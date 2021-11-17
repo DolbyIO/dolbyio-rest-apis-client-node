@@ -1,0 +1,27 @@
+image: 836782323787.dkr.ecr.us-east-1.amazonaws.com/node-git:13.13.0-4
+
+variables:
+    CI_DEBUG_TRACE: 'false'
+
+stages:
+    - build
+
+build_package_npm:
+    stage: build
+    before_script:
+        - npm --version
+        # Update version number
+        - node updateVersion.js
+        # Install the dependencies
+        - npm install
+    script:
+        # Build the package
+        - npm run build
+
+        # Publish the package to GitLab packages
+        - npm config set @dolby-io:registry https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
+        - npm config set -- '//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
+        - npm config set -- '//${CI_SERVER_HOST}/api/v4/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
+
+        - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then NPM_PUBLISH_TAG="stable"; else NPM_PUBLISH_TAG="beta"; fi
+        - npm publish -tag $NPM_PUBLISH_TAG

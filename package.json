@@ -1,0 +1,26 @@
+{
+    "name": "@dolbyio/dolbyio-rest-apis-client",
+    "version": "0.1.0",
+    "description": "Node.JS wrapper for the dolby.io REST APIs",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsc",
+        "prettier": "prettier --write ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dolbyio-samples/dolbyio-rest-apis-client-node.git"
+    },
+    "author": "Fabien Lavocat <fabien.lavocat@dolby.com>",
+    "license": "CC0 1.0 Universal",
+    "files": [
+        "dist/*",
+        "README.md"
+    ],
+    "devDependencies": {
+        "@types/node": "^16.4.0",
+        "prettier": "^2.3.2",
+        "tslint": "^6.1.3",
+        "typescript": "^4.3.5"
+    }
+}
