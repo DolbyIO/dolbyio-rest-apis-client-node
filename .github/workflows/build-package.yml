@@ -12,17 +12,12 @@ jobs:
               with:
                   persist-credentials: false
 
-            - name: Prepare environment 🌎
-              run: |
-                  npm --version
-                  # Update version number
-                  node updateVersion.js
-                  # Install the dependencies
-                  npm install
-            - name: Build the packages 🔧
-              run: |
-                  # Build the package
-                  npm run build
+            - name: Print NPM version 🌎
+              run: npm --version
+            - name: Install the dependencies 🔧
+              run: npm install
+            - name: Build the package 🔧
+              run: npm run build
             - name: Deploy to NPMJS 🚀
               if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
               uses: JS-DevTools/npm-publish@v1
