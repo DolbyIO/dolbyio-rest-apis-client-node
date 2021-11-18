@@ -4,7 +4,7 @@ Node.JS wrapper for the dolby.io REST [Communications](https://docs.dolby.io/int
 
 ## Install this project
 
-Run the npm command to install the package `dolbyiorestapis` into your Node project:
+Run the npm command to install the package `@dolbyio/dolbyio-rest-apis-client` into your Node project:
 
 ```bash
 npm install @dolbyio/dolbyio-rest-apis-client --save
