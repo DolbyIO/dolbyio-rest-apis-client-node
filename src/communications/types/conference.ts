@@ -29,7 +29,7 @@ export interface UserTokens {
 
 export interface Conference {
     /** The ID of the created conference. */
-    conferenceID: string;
+    conferenceId: string;
     /** The alias of the created conference. */
     conferenceAlias: string;
     /** The PIN code of the created conference. */
