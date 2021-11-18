@@ -17,7 +17,7 @@ npm install @dolbyio/dolbyio-rest-apis-client --save
 To get an access token that will be used by the client SDK for an end user to open a session against dolby.io, use the following code:
 
 ```javascript
-const dolbyio = require('@dolby-io/dolbyio-rest-apis-client');
+const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
 
 const CONSUMER_KEY = 'YOUR_CONSUMER_KEY';
 const CONSUMER_SECRET = 'YOUR_CONSUMER_SECRET';
@@ -30,7 +30,7 @@ console.log(`Access Token: ${at.access_token}`);
 To get an access token that will be used by your server to perform backend operations like creating a conference, use the following code.
 
 ```javascript
-const dolbyio = require('@dolby-io/dolbyio-rest-apis-client');
+const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
 
 const CONSUMER_KEY = 'YOUR_CONSUMER_KEY';
 const CONSUMER_SECRET = 'YOUR_CONSUMER_SECRET';
@@ -45,7 +45,7 @@ console.log(`Access Token: ${jwt.access_token}`);
 To create a Dolby Voice conference, you first must retrieve an API Access Token, then use the following code to create the conference.
 
 ```javascript
-const dolbyio = require('@dolby-io/dolbyio-rest-apis-client');
+const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
 
 const CONSUMER_KEY = 'YOUR_CONSUMER_KEY';
 const CONSUMER_SECRET = 'YOUR_CONSUMER_SECRET';
@@ -70,7 +70,7 @@ const jwt = await dolbyio.communications.authentication.getApiAccessToken(CONSUM
 // Create the conference
 const conference = await dolbyio.communications.conference.createConference(jwt, options);
 
-console.log(`Conference created: ${conference.conferenceID}`);
+console.log(`Conference created: ${conference.conferenceId}`);
 ```
 
 ## Build this project
