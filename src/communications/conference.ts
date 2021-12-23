@@ -137,8 +137,10 @@ export const kick = async (accessToken: JwtToken, conferenceId: string, external
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
  * @param participants List of the participants with their new permissions.
+ *
+ * @returns The list of user tokens for each participants.
  */
-export const updatePermissions = async (accessToken: JwtToken, conferenceId: string, participants: Array<Participant>): Promise<void> => {
+export const updatePermissions = async (accessToken: JwtToken, conferenceId: string, participants: Array<Participant>): Promise<UserTokens> => {
     const obj_participants = {};
     for (let index = 0; index < participants.length; index++) {
         const participant = participants[index];
@@ -163,7 +165,8 @@ export const updatePermissions = async (accessToken: JwtToken, conferenceId: str
         body,
     };
 
-    await sendPost(options);
+    const response = await sendPost(options);
+    return response as UserTokens;
 };
 
 /**
