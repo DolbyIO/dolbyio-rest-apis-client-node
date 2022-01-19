@@ -1,5 +1,6 @@
-import { sendDelete, sendPost } from '../internal/httpHelpers';
+import { sendDelete, sendPost, sendPut } from '../internal/httpHelpers';
 import { CreateConferenceOptions, Conference, UserTokens } from './types/conference';
+import { SpatialEnvironment, SpatialListener, SpatialUsers } from './types/spatialAudio';
 import JwtToken from './types/jwtToken';
 import Participant from './types/participant';
 import { RTCPMode } from './types/rtcpMode';
@@ -127,6 +128,44 @@ export const kick = async (accessToken: JwtToken, conferenceId: string, external
     };
 
     await sendPost(options);
+};
+
+/**
+ * Sets the spatial audio scene for all listeners in an ongoing conference. This sets the spatial audio environment, the position and direction for all listeners with the spatialAudio flag enabled. The calls are not cumulative, and each call sets all the spatial listener values. Participants who do not have a position set are muted.
+ *
+ * @link https://docs.dolby.io/communications-apis/reference/putspatiallistenersaudio
+ *
+ * @param accessToken Access token to use for authentication.
+ * @param conferenceId Identifier of the conference.
+ * @param environment The spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
+ * @param listeners The listener's audio position and direction, defined using Cartesian coordinates.
+ * @param users The users' audio positions, defined using Cartesian coordinates.
+ */
+export const setSpatialListenersAudio = async (
+    accessToken: JwtToken,
+    conferenceId: string,
+    environment: SpatialEnvironment,
+    listeners: SpatialListener,
+    users: SpatialUsers
+): Promise<void> => {
+    const body = JSON.stringify({
+        environment: environment,
+        listeners: listeners,
+        users: users,
+    });
+
+    const options = {
+        hostname: 'api.voxeet.com',
+        path: `/v2/conferences/${conferenceId}/spatial-listeners-audio`,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
+        },
+        body,
+    };
+
+    await sendPut(options);
 };
 
 /**
