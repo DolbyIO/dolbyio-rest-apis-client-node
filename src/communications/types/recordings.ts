@@ -12,9 +12,9 @@ export interface GetRecordingOptions extends PagedOptions, GetRecordingsOptionsB
 }
 
 export interface MixRecording {
-    /** The size of the MP4 recording (in bytes). The MP4 recording is available only if you have requested the MP4 format in the recording settings. For more information, see the [Recording](https://docs.dolby.io/interactivity/docs/recording) document. */
+    /** The size of the MP4 recording (in bytes). The MP4 recording is available only if you have requested the MP4 format in the recording settings. For more information, see the [Recording](https://docs.dolby.io/communications-apis/docs/guides-recording-mechanisms) document. */
     mp4: number;
-    /** The size of the MP3 recording (in bytes). The MP3 recording is available only if you have requested the MP3 format in the recording settings. For more information, see the [Recording](https://docs.dolby.io/interactivity/docs/recording) document. */
+    /** The size of the MP3 recording (in bytes). The MP3 recording is available only if you have requested the MP3 format in the recording settings. For more information, see the [Recording](https://docs.dolby.io/communications-apis/docs/guides-recording-mechanisms) document. */
     mp3: number;
     /** The region code in which the mix recording took place. */
     region: string;

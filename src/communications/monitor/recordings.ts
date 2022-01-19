@@ -8,7 +8,7 @@ import { GetRecordingsOptions, GetAllRecordingsOptions, GetRecordingsResponse, R
  * This API checks only the recordings that have ended during a specific time range.
  * Recordings are indexed based on the ending time.
  *
- * @link https://docs.dolby.io/interactivity/reference/getrecordings
+ * @link https://docs.dolby.io/communications-apis/reference/getrecordings
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the recordings.
@@ -53,7 +53,7 @@ export const getRecordings = async (accessToken: JwtToken, options: GetRecording
  * This API checks only the recordings that have ended during a specific time range.
  * Recordings are indexed based on the ending time.
  *
- * @link https://docs.dolby.io/interactivity/reference/getrecordings
+ * @link https://docs.dolby.io/communications-apis/reference/getrecordings
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the recordings.
@@ -93,7 +93,7 @@ export const getAllRecordings = async (accessToken: JwtToken, options: GetAllRec
  * This API checks the recordings that have ended during a specific time range.
  * Recordings are indexed based on the ending time.
  *
- * @link https://docs.dolby.io/interactivity/reference/getconferencerecordings
+ * @link https://docs.dolby.io/communications-apis/reference/getconferencerecordings
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the webhooks.
@@ -138,7 +138,7 @@ export const getRecording = async (accessToken: JwtToken, options: GetRecordingO
  *
  * **Warning**: After deleting the recording, it is not possible to restore the recording data.
  *
- * @link https://docs.dolby.io/interactivity/reference/deleteconferencerecordings
+ * @link https://docs.dolby.io/communications-apis/reference/deleteconferencerecordings
  *
  * @param accessToken Access token to use for authentication.
  * @param confId Identifier of the conference.
@@ -160,7 +160,7 @@ export const deleteRecording = async (accessToken: JwtToken, confId: string): Pr
  * Get details of all Dolby Voice-based audio recordings, and associated split recordings,
  * for a given conference and download the conference recording in the MP3 audio format.
  *
- * @link https://docs.dolby.io/interactivity/reference/getconferenceaudiorecording
+ * @link https://docs.dolby.io/communications-apis/reference/getconferenceaudiorecording
  *
  * @param accessToken Access token to use for authentication.
  * @param confId Identifier of the conference.
@@ -183,9 +183,9 @@ export const getDolbyVoiceRecording = async (accessToken: JwtToken, confId: stri
 
 /**
  * Download the conference recording in the MP4 video format.
- * For more information, see the [Recording](https://docs.dolby.io/interactivity/docs/recording) document.
+ * For more information, see the [Recording](https://docs.dolby.io/communications-apis/docs/guides-recording-mechanisms) document.
  *
- * @link https://docs.dolby.io/interactivity/reference/getconferencemp4recording
+ * @link https://docs.dolby.io/communications-apis/reference/getconferencemp4recording
  *
  * @param accessToken Access token to use for authentication.
  * @param confId Identifier of the conference.
@@ -206,9 +206,9 @@ export const downloadMp4Recording = async (accessToken: JwtToken, confId: string
 
 /**
  * Download the conference recording in the MP3 audio format.
- * For more information, see the [Recording](https://docs.dolby.io/interactivity/docs/recording) document.
+ * For more information, see the [Recording](https://docs.dolby.io/communications-apis/docs/guides-recording-mechanisms) document.
  *
- * @link https://docs.dolby.io/interactivity/reference/getconferencemp3recording
+ * @link https://docs.dolby.io/communications-apis/reference/getconferencemp3recording
  *
  * @param accessToken Access token to use for authentication.
  * @param confId Identifier of the conference.
