@@ -7,7 +7,7 @@ import { RTCPMode } from './types/rtcpMode';
 /**
  * Creates a conference.
  *
- * @link https://docs.dolby.io/interactivity/reference/postconferencecreate
+ * @link https://docs.dolby.io/communications-apis/reference/postconferencecreate
  *
  * @param accessToken Access token to use for authentication.
  * @param ownerExternalId External ID of the owner of the conference.
@@ -64,7 +64,7 @@ export const createConference = async (accessToken: JwtToken, options: CreateCon
 /**
  * Invites participants to an ongoing conference. This API can also be used to generate new conference access tokens for an ongoing conference. If the invite request includes participants that are already in the conference, a new conference access token is not generated and an invitation is not sent.
  *
- * @link https://docs.dolby.io/interactivity/reference/postconferenceinvite
+ * @link https://docs.dolby.io/communications-apis/reference/postconferenceinvite
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
@@ -104,7 +104,7 @@ export const invite = async (accessToken: JwtToken, conferenceId: string, partic
 /**
  * Kicks participants from an ongoing conference.
  *
- * @link https://docs.dolby.io/interactivity/reference/postconferencekick
+ * @link https://docs.dolby.io/communications-apis/reference/postconferencekick
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
@@ -132,7 +132,7 @@ export const kick = async (accessToken: JwtToken, conferenceId: string, external
 /**
  * Update permissions for participants in a conference. When a participant's permissions are updated, the new token is sent directly to the SDK. The SDK automatically receives, stores, and manages the new token and a `permissionsUpdated` event is sent.
  *
- * @link https://docs.dolby.io/interactivity/reference/postconferencepermissions
+ * @link https://docs.dolby.io/communications-apis/reference/postconferencepermissions
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
@@ -172,7 +172,7 @@ export const updatePermissions = async (accessToken: JwtToken, conferenceId: str
 /**
  * Terminates an ongoing conference and removes all remaining participants from the conference.
  *
- * @link https://docs.dolby.io/interactivity/reference/deleteconference
+ * @link https://docs.dolby.io/communications-apis/reference/deleteconference
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
@@ -195,7 +195,7 @@ export const terminate = async (accessToken: JwtToken, conferenceId: string): Pr
  * @deprecated
  * Destroys an ongoing conference and removes all remaining participants from the conference.
  *
- * @link https://docs.dolby.io/interactivity/reference/postconferencedestroy
+ * @link https://docs.dolby.io/communications-apis/reference/postconferencedestroy
  *
  * @param consumerKey Your Dolby.io Consumer Key.
  * @param consumerSecret Your Dolby.io Consumer Secret.

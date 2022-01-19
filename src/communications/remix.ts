@@ -7,7 +7,7 @@ import RemixStatus from './types/remixStatus';
  * the current mixer layout. The `Recording.MP4.Available` event is sent if the customer has configured
  * the webhook in the developer portal.
  *
- * @link https://docs.dolby.io/interactivity/reference/postconferencemixstart
+ * @link https://docs.dolby.io/communications-apis/reference/postconferencemixstart
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
@@ -35,7 +35,7 @@ export const start = async (accessToken: JwtToken, conferenceId: string): Promis
  * the current mixer layout. The `Recording.MP4.Available` event is sent if the customer has configured
  * the webhook in the developer portal.
  *
- * @link https://docs.dolby.io/interactivity/reference/postconferencemixcreate
+ * @link https://docs.dolby.io/communications-apis/reference/postconferencemixcreate
  *
  * @param consumerKey Your Dolby.io Consumer Key.
  * @param consumerSecret Your Dolby.io Consumer Secret.
@@ -62,7 +62,7 @@ export const startBasicAuth = async (consumerKey: string, consumerSecret: string
 /**
  * Gets the status of a current mixing job. You must use this API if the conference is protected using enhanced conference access control.
  *
- * @link https://docs.dolby.io/interactivity/reference/postconferenceremixstatus
+ * @link https://docs.dolby.io/communications-apis/reference/getconferenceremixstatus
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
@@ -87,7 +87,7 @@ export const getStatus = async (accessToken: JwtToken, conferenceId: string): Pr
  * @deprecated
  * Gets the status of a current mixing job.
  *
- * @link https://docs.dolby.io/interactivity/reference/postconferencemixstatus
+ * @link https://docs.dolby.io/communications-apis/reference/getconferencemixstatus
  *
  * @param consumerKey Your Dolby.io Consumer Key.
  * @param consumerSecret Your Dolby.io Consumer Secret.

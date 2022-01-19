@@ -1,6 +1,6 @@
 # Dolby.io REST APIs
 
-Node.JS wrapper for the dolby.io REST [Communications](https://docs.dolby.io/interactivity/reference/authentication-api) APIs.
+Node.JS wrapper for the dolby.io REST [Communications](https://docs.dolby.io/communications-apis/reference/authentication-api) APIs.
 
 ## Install this project
 
