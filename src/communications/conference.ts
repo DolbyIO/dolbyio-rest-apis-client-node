@@ -138,19 +138,19 @@ export const kick = async (accessToken: JwtToken, conferenceId: string, external
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
  * @param environment The spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
- * @param listeners The listener's audio position and direction, defined using Cartesian coordinates.
+ * @param listener The listener's audio position and direction, defined using Cartesian coordinates.
  * @param users The users' audio positions, defined using Cartesian coordinates.
  */
 export const setSpatialListenersAudio = async (
     accessToken: JwtToken,
     conferenceId: string,
     environment: SpatialEnvironment,
-    listeners: SpatialListener,
+    listener: SpatialListener,
     users: SpatialUsers
 ): Promise<void> => {
     const body = JSON.stringify({
         environment: environment,
-        listeners: listeners,
+        listener: listener,
         users: users,
     });
 
