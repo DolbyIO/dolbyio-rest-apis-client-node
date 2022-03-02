@@ -20,7 +20,7 @@ import { PagedResponse } from '../types/core';
  * **Note:** Only terminated conferences include a complete summary.
  * The summary of ongoing conferences includes the following fields in the response: `confId`, `alias`, `region`, `dolbyVoice`, `start`, `live`, `owner`.
  *
- * @link https://docs.dolby.io/communications-apis/reference/getconferences
+ * @link https://docs.dolby.io/communications-apis/reference/get-conferences
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the conferences.
@@ -76,7 +76,7 @@ export const listConferences = async (accessToken: JwtToken, options: ListConfer
  * **Note:** Only terminated conferences include a complete summary.
  * The summary of ongoing conferences includes the following fields in the response: `confId`, `alias`, `region`, `dolbyVoice`, `start`, `live`, `owner`.
  *
- * @link https://docs.dolby.io/communications-apis/reference/getconferences
+ * @link https://docs.dolby.io/communications-apis/reference/get-conferences
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the conferences.
@@ -128,7 +128,7 @@ export const listAllConferences = async (accessToken: JwtToken, options: ListAll
  * **Note:** Only terminated conferences include a complete summary.
  * The summary of ongoing conferences includes the following fields in the response: `confId`, `alias`, `region`, `dolbyVoice`, `start`, `live`, `owner`.
  *
- * @link https://docs.dolby.io/communications-apis/reference/getconferencesummary
+ * @link https://docs.dolby.io/communications-apis/reference/get-conference-summary
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId The identifier of the conference.
@@ -155,7 +155,7 @@ export const getConference = async (accessToken: JwtToken, conferenceId: string,
  *
  * **Note:** Only terminated conferences include a complete summary.
  *
- * @link https://docs.dolby.io/communications-apis/reference/getconferencestatistics
+ * @link https://docs.dolby.io/communications-apis/reference/get-conference-statistics
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId The identifier of the conference.
@@ -179,7 +179,7 @@ export const getConferenceStatistics = async (accessToken: JwtToken, conferenceI
 /**
  * Get statistics and connection details of all participants in a conference. Optionally limit the search result with a specific time range.
  *
- * @link https://docs.dolby.io/communications-apis/reference/getconferenceparticipants
+ * @link https://docs.dolby.io/communications-apis/reference/get-info-conference-participants
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the participants.
@@ -231,7 +231,7 @@ export const getConferenceParticipants = async (accessToken: JwtToken, options: 
 /**
  * Get statistics and connection details of all participants in a conference. Optionally limit the search result with a specific time range.
  *
- * @link https://docs.dolby.io/communications-apis/reference/getconferenceparticipants
+ * @link https://docs.dolby.io/communications-apis/reference/get-info-conference-participants
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the participants.

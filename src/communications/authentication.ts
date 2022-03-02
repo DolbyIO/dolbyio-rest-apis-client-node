@@ -37,7 +37,7 @@ const getAccessToken = async (
 /**
  * Gets an access token to authenticate for API calls.
  *
- * @link https://docs.dolby.io/communications-apis/reference/jwt
+ * @link https://docs.dolby.io/communications-apis/reference/get-bearer-token
  *
  * @param consumerKey Your Dolby.io Consumer Key.
  * @param consumerSecret Your Dolby.io Consumer Secret.
@@ -52,7 +52,7 @@ export const getApiAccessToken = async (consumerKey: string, consumerSecret: str
 /**
  * Gets a client access token to authenticate a session.
  *
- * @link https://docs.dolby.io/communications-apis/reference/postoauthtoken
+ * @link https://docs.dolby.io/communications-apis/reference/get-client-access-token
  *
  * @param consumerKey Your Dolby.io Consumer Key.
  * @param consumerSecret Your Dolby.io Consumer Secret.
