@@ -6,7 +6,7 @@ import JwtToken from './types/jwtToken';
  * a `Stream.Rtmp.InProgress` Webhook event will be sent. You must use this API if the conference is protected
  * using enhanced conference access control.
  *
- * @link https://docs.dolby.io/communications-apis/reference/postrtmpstart
+ * @link https://docs.dolby.io/communications-apis/reference/start-rtmp
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
@@ -34,7 +34,7 @@ export const startRtmp = async (accessToken: JwtToken, conferenceId: string, rtm
  * Starts an RTMP live stream. Once the Dolby.io Communication API service started streaming to the target url,
  * a `Stream.Rtmp.InProgress` Webhook event will be sent.
  *
- * @link https://docs.dolby.io/communications-apis/reference/postrtmpstartv1
+ * @link https://docs.dolby.io/communications-apis/reference/start-rtmp-v1
  *
  * @param consumerKey Your Dolby.io Consumer Key.
  * @param consumerSecret Your Dolby.io Consumer Secret.
@@ -67,7 +67,7 @@ export const startRtmpBasicAuth = async (
 /**
  * Stops an RTMP stream. You must use this API if the conference is protected using enhanced conference access control.
  *
- * @link https://docs.dolby.io/communications-apis/reference/postrtmpstop
+ * @link https://docs.dolby.io/communications-apis/reference/stop-rtmp
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
@@ -90,7 +90,7 @@ export const stopRtmp = async (accessToken: JwtToken, conferenceId: string): Pro
  * @deprecated
  * Stops an RTMP stream.
  *
- * @link https://docs.dolby.io/communications-apis/reference/postrtmpstopv1
+ * @link https://docs.dolby.io/communications-apis/reference/stop-rtmp-v1
  *
  * @param consumerKey Your Dolby.io Consumer Key.
  * @param consumerSecret Your Dolby.io Consumer Secret.
@@ -117,7 +117,7 @@ export const stopRtmpBasicAuth = async (consumerKey: string, consumerSecret: str
  * Starts an HTTP Live Stream (HLS). The HLS URL is included in the Stream.Hls.InProgress Webhook event.
  * You must use this API if the conference is protected using enhanced conference access control.
  *
- * @link https://docs.dolby.io/communications-apis/reference/posthlsstart
+ * @link https://docs.dolby.io/communications-apis/reference/start-hls
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
@@ -140,7 +140,7 @@ export const startHls = async (accessToken: JwtToken, conferenceId: string): Pro
  * @deprecated
  * Starts an HTTP Live Stream (HLS). The HLS URL is included in the Stream.Hls.InProgress Webhook event.
  *
- * @link https://docs.dolby.io/communications-apis/reference/posthlsstartv1
+ * @link https://docs.dolby.io/communications-apis/reference/start-hls-v1
  *
  * @param consumerKey Your Dolby.io Consumer Key.
  * @param consumerSecret Your Dolby.io Consumer Secret.
@@ -166,7 +166,7 @@ export const startHlsBasicAuth = async (consumerKey: string, consumerSecret: str
  * @deprecated
  * Stops an HTTP Live Stream (HLS). You must use this API if the conference is protected using enhanced conference access control.
  *
- * @link https://docs.dolby.io/communications-apis/reference/posthlsstop
+ * @link https://docs.dolby.io/communications-apis/reference/stop-hls
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
@@ -189,7 +189,7 @@ export const stopHls = async (accessToken: JwtToken, conferenceId: string): Prom
  * @deprecated
  * Stops an HTTP Live Stream (HLS).
  *
- * @link https://docs.dolby.io/communications-apis/reference/posthlsstopv1
+ * @link https://docs.dolby.io/communications-apis/reference/stop-hls-v1
  *
  * @param consumerKey Your Dolby.io Consumer Key.
  * @param consumerSecret Your Dolby.io Consumer Secret.

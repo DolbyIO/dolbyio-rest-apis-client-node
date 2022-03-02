@@ -6,7 +6,7 @@ import { GetWebhooksOptions, GetAllWebhooksOptions, GetWebHookResponse, WebHook 
 /**
  * Gets a list of Webhook events sent, during a specific time range. The list includes associated endpoint response codes and headers.
  *
- * @link https://docs.dolby.io/communications-apis/reference/getwebhooks
+ * @link https://docs.dolby.io/communications-apis/reference/get-webhooks
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the webhooks.
@@ -58,7 +58,7 @@ export const getEvents = async (accessToken: JwtToken, options: GetWebhooksOptio
 /**
  * Gets a list of all Webhook events sent, during a specific time range. The list includes associated endpoint response codes and headers.
  *
- * @link https://docs.dolby.io/communications-apis/reference/getwebhooks
+ * @link https://docs.dolby.io/communications-apis/reference/get-webhooks
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the webhooks.
