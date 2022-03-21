@@ -131,6 +131,47 @@ export const kick = async (accessToken: JwtToken, conferenceId: string, external
 };
 
 /**
+ * Sends a message to some or all participants in a conference.
+ *
+ * @link https://docs.dolby.io/communications-apis/reference/send-message
+ *
+ * @param accessToken Access token to use for authentication.
+ * @param conferenceId Identifier of the conference.
+ * @param fromExternalId The external ID of the author of the message.
+ * @param toExternalIds A list of external IDs that will receive the message. If empty, the message will be broadcasted to all participants in the conference.
+ * @param message The message to send.
+ */
+export const sendMessage = async (
+    accessToken: JwtToken,
+    conferenceId: string,
+    fromExternalId: string,
+    toExternalIds: Array<string>,
+    message: string
+): Promise<void> => {
+    const body = {
+        from: fromExternalId,
+        message: message,
+    };
+
+    if (toExternalIds && toExternalIds.length > 0) {
+        body['to'] = toExternalIds;
+    }
+
+    const options = {
+        hostname: 'api.voxeet.com',
+        path: `/v2/conferences/${conferenceId}/message`,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
+        },
+        body: JSON.stringify(body),
+    };
+
+    await sendPost(options);
+};
+
+/**
  * Sets the spatial audio scene for all listeners in an ongoing conference. This sets the spatial audio environment, the position and direction for all listeners with the spatialAudio flag enabled. The calls are not cumulative, and each call sets all the spatial listener values. Participants who do not have a position set are muted.
  *
  * @link https://docs.dolby.io/communications-apis/reference/set-spatial-listeners-audio
