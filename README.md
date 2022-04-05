@@ -1,6 +1,6 @@
 # Dolby.io REST APIs
 
-Node.JS wrapper for the dolby.io REST [Communications](https://docs.dolby.io/communications-apis/reference/authentication-api) APIs.
+Node.JS wrapper for the dolby.io REST [Communications](https://docs.dolby.io/communications-apis/reference/authentication-api) and [Media](https://docs.dolby.io/media-processing/reference/media-enhance-overview) APIs.
 
 ## Install this project
 
@@ -10,7 +10,7 @@ Run the npm command to install the package `@dolbyio/dolbyio-rest-apis-client` i
 npm install @dolbyio/dolbyio-rest-apis-client --save
 ```
 
-## Examples
+## Communications Examples
 
 ### Authenticate
 
@@ -71,6 +71,23 @@ const jwt = await dolbyio.communications.authentication.getApiAccessToken(CONSUM
 const conference = await dolbyio.communications.conference.createConference(jwt, options);
 
 console.log(`Conference created: ${conference.conferenceId}`);
+```
+
+## Media Examples
+
+### Authenticate
+
+To get an access token, use the following code:
+
+```javascript
+const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
+
+const API_KEY = 'YOUR_API_KEY';
+const API_SECRET = 'YOUR_API_SECRET';
+
+const at = await dolbyio.media.platform.getAccessToken(API_KEY, API_SECRET);
+
+console.log(`Access Token: ${at.access_token}`);
 ```
 
 ## Build this project
