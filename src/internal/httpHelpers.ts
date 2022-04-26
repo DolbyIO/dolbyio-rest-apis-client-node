@@ -1,6 +1,7 @@
 import fs from 'fs';
-import https from 'https';
-import http from 'http';
+import { https } from 'follow-redirects';
+import coreHttp from 'http';
+import coreHttps from 'https';
 import { URLSearchParams } from 'url';
 
 interface SendRequestOptions extends RequestOptions {
@@ -11,7 +12,7 @@ export interface RequestOptions {
     hostname: string;
     path: string;
     params?: NodeJS.Dict<string>;
-    headers: http.OutgoingHttpHeaders;
+    headers: coreHttp.OutgoingHttpHeaders;
     body?: string;
 }
 
@@ -23,14 +24,14 @@ export interface RequestOptions {
  * @returns A JSON payload object through a Promise.
  */
 const sendRequest = (options: SendRequestOptions) => {
-    return new Promise(function (resolve, reject) {
+    return new Promise<any>((resolve, reject) => {
         let path = options.path;
         if (options.params && Object.keys(options.params).length > 0) {
             const searchParams = new URLSearchParams(options.params);
             path += `?${searchParams}`;
         }
 
-        const opts: https.RequestOptions = {
+        const opts: coreHttps.RequestOptions = {
             hostname: options.hostname,
             port: 443,
             path: path,
@@ -39,7 +40,7 @@ const sendRequest = (options: SendRequestOptions) => {
         };
 
         const req = https.request(opts, (res) => {
-            console.log(`[${options.method}] ${res.statusCode} - https://${options.hostname}${path}`);
+            console.log(`[${opts.method}] ${res.statusCode} - https://${opts.hostname}${opts.path}`);
 
             let data = '';
             res.on('data', (chunk) => {
@@ -154,14 +155,14 @@ export const download = (filepath: string, options: RequestOptions) => {
         ...options,
     };
 
-    return new Promise<void>(function (resolve, reject) {
+    return new Promise<void>((resolve, reject) => {
         let path = sendRequestOptions.path;
         if (sendRequestOptions.params && Object.keys(sendRequestOptions.params).length > 0) {
             const searchParams = new URLSearchParams(sendRequestOptions.params);
             path += `?${searchParams}`;
         }
 
-        const opts: https.RequestOptions = {
+        const opts: coreHttps.RequestOptions = {
             hostname: sendRequestOptions.hostname,
             port: 443,
             path: path,
@@ -170,7 +171,7 @@ export const download = (filepath: string, options: RequestOptions) => {
         };
 
         const req = https.request(opts, (res) => {
-            console.log(`[${sendRequestOptions.method}] ${res.statusCode} - https://${sendRequestOptions.hostname}${path}`);
+            console.log(`[${opts.method}] ${res.statusCode} - https://${opts.hostname}${opts.path}`);
 
             const fileStream = fs.createWriteStream(filepath, { autoClose: true });
 
