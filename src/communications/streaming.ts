@@ -24,6 +24,7 @@ export const startRtmp = async (accessToken: JwtToken, conferenceId: string, rtm
             'Content-Type': 'application/json',
             Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
         },
+        body,
     };
 
     await sendPost(options);
@@ -59,6 +60,7 @@ export const startRtmpBasicAuth = async (
             'Content-Type': 'application/json',
             Authorization: `Basic ${authz}`,
         },
+        body,
     };
 
     await sendPost(options);
