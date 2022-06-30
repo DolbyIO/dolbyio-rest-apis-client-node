@@ -270,29 +270,3 @@ export const terminate = async (accessToken: JwtToken, conferenceId: string): Pr
 
     await sendDelete(options);
 };
-
-/**
- * @deprecated
- * Destroys an ongoing conference and removes all remaining participants from the conference.
- *
- * @link https://docs.dolby.io/communications-apis/reference/destroy-conference
- *
- * @param consumerKey Your Dolby.io Consumer Key.
- * @param consumerSecret Your Dolby.io Consumer Secret.
- * @param conferenceId Identifier of the conference.
- */
-export const destroy = async (consumerKey: string, consumerSecret: string, conferenceId: string): Promise<void> => {
-    const authz = Buffer.from(`${consumerKey}:${consumerSecret}`).toString('base64');
-
-    const options = {
-        hostname: 'session.voxeet.com',
-        path: `/v1/conferences/${conferenceId}/destroy`,
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Basic ${authz}`,
-        },
-    };
-
-    await sendPost(options);
-};
