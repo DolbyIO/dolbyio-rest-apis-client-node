@@ -212,3 +212,55 @@ export const stopHlsBasicAuth = async (consumerKey: string, consumerSecret: stri
 
     await sendPost(options);
 };
+
+/**
+ * Starts a Low Latency Stream to Millicast.
+ *
+ * @link https://docs.dolby.io/communications-apis/reference/start-lls
+ *
+ * @param accessToken Access token to use for authentication.
+ * @param conferenceId Identifier of the conference.
+ * @param streamName The Millicast stream name to which the conference will broadcasted.
+ * @param publishingToken The Millicast publishing token used to identify the broadcaster.
+ */
+ export const startLls = async (accessToken: JwtToken, conferenceId: string, streamName: string, publishingToken: string): Promise<void> => {
+    const body = JSON.stringify({
+        streamName: streamName,
+        publishingToken: publishingToken,
+    });
+
+    const options = {
+        hostname: 'api.voxeet.com',
+        path: `/v2/conferences/mix/${conferenceId}/lls/start`,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
+        },
+        body,
+    };
+
+    await sendPost(options);
+};
+
+/**
+ * Stops an existing Low Latency Stream to Millicast.
+ *
+ * @link https://docs.dolby.io/communications-apis/reference/stop-lls
+ *
+ * @param accessToken Access token to use for authentication.
+ * @param conferenceId Identifier of the conference.
+ */
+ export const stopLls = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
+    const options = {
+        hostname: 'api.voxeet.com',
+        path: `/v2/conferences/mix/${conferenceId}/lls/stop`,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
+        },
+    };
+
+    await sendPost(options);
+};
