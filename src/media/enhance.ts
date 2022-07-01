@@ -13,17 +13,17 @@ import { EnhanceJob } from './types/enhance';
  *
  * @link https://docs.dolby.io/media-apis/reference/media-enhance-post
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-enhance-post
  *
  * @returns The job identifier through a `Promise`.
  */
-export const start = async (auth: string | JwtToken, jobContent: string): Promise<string | null> => {
+export const start = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/enhance',
         headers: {},
-        auth,
+        accessToken,
         body: jobContent,
     };
 
@@ -44,12 +44,12 @@ export const start = async (auth: string | JwtToken, jobContent: string): Promis
  *
  * @link https://docs.dolby.io/media-apis/reference/media-enhance-get
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to retrieve.
  *
  * @returns The `EnhanceJob` object through a `Promise`.
  */
-export const getResults = async (auth: string | JwtToken, jobId: string): Promise<EnhanceJob> => {
+export const getResults = async (accessToken: JwtToken, jobId: string): Promise<EnhanceJob> => {
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/enhance',
@@ -57,7 +57,7 @@ export const getResults = async (auth: string | JwtToken, jobId: string): Promis
             job_id: jobId,
         },
         headers: {},
-        auth,
+        accessToken,
     };
 
     const response = await sendGet(requestOptions);

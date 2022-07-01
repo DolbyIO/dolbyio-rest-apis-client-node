@@ -16,17 +16,17 @@ import { DiagnoseJob } from './types/diagnose';
  * If you have feedback on how you'd like to use the API please reach out to share your feedback with our team.
  * https://dolby.io/contact
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-diagnose-post
  *
  * @returns The job identifier through a `Promise`.
  */
-export const start = async (auth: string | JwtToken, jobContent: string): Promise<string | null> => {
+export const start = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/diagnose',
         headers: {},
-        auth,
+        accessToken,
         body: jobContent,
     };
 
@@ -49,12 +49,12 @@ export const start = async (auth: string | JwtToken, jobContent: string): Promis
  *
  * @link https://docs.dolby.io/media-apis/reference/media-diagnose-get
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to retrieve.
  *
  * @returns The `DiagnoseJob` object through a `Promise`.
  */
-export const getResults = async (auth: string | JwtToken, jobId: string): Promise<DiagnoseJob> => {
+export const getResults = async (accessToken: JwtToken, jobId: string): Promise<DiagnoseJob> => {
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/diagnose',
@@ -62,7 +62,7 @@ export const getResults = async (auth: string | JwtToken, jobId: string): Promis
             job_id: jobId,
         },
         headers: {},
-        auth,
+        accessToken,
     };
 
     const response = await sendGet(requestOptions);

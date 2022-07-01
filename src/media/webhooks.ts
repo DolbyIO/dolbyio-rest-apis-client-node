@@ -8,13 +8,13 @@ import { UpdateWebhookOptions, Webhook } from './types/webhooks';
  *
  * @link https://docs.dolby.io/media-apis/reference/media-webhook-post
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param url The callback url that will be called when job execution completes.
  * @param headers (Optional) Headers to include in the webhook call.
  *
  * @returns The webhook identifier through a `Promise`.
  */
-export const registerWebhook = async (auth: string | JwtToken, url: string, headers?: http.OutgoingHttpHeaders): Promise<string | null> => {
+export const registerWebhook = async (accessToken: JwtToken, url: string, headers?: http.OutgoingHttpHeaders): Promise<string | null> => {
     const payload = {
         callback: {
             url: url,
@@ -29,7 +29,7 @@ export const registerWebhook = async (auth: string | JwtToken, url: string, head
         hostname: 'api.dolby.com',
         path: '/media/webhooks',
         headers: {},
-        auth,
+        accessToken,
         body: JSON.stringify(payload, null, '  '),
     };
 
@@ -46,10 +46,10 @@ export const registerWebhook = async (auth: string | JwtToken, url: string, head
  *
  * @link https://docs.dolby.io/media-apis/reference/media-webhook-put
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param options Options to update the webhook.
  */
-export const updateWebhook = async (auth: string | JwtToken, options: UpdateWebhookOptions): Promise<void> => {
+export const updateWebhook = async (accessToken: JwtToken, options: UpdateWebhookOptions): Promise<void> => {
     const payload = {
         callback: {
             url: options.url,
@@ -67,7 +67,7 @@ export const updateWebhook = async (auth: string | JwtToken, options: UpdateWebh
             id: options.webhookId,
         },
         headers: {},
-        auth,
+        accessToken,
         body: JSON.stringify(payload, null, '  '),
     };
 
@@ -79,12 +79,12 @@ export const updateWebhook = async (auth: string | JwtToken, options: UpdateWebh
  *
  * @link https://docs.dolby.io/media-apis/reference/media-webhook-get
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param webhookId Identifier of the webhook to retrieve.
  *
  * @returns The `Webhook` object through a `Promise`.
  */
-export const retrieveWebhook = async (auth: string | JwtToken, webhookId: string): Promise<Webhook> => {
+export const retrieveWebhook = async (accessToken: JwtToken, webhookId: string): Promise<Webhook> => {
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/webhooks',
@@ -92,7 +92,7 @@ export const retrieveWebhook = async (auth: string | JwtToken, webhookId: string
             id: webhookId,
         },
         headers: {},
-        auth,
+        accessToken,
     };
 
     const response = await sendGet(requestOptions);
@@ -104,12 +104,12 @@ export const retrieveWebhook = async (auth: string | JwtToken, webhookId: string
  *
  * @link https://docs.dolby.io/media-apis/reference/media-webhook-delete
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param webhookId Identifier of the webhook to delete.
  *
  * @returns The webhook identifier through a `Promise`.
  */
-export const deleteWebhook = async (auth: string | JwtToken, webhookId: string): Promise<string | null> => {
+export const deleteWebhook = async (accessToken: JwtToken, webhookId: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/webhooks',
@@ -117,7 +117,7 @@ export const deleteWebhook = async (auth: string | JwtToken, webhookId: string):
             id: webhookId,
         },
         headers: {},
-        auth,
+        accessToken,
     };
 
     const response = await sendDelete(requestOptions);

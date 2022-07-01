@@ -8,12 +8,12 @@ import { ListJobsOptions, ListAllJobsOptions, JobsResponse, Job } from './types/
  *
  * @link https://docs.dolby.io/media-apis/reference/media-jobs-get
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param options Options to request the list of jobs.
  *
  * @returns A `JobsResponse` object through a `Promise`.
  */
-export const list = async (auth: string | JwtToken, options: ListJobsOptions): Promise<JobsResponse> => {
+export const list = async (accessToken: JwtToken, options: ListJobsOptions): Promise<JobsResponse> => {
     const params = {};
     if (options.submitted_after) {
         params['submitted_after'] = options.submitted_after;
@@ -33,7 +33,7 @@ export const list = async (auth: string | JwtToken, options: ListJobsOptions): P
         path: '/media/jobs',
         params,
         headers: {},
-        auth,
+        accessToken,
     };
 
     const response = await sendGet(requestOptions);
@@ -46,12 +46,12 @@ export const list = async (auth: string | JwtToken, options: ListJobsOptions): P
  *
  * @link https://docs.dolby.io/media-apis/reference/media-jobs-get
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param options Options to request the list of jobs.
  *
  * @returns An array of `Job` objects through a `Promise`.
  */
-export const listAll = async (auth: string | JwtToken, options: ListAllJobsOptions): Promise<Array<Job>> => {
+export const listAll = async (accessToken: JwtToken, options: ListAllJobsOptions): Promise<Array<Job>> => {
     const params = {};
     if (options.submitted_after) {
         params['submitted_after'] = options.submitted_after;
@@ -67,7 +67,7 @@ export const listAll = async (auth: string | JwtToken, options: ListAllJobsOptio
         hostname: 'api.dolby.com',
         path: '/media/jobs',
         headers: {},
-        auth,
+        accessToken,
     };
 
     const result: Array<Job> = [];
@@ -97,10 +97,10 @@ export const listAll = async (auth: string | JwtToken, options: ListAllJobsOptio
  *
  * @link https://docs.dolby.io/media-apis/reference/media-jobs-cancel-post
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to cancel.
  */
-export const cancel = async (auth: string | JwtToken, jobId: string): Promise<void> => {
+export const cancel = async (accessToken: JwtToken, jobId: string): Promise<void> => {
     const params = {
         job_id: jobId,
     };
@@ -109,7 +109,7 @@ export const cancel = async (auth: string | JwtToken, jobId: string): Promise<vo
         hostname: 'api.dolby.com',
         path: '/media/jobs/cancel',
         headers: {},
-        auth,
+        accessToken,
         params: params,
     };
 

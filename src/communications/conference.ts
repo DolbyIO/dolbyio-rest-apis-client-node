@@ -11,7 +11,6 @@ import { RTCPMode } from './types/rtcpMode';
  * @link https://docs.dolby.io/communications-apis/reference/create-conference
  *
  * @param accessToken Access token to use for authentication.
- * @param ownerExternalId External ID of the owner of the conference.
  * @param options Options to create the conference.
  *
  * @returns A `Conference` object through a `Promise`.
