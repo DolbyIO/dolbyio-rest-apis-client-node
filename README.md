@@ -19,10 +19,10 @@ To get an access token that will be used by the client SDK for an end user to op
 ```javascript
 const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
 
-const CONSUMER_KEY = 'YOUR_CONSUMER_KEY';
-const CONSUMER_SECRET = 'YOUR_CONSUMER_SECRET';
+const APP_KEY = 'YOUR_APP_KEY';
+const APP_SECRET = 'YOUR_APP_SECRET';
 
-const at = await dolbyio.communications.authentication.getClientAccessToken(CONSUMER_KEY, CONSUMER_SECRET);
+const at = await dolbyio.communications.authentication.getClientAccessToken(APP_KEY, APP_SECRET);
 
 console.log(`Access Token: ${at.access_token}`);
 ```
@@ -32,10 +32,10 @@ To get an access token that will be used by your server to perform backend opera
 ```javascript
 const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
 
-const CONSUMER_KEY = 'YOUR_CONSUMER_KEY';
-const CONSUMER_SECRET = 'YOUR_CONSUMER_SECRET';
+const APP_KEY = 'YOUR_APP_KEY';
+const APP_SECRET = 'YOUR_APP_SECRET';
 
-const jwt = await dolbyio.communications.authentication.getApiAccessToken(CONSUMER_KEY, CONSUMER_SECRET);
+const jwt = await dolbyio.communications.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
 
 console.log(`Access Token: ${jwt.access_token}`);
 ```
@@ -47,8 +47,8 @@ To create a Dolby Voice conference, you first must retrieve an API Access Token,
 ```javascript
 const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
 
-const CONSUMER_KEY = 'YOUR_CONSUMER_KEY';
-const CONSUMER_SECRET = 'YOUR_CONSUMER_SECRET';
+const APP_KEY = 'YOUR_APP_KEY';
+const APP_SECRET = 'YOUR_APP_SECRET';
 
 const ownerExternalId = ''; // Identifier of the owner of the conference
 const alias = ''; // Conference alias
@@ -65,7 +65,7 @@ const options = {
 };
 
 // Request an Access Token
-const jwt = await dolbyio.communications.authentication.getApiAccessToken(CONSUMER_KEY, CONSUMER_SECRET);
+const jwt = await dolbyio.communications.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
 
 // Create the conference
 const conference = await dolbyio.communications.conference.createConference(jwt, options);
@@ -82,10 +82,10 @@ To get an access token, use the following code:
 ```javascript
 const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
 
-const API_KEY = 'YOUR_API_KEY';
-const API_SECRET = 'YOUR_API_SECRET';
+const APP_KEY = 'YOUR_APP_KEY';
+const APP_SECRET = 'YOUR_APP_SECRET';
 
-const at = await dolbyio.media.platform.getAccessToken(API_KEY, API_SECRET);
+const at = await dolbyio.media.platform.getApiAccessToken(API_KEY, API_SECRET);
 
 console.log(`Access Token: ${at.access_token}`);
 ```
