@@ -17,17 +17,17 @@ import { MasteringPreviewJob, MasteringJob } from './types/mastering';
  *
  * @link https://docs.dolby.io/media-apis/reference/media-music-mastering-post
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-music-mastering-post
  *
  * @returns The job identifier through a `Promise`.
  */
-export const startPreview = async (auth: string | JwtToken, jobContent: string): Promise<string | null> => {
+export const startPreview = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/master/preview',
         headers: {},
-        auth,
+        accessToken,
         body: jobContent,
     };
 
@@ -47,12 +47,12 @@ export const startPreview = async (auth: string | JwtToken, jobContent: string):
  *
  * @link https://docs.dolby.io/media-apis/reference/media-music-mastering-preview-get
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to retrieve.
  *
  * @returns The `MasteringPreviewJob` object through a `Promise`.
  */
-export const getPreviewResults = async (auth: string | JwtToken, jobId: string): Promise<MasteringPreviewJob> => {
+export const getPreviewResults = async (accessToken: JwtToken, jobId: string): Promise<MasteringPreviewJob> => {
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/master/preview',
@@ -60,7 +60,7 @@ export const getPreviewResults = async (auth: string | JwtToken, jobId: string):
             job_id: jobId,
         },
         headers: {},
-        auth,
+        accessToken,
     };
 
     const response = await sendGet(requestOptions);
@@ -80,17 +80,17 @@ export const getPreviewResults = async (auth: string | JwtToken, jobId: string):
  *
  * @link https://docs.dolby.io/media-apis/reference/media-music-mastering-post
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-music-mastering-post
  *
  * @returns The job identifier through a `Promise`.
  */
-export const start = async (auth: string | JwtToken, jobContent: string): Promise<string | null> => {
+export const start = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/master',
         headers: {},
-        auth,
+        accessToken,
         body: jobContent,
     };
 
@@ -110,12 +110,12 @@ export const start = async (auth: string | JwtToken, jobContent: string): Promis
  *
  * @link https://docs.dolby.io/media-apis/reference/media-music-mastering-get
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to retrieve.
  *
  * @returns The `MasteringJob` object through a `Promise`.
  */
-export const getResults = async (auth: string | JwtToken, jobId: string): Promise<MasteringJob> => {
+export const getResults = async (accessToken: JwtToken, jobId: string): Promise<MasteringJob> => {
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/master',
@@ -123,7 +123,7 @@ export const getResults = async (auth: string | JwtToken, jobId: string): Promis
             job_id: jobId,
         },
         headers: {},
-        auth,
+        accessToken,
     };
 
     const response = await sendGet(requestOptions);

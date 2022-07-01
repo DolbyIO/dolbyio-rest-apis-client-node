@@ -2,26 +2,26 @@ import { sendPost } from '../internal/httpHelpers';
 import JwtToken from './types/jwtToken';
 
 /**
- * Generates OAuth2 access token.
+ * Generates an API token.
  *
- * Generates an access token to be used for Bearer Authentication for Media API calls.
- * The token will expire in 12 hours.
+ * @link https://docs.dolby.io/media-apis/reference/get-api-token
  *
- * @link https://docs.dolby.io/media-apis/reference/media-oauth2-post
- *
- * @param apiKey Your Dolby.io API Key.
- * @param apiSecret Your Dolby.io API Secret.
+ * @param appKey Your Dolby.io App Key.
+ * @param appSecret Your Dolby.io App Secret.
  *
  * @returns A `JwtToken` object through a `Promise`.
  */
-export const getAccessToken = async (apiKey: string, apiSecret: string): Promise<JwtToken> => {
+export const getApiAccessToken = async (appKey: string, appSecret: string, expiresIn: number | undefined): Promise<JwtToken> => {
     let body = 'grant_type=client_credentials';
+    if (expiresIn) {
+        body += `&expires_in=${expiresIn}`;
+    }
 
-    const authz = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64');
+    const authz = Buffer.from(`${appKey}:${appSecret}`).toString('base64');
 
     const options = {
-        hostname: 'api.dolby.com',
-        path: '/media/oauth2/token',
+        hostname: 'api.dolby.io',
+        path: '/v1/auth/token',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Cache-Control': 'no-cache',

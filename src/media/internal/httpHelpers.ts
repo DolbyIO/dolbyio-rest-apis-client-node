@@ -2,7 +2,7 @@ import * as httpHelpers from '../../internal/httpHelpers';
 import JwtToken from '../types/jwtToken';
 
 export interface AuthRequestOptions extends httpHelpers.RequestOptions {
-    auth: string | JwtToken;
+    accessToken: JwtToken;
 }
 
 /**
@@ -13,11 +13,7 @@ export interface AuthRequestOptions extends httpHelpers.RequestOptions {
  * @returns A JSON payload object through a Promise.
  */
 export const sendGet = (options: AuthRequestOptions) => {
-    if (typeof options.auth === 'string') {
-        options.headers['x-api-key'] = options.auth;
-    } else {
-        options.headers['Authorization'] = `Bearer ${options.auth.access_token}`;
-    }
+    options.headers['Authorization'] = `Bearer ${options.accessToken.access_token}`;
 
     return httpHelpers.sendGet(options);
 };
@@ -30,11 +26,7 @@ export const sendGet = (options: AuthRequestOptions) => {
  * @returns A JSON payload object through a Promise.
  */
 export const sendPost = (options: AuthRequestOptions) => {
-    if (typeof options.auth === 'string') {
-        options.headers['x-api-key'] = options.auth;
-    } else {
-        options.headers['Authorization'] = `Bearer ${options.auth.access_token}`;
-    }
+    options.headers['Authorization'] = `Bearer ${options.accessToken.access_token}`;
 
     return httpHelpers.sendPost(options);
 };
@@ -47,11 +39,7 @@ export const sendPost = (options: AuthRequestOptions) => {
  * @returns A JSON payload object through a Promise.
  */
 export const sendPut = (options: AuthRequestOptions) => {
-    if (typeof options.auth === 'string') {
-        options.headers['x-api-key'] = options.auth;
-    } else {
-        options.headers['Authorization'] = `Bearer ${options.auth.access_token}`;
-    }
+    options.headers['Authorization'] = `Bearer ${options.accessToken.access_token}`;
 
     return httpHelpers.sendPut(options);
 };
@@ -64,11 +52,7 @@ export const sendPut = (options: AuthRequestOptions) => {
  * @returns A JSON payload object through a Promise.
  */
 export const sendDelete = (options: AuthRequestOptions) => {
-    if (typeof options.auth === 'string') {
-        options.headers['x-api-key'] = options.auth;
-    } else {
-        options.headers['Authorization'] = `Bearer ${options.auth.access_token}`;
-    }
+    options.headers['Authorization'] = `Bearer ${options.accessToken.access_token}`;
 
     return httpHelpers.sendDelete(options);
 };
@@ -82,11 +66,7 @@ export const sendDelete = (options: AuthRequestOptions) => {
  * @returns A JSON payload object through a Promise.
  */
 export const download = (filepath: string, options: AuthRequestOptions) => {
-    if (typeof options.auth === 'string') {
-        options.headers['x-api-key'] = options.auth;
-    } else {
-        options.headers['Authorization'] = `Bearer ${options.auth.access_token}`;
-    }
+    options.headers['Authorization'] = `Bearer ${options.accessToken.access_token}`;
 
     return httpHelpers.download(filepath, options);
 };

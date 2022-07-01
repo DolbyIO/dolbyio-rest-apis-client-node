@@ -12,12 +12,12 @@ import JwtToken from './types/jwtToken';
  *
  * @link https://docs.dolby.io/media-apis/reference/media-input
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param dlbUrl The `url` should be in the form `dlb://object-key` where the object-key can be any alpha-numeric string. The object-key is unique to your account API Key so there is no risk of collision with other users.
  *
  * @returns The upload URL through a `Promise`.
  */
-export const getUploadUrl = async (auth: string | JwtToken, dlbUrl: string): Promise<string | null> => {
+export const getUploadUrl = async (accessToken: JwtToken, dlbUrl: string): Promise<string | null> => {
     const payload = {
         url: dlbUrl,
     };
@@ -26,7 +26,7 @@ export const getUploadUrl = async (auth: string | JwtToken, dlbUrl: string): Pro
         hostname: 'api.dolby.com',
         path: '/media/input',
         headers: {},
-        auth,
+        accessToken,
         body: JSON.stringify(payload, null, '  '),
     };
 
@@ -47,11 +47,11 @@ export const getUploadUrl = async (auth: string | JwtToken, dlbUrl: string): Pro
  *
  * @link https://docs.dolby.io/media-apis/reference/media-output-get
  *
- * @param auth Your Dolby.io Media API Key or a JWT Token.
+ * @param accessToken Access token to use for authentication.
  * @param dlbUrl The `url` should be in the form `dlb://object-key` where the object-key can be any alpha-numeric string. The object-key is unique to your account API Key so there is no risk of collision with other users.
  * @param filePath Local file path where to download the file to.
  */
-export const downloadFile = async (auth: string | JwtToken, dlbUrl: string, filePath: string): Promise<void> => {
+export const downloadFile = async (accessToken: JwtToken, dlbUrl: string, filePath: string): Promise<void> => {
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/output',
@@ -59,7 +59,7 @@ export const downloadFile = async (auth: string | JwtToken, dlbUrl: string, file
             url: dlbUrl,
         },
         headers: {},
-        auth,
+        accessToken,
     };
 
     download(filePath, requestOptions);
