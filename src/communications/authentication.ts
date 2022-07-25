@@ -11,13 +11,7 @@ import JwtToken from './types/jwtToken';
  *
  * @returns A `JwtToken` object through a `Promise`.
  */
-const getAccessToken = async (
-    appKey: string,
-    appSecret: string,
-    hostname: string,
-    path: string,
-    expiresIn: number | undefined
-): Promise<JwtToken> => {
+const getAccessToken = async (appKey: string, appSecret: string, hostname: string, path: string, expiresIn: number | undefined): Promise<JwtToken> => {
     let body = 'grant_type=client_credentials';
     if (expiresIn) {
         body += `&expires_in=${expiresIn}`;

@@ -62,7 +62,7 @@ export const stopRtmp = async (accessToken: JwtToken, conferenceId: string): Pro
  * @param streamName The Millicast stream name to which the conference will broadcasted.
  * @param publishingToken The Millicast publishing token used to identify the broadcaster.
  */
- export const startLls = async (accessToken: JwtToken, conferenceId: string, streamName: string, publishingToken: string): Promise<void> => {
+export const startLls = async (accessToken: JwtToken, conferenceId: string, streamName: string, publishingToken: string): Promise<void> => {
     const body = JSON.stringify({
         streamName: streamName,
         publishingToken: publishingToken,
@@ -90,7 +90,7 @@ export const stopRtmp = async (accessToken: JwtToken, conferenceId: string): Pro
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
  */
- export const stopLls = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
+export const stopLls = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
     const options = {
         hostname: 'api.voxeet.com',
         path: `/v2/conferences/mix/${conferenceId}/lls/stop`,
