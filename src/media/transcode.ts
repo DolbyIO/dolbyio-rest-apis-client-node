@@ -18,7 +18,10 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/transcode',
-        headers: {},
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
         accessToken,
         body: jobContent,
     };

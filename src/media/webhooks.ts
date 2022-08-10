@@ -28,7 +28,10 @@ export const registerWebhook = async (accessToken: JwtToken, url: string, header
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/webhooks',
-        headers: {},
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
         accessToken,
         body: JSON.stringify(payload, null, '  '),
     };
@@ -66,7 +69,10 @@ export const updateWebhook = async (accessToken: JwtToken, options: UpdateWebhoo
         params: {
             id: options.webhookId,
         },
-        headers: {},
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
         accessToken,
         body: JSON.stringify(payload, null, '  '),
     };

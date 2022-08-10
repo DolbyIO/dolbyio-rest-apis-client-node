@@ -97,6 +97,7 @@ export const sendPost = (options: RequestOptions) => {
     if (!options.body) {
         // The REST APIs don't support an empty payload
         options.body = '{}';
+        options.headers['Content-Type'] = 'application/json';
     }
 
     options.headers['Content-Length'] = options.body.length;

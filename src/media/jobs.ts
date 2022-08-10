@@ -108,7 +108,10 @@ export const cancel = async (accessToken: JwtToken, jobId: string): Promise<void
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/jobs/cancel',
-        headers: {},
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
         accessToken,
         params: params,
     };

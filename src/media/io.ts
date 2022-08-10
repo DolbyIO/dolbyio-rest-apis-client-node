@@ -25,7 +25,10 @@ export const getUploadUrl = async (accessToken: JwtToken, dlbUrl: string): Promi
     const requestOptions: AuthRequestOptions = {
         hostname: 'api.dolby.com',
         path: '/media/input',
-        headers: {},
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
         accessToken,
         body: JSON.stringify(payload, null, '  '),
     };
