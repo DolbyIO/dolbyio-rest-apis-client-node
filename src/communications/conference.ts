@@ -44,8 +44,6 @@ export const createConference = async (accessToken: JwtToken, options: CreateCon
         body['participants'] = obj_participants;
     }
 
-    const strBody = JSON.stringify(body);
-
     const requestOptions = {
         hostname: 'api.voxeet.com',
         path: '/v2/conferences/create',
@@ -54,7 +52,7 @@ export const createConference = async (accessToken: JwtToken, options: CreateCon
             'Content-Type': 'application/json',
             Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
         },
-        body: strBody,
+        body: JSON.stringify(body),
     };
 
     const response = await sendPost(requestOptions);

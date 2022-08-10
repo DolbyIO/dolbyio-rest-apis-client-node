@@ -18,7 +18,6 @@ import RemixStatus from './types/remixStatus';
 export const start = async (accessToken: JwtToken, conferenceId: string, layoutUrl?: string): Promise<RemixStatus> => {
     const body = {};
     if (layoutUrl) body['layoutUrl'] = layoutUrl;
-    const strBody = JSON.stringify(body);
 
     const options = {
         hostname: 'api.voxeet.com',
@@ -28,7 +27,7 @@ export const start = async (accessToken: JwtToken, conferenceId: string, layoutU
             'Content-Type': 'application/json',
             Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
         },
-        body: strBody,
+        body: JSON.stringify(body),
     };
 
     const response = await sendPost(options);
