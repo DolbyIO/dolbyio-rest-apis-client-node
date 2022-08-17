@@ -65,5 +65,5 @@ export const downloadFile = async (accessToken: JwtToken, dlbUrl: string, filePa
         accessToken,
     };
 
-    download(filePath, requestOptions);
+    return download(filePath, requestOptions);
 };
