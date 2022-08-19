@@ -25,6 +25,7 @@ export const createConference = async (accessToken: JwtToken, options: CreateCon
     if (options.pinCode) parameters['pincode'] = options.pinCode;
     if (options.ttl) parameters['ttl'] = options.ttl;
     if (options.videoCodec) parameters['videoCodec'] = options.videoCodec;
+    if (options.recordingFormats) parameters['recording'] = { format: options.recordingFormats };
 
     const body = {
         ownerExternalId: options.ownerExternalId,
