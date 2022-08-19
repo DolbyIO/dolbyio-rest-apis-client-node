@@ -21,6 +21,8 @@ export interface CreateConferenceOptions {
     videoCodec?: VideoCodec;
     /** List of participants. */
     participants?: Array<Participant>;
+    /** If specified, the default RecordingConfiguration is overridden. Specifies the recording format. Valid values are 'mp3' and 'mp4'. */
+    recordingFormats?: Array<string>;
 }
 
 export interface UserTokens {
