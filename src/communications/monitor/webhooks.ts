@@ -1,6 +1,7 @@
 import { sendGet } from '../../internal/httpHelpers';
 import { getAll } from '../internal/httpHelpers';
-import JwtToken from '../types/jwtToken';
+import { COMMS_HOSTNAME } from '../internal/urls';
+import JwtToken from '../../types/jwtToken';
 import { GetWebhooksOptions, GetAllWebhooksOptions, GetWebHookResponse, WebHook } from '../types/webhooks';
 
 /**
@@ -42,7 +43,7 @@ export const getEvents = async (accessToken: JwtToken, options: GetWebhooksOptio
     }
 
     const requestOptions = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path,
         params,
         headers: {
@@ -91,7 +92,7 @@ export const getAllEvents = async (accessToken: JwtToken, options: GetAllWebhook
     }
 
     const requestOptions = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path,
         params,
         headers: {

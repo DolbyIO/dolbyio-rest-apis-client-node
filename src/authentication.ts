@@ -1,9 +1,12 @@
-import { sendPost } from '../internal/httpHelpers';
+import { sendPost } from './internal/httpHelpers';
+import { AUTH_HOSTNAME } from './internal/urls';
 import JwtToken from './types/jwtToken';
 
 /**
  * Generates an API token.
+ * To make any API call, you must acquire a JWT (JSON Web Token) format API token.
  *
+ * @link https://docs.dolby.io/communications-apis/reference/get-api-token
  * @link https://docs.dolby.io/media-apis/reference/get-api-token
  *
  * @param appKey Your Dolby.io App Key.
@@ -20,7 +23,7 @@ export const getApiAccessToken = async (appKey: string, appSecret: string, expir
     const authz = Buffer.from(`${appKey}:${appSecret}`).toString('base64');
 
     const options = {
-        hostname: 'api.dolby.io',
+        hostname: AUTH_HOSTNAME,
         path: '/v1/auth/token',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

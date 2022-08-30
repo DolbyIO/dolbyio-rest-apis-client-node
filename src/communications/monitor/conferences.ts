@@ -1,6 +1,7 @@
 import { sendGet } from '../../internal/httpHelpers';
 import { getAll } from '../internal/httpHelpers';
-import JwtToken from '../types/jwtToken';
+import { COMMS_HOSTNAME } from '../internal/urls';
+import JwtToken from '../../types/jwtToken';
 import {
     ListConferencesOptions,
     ListAllConferencesOptions,
@@ -57,7 +58,7 @@ export const listConferences = async (accessToken: JwtToken, options: ListConfer
     }
 
     const requestOptions = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: '/v1/monitor/conferences',
         params,
         headers: {
@@ -110,7 +111,7 @@ export const listAllConferences = async (accessToken: JwtToken, options: ListAll
     }
 
     const requestOptions = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: '/v1/monitor/conferences',
         params,
         headers: {
@@ -138,7 +139,7 @@ export const listAllConferences = async (accessToken: JwtToken, options: ListAll
  */
 export const getConference = async (accessToken: JwtToken, conferenceId: string, livestats: boolean = false): Promise<Conference> => {
     const options = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: `v1/monitor/conferences/${conferenceId}?livestats=${livestats}`,
         headers: {
             Accept: 'application/json',
@@ -164,7 +165,7 @@ export const getConference = async (accessToken: JwtToken, conferenceId: string,
  */
 export const getConferenceStatistics = async (accessToken: JwtToken, conferenceId: string): Promise<Statistics> => {
     const options = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: `/v1/monitor/conferences/${conferenceId}/statistics`,
         headers: {
             Accept: 'application/json',
@@ -215,7 +216,7 @@ export const getConferenceParticipants = async (accessToken: JwtToken, options: 
     }
 
     const requestOptions = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: path,
         params,
         headers: {
@@ -264,7 +265,7 @@ export const getAllConferenceParticipants = async (accessToken: JwtToken, option
     }
 
     const requestOptions = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: path,
         params,
         headers: {

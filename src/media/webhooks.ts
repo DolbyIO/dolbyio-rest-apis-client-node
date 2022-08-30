@@ -1,6 +1,7 @@
 import http from 'http';
 import { sendGet, sendPost, sendPut, sendDelete, AuthRequestOptions } from './internal/httpHelpers';
-import JwtToken from './types/jwtToken';
+import { API_HOSTNAME } from './internal/urls';
+import JwtToken from '../types/jwtToken';
 import { UpdateWebhookOptions, Webhook } from './types/webhooks';
 
 /**
@@ -26,7 +27,7 @@ export const registerWebhook = async (accessToken: JwtToken, url: string, header
     }
 
     const requestOptions: AuthRequestOptions = {
-        hostname: 'api.dolby.com',
+        hostname: API_HOSTNAME,
         path: '/media/webhooks',
         headers: {
             Accept: 'application/json',
@@ -64,7 +65,7 @@ export const updateWebhook = async (accessToken: JwtToken, options: UpdateWebhoo
     }
 
     const requestOptions: AuthRequestOptions = {
-        hostname: 'api.dolby.com',
+        hostname: API_HOSTNAME,
         path: '/media/webhooks',
         params: {
             id: options.webhookId,
@@ -92,7 +93,7 @@ export const updateWebhook = async (accessToken: JwtToken, options: UpdateWebhoo
  */
 export const retrieveWebhook = async (accessToken: JwtToken, webhookId: string): Promise<Webhook> => {
     const requestOptions: AuthRequestOptions = {
-        hostname: 'api.dolby.com',
+        hostname: API_HOSTNAME,
         path: '/media/webhooks',
         params: {
             id: webhookId,
@@ -117,7 +118,7 @@ export const retrieveWebhook = async (accessToken: JwtToken, webhookId: string):
  */
 export const deleteWebhook = async (accessToken: JwtToken, webhookId: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {
-        hostname: 'api.dolby.com',
+        hostname: API_HOSTNAME,
         path: '/media/webhooks',
         params: {
             id: webhookId,

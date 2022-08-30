@@ -1,5 +1,6 @@
 import { sendPost } from '../internal/httpHelpers';
-import JwtToken from './types/jwtToken';
+import { COMMS_HOSTNAME } from './internal/urls';
+import JwtToken from '../types/jwtToken';
 
 /**
  * Starts an RTMP live stream. Once the Dolby.io Communication API service started streaming to the target url,
@@ -17,7 +18,7 @@ export const startRtmp = async (accessToken: JwtToken, conferenceId: string, rtm
     const body = JSON.stringify({ uri: uri });
 
     const options = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/mix/${conferenceId}/rtmp/start`,
         headers: {
             Accept: 'application/json',
@@ -40,7 +41,7 @@ export const startRtmp = async (accessToken: JwtToken, conferenceId: string, rtm
  */
 export const stopRtmp = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
     const options = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/mix/${conferenceId}/rtmp/stop`,
         headers: {
             Accept: 'application/json',
@@ -69,7 +70,7 @@ export const startLls = async (accessToken: JwtToken, conferenceId: string, stre
     });
 
     const options = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/mix/${conferenceId}/lls/start`,
         headers: {
             Accept: 'application/json',
@@ -92,7 +93,7 @@ export const startLls = async (accessToken: JwtToken, conferenceId: string, stre
  */
 export const stopLls = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
     const options = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/mix/${conferenceId}/lls/stop`,
         headers: {
             Accept: 'application/json',

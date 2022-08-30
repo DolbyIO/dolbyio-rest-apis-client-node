@@ -1,5 +1,6 @@
 import { sendPost, sendGet } from '../internal/httpHelpers';
-import JwtToken from './types/jwtToken';
+import { COMMS_HOSTNAME } from './internal/urls';
+import JwtToken from '../types/jwtToken';
 import RemixStatus from './types/remixStatus';
 
 /**
@@ -20,7 +21,7 @@ export const start = async (accessToken: JwtToken, conferenceId: string, layoutU
     if (layoutUrl) body['layoutUrl'] = layoutUrl;
 
     const options = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/mix/${conferenceId}/remix/start`,
         headers: {
             Accept: 'application/json',
@@ -46,7 +47,7 @@ export const start = async (accessToken: JwtToken, conferenceId: string, layoutU
  */
 export const getStatus = async (accessToken: JwtToken, conferenceId: string): Promise<RemixStatus> => {
     const options = {
-        hostname: 'comms.api.dolby.io',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/mix/${conferenceId}/remix/status`,
         headers: {
             Accept: 'application/json',

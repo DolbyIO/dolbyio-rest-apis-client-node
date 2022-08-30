@@ -1,5 +1,6 @@
 import { sendPost, download, AuthRequestOptions } from './internal/httpHelpers';
-import JwtToken from './types/jwtToken';
+import { API_HOSTNAME } from './internal/urls';
+import JwtToken from '../types/jwtToken';
 
 /**
  * Starts Media Input
@@ -23,7 +24,7 @@ export const getUploadUrl = async (accessToken: JwtToken, dlbUrl: string): Promi
     };
 
     const requestOptions: AuthRequestOptions = {
-        hostname: 'api.dolby.com',
+        hostname: API_HOSTNAME,
         path: '/media/input',
         headers: {
             Accept: 'application/json',
@@ -56,7 +57,7 @@ export const getUploadUrl = async (accessToken: JwtToken, dlbUrl: string): Promi
  */
 export const downloadFile = async (accessToken: JwtToken, dlbUrl: string, filePath: string): Promise<void> => {
     const requestOptions: AuthRequestOptions = {
-        hostname: 'api.dolby.com',
+        hostname: API_HOSTNAME,
         path: '/media/output',
         params: {
             url: dlbUrl,
