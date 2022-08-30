@@ -19,6 +19,8 @@ export interface CreateConferenceOptions {
     ttl?: number;
     /** Specifies video codecs (VP8 or H264) for a specific conference. */
     videoCodec?: VideoCodec;
+    /** If `true`, the conference does not allow participants to enable video. */
+    audioOnly?: boolean;
     /** List of participants. */
     participants?: Array<Participant>;
     /** If specified, the default RecordingConfiguration is overridden. Specifies the recording format. Valid values are 'mp3' and 'mp4'. */

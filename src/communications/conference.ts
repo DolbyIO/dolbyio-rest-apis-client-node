@@ -20,6 +20,7 @@ export const createConference = async (accessToken: JwtToken, options: CreateCon
     const parameters = {
         dolbyVoice: options.dolbyVoice ? options.dolbyVoice : true,
         liveRecording: options.liveRecording ? options.liveRecording : false,
+        audioOnly: options.audioOnly ? options.audioOnly : false,
         rtcpMode: options.rtcpMode ? options.rtcpMode : RTCPMode.Average,
     };
 
