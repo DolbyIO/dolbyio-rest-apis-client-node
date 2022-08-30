@@ -1,5 +1,6 @@
 import { sendPost, sendGet, AuthRequestOptions } from './internal/httpHelpers';
-import JwtToken from './types/jwtToken';
+import { API_HOSTNAME } from './internal/urls';
+import JwtToken from '../types/jwtToken';
 import { MasteringPreviewJob, MasteringJob } from './types/mastering';
 
 /**
@@ -24,7 +25,7 @@ import { MasteringPreviewJob, MasteringJob } from './types/mastering';
  */
 export const startPreview = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {
-        hostname: 'api.dolby.com',
+        hostname: API_HOSTNAME,
         path: '/media/master/preview',
         headers: {
             Accept: 'application/json',
@@ -57,7 +58,7 @@ export const startPreview = async (accessToken: JwtToken, jobContent: string): P
  */
 export const getPreviewResults = async (accessToken: JwtToken, jobId: string): Promise<MasteringPreviewJob> => {
     const requestOptions: AuthRequestOptions = {
-        hostname: 'api.dolby.com',
+        hostname: API_HOSTNAME,
         path: '/media/master/preview',
         params: {
             job_id: jobId,
@@ -90,7 +91,7 @@ export const getPreviewResults = async (accessToken: JwtToken, jobId: string): P
  */
 export const start = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {
-        hostname: 'api.dolby.com',
+        hostname: API_HOSTNAME,
         path: '/media/master',
         headers: {
             Accept: 'application/json',
@@ -123,7 +124,7 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
  */
 export const getResults = async (accessToken: JwtToken, jobId: string): Promise<MasteringJob> => {
     const requestOptions: AuthRequestOptions = {
-        hostname: 'api.dolby.com',
+        hostname: API_HOSTNAME,
         path: '/media/master',
         params: {
             job_id: jobId,

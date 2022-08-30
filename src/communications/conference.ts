@@ -1,7 +1,8 @@
 import { sendDelete, sendPost, sendPut } from '../internal/httpHelpers';
+import { COMMS_HOSTNAME } from './internal/urls';
 import { CreateConferenceOptions, Conference, UserTokens } from './types/conference';
 import { SpatialEnvironment, SpatialListener, SpatialUsers } from './types/spatialAudio';
-import JwtToken from './types/jwtToken';
+import JwtToken from '../types/jwtToken';
 import Participant from './types/participant';
 import { RTCPMode } from './types/rtcpMode';
 
@@ -19,6 +20,7 @@ export const createConference = async (accessToken: JwtToken, options: CreateCon
     const parameters = {
         dolbyVoice: options.dolbyVoice ? options.dolbyVoice : true,
         liveRecording: options.liveRecording ? options.liveRecording : false,
+        audioOnly: options.audioOnly ? options.audioOnly : false,
         rtcpMode: options.rtcpMode ? options.rtcpMode : RTCPMode.Average,
     };
 
@@ -46,7 +48,7 @@ export const createConference = async (accessToken: JwtToken, options: CreateCon
     }
 
     const requestOptions = {
-        hostname: 'api.voxeet.com',
+        hostname: COMMS_HOSTNAME,
         path: '/v2/conferences/create',
         headers: {
             Accept: 'application/json',
@@ -86,7 +88,7 @@ export const invite = async (accessToken: JwtToken, conferenceId: string, partic
     });
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/${conferenceId}/invite`,
         headers: {
             Accept: 'application/json',
@@ -115,7 +117,7 @@ export const kick = async (accessToken: JwtToken, conferenceId: string, external
     });
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/${conferenceId}/kick`,
         headers: {
             Accept: 'application/json',
@@ -156,7 +158,7 @@ export const sendMessage = async (
     }
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/${conferenceId}/message`,
         headers: {
             Accept: 'application/json',
@@ -194,7 +196,7 @@ export const setSpatialListenersAudio = async (
     });
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/${conferenceId}/spatial-listeners-audio`,
         headers: {
             Accept: 'application/json',
@@ -233,7 +235,7 @@ export const updatePermissions = async (accessToken: JwtToken, conferenceId: str
     });
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/${conferenceId}/invite`,
         headers: {
             Accept: 'application/json',
@@ -257,7 +259,7 @@ export const updatePermissions = async (accessToken: JwtToken, conferenceId: str
  */
 export const terminate = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: COMMS_HOSTNAME,
         path: `/v2/conferences/${conferenceId}`,
         headers: {
             Accept: 'application/json',

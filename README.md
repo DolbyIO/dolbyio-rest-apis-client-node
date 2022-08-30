@@ -10,6 +10,21 @@ Run the npm command to install the package `@dolbyio/dolbyio-rest-apis-client` i
 npm install @dolbyio/dolbyio-rest-apis-client --save
 ```
 
+## Authentication
+
+To get an access token that will be used by your server to perform backend operations like creating a conference, use the following code.
+
+```javascript
+const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
+
+const APP_KEY = 'YOUR_APP_KEY';
+const APP_SECRET = 'YOUR_APP_SECRET';
+
+const jwt = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
+
+console.log(`Access Token: ${jwt.access_token}`);
+```
+
 ## Communications Examples
 
 ### Authenticate
@@ -25,19 +40,6 @@ const APP_SECRET = 'YOUR_APP_SECRET';
 const at = await dolbyio.communications.authentication.getClientAccessToken(APP_KEY, APP_SECRET);
 
 console.log(`Access Token: ${at.access_token}`);
-```
-
-To get an access token that will be used by your server to perform backend operations like creating a conference, use the following code.
-
-```javascript
-const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
-
-const APP_KEY = 'YOUR_APP_KEY';
-const APP_SECRET = 'YOUR_APP_SECRET';
-
-const jwt = await dolbyio.communications.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
-
-console.log(`Access Token: ${jwt.access_token}`);
 ```
 
 ### Create a conference
@@ -65,7 +67,7 @@ const options = {
 };
 
 // Request an Access Token
-const jwt = await dolbyio.communications.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
+const jwt = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
 
 // Create the conference
 const conference = await dolbyio.communications.conference.createConference(jwt, options);
@@ -75,9 +77,9 @@ console.log(`Conference created: ${conference.conferenceId}`);
 
 ## Media Examples
 
-### Authenticate
+### Start an enhance job
 
-To get an access token, use the following code:
+To start an enhance job, use the following code:
 
 ```javascript
 const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
@@ -85,9 +87,18 @@ const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
 const APP_KEY = 'YOUR_APP_KEY';
 const APP_SECRET = 'YOUR_APP_SECRET';
 
-const at = await dolbyio.media.platform.getApiAccessToken(API_KEY, API_SECRET);
+// Request an Access Token
+const jwt = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
 
-console.log(`Access Token: ${at.access_token}`);
+const jobDescription = JSON.stringify({
+    content: { type: 'podcast' },
+    input: 'dlb://in/file.mp4',
+    output: 'dlb://out/file.mp4',
+});
+
+const jobId = await dolbyio.media.enhance.start(jwt, jobDescription);
+
+console.log(`Job ID: ${jobId}`);
 ```
 
 ## Build this project

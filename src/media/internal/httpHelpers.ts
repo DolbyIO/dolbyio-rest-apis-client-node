@@ -1,5 +1,5 @@
 import * as httpHelpers from '../../internal/httpHelpers';
-import JwtToken from '../types/jwtToken';
+import JwtToken from '../../types/jwtToken';
 
 export interface AuthRequestOptions extends httpHelpers.RequestOptions {
     accessToken: JwtToken;
