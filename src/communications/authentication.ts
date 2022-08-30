@@ -23,7 +23,7 @@ export const getClientAccessToken = async (appKey: string, appSecret: string, ex
 
     const options = {
         hostname: SESSION_HOSTNAME,
-        path: '/v1/auth/token',
+        path: '/v1/auth2/token',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Cache-Control': 'no-cache',
