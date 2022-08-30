@@ -35,7 +35,7 @@ export const getRecordings = async (accessToken: JwtToken, options: GetRecording
     }
 
     const requestOptions = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: '/v1/monitor/recordings',
         params,
         headers: {
@@ -76,7 +76,7 @@ export const getAllRecordings = async (accessToken: JwtToken, options: GetAllRec
     };
 
     const requestOptions = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: '/v1/monitor/recordings',
         params,
         headers: {
@@ -120,7 +120,7 @@ export const getRecording = async (accessToken: JwtToken, options: GetRecordingO
     }
 
     const requestOptions = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v1/monitor/conferences/${opts.confId}/recordings`,
         params,
         headers: {
@@ -145,7 +145,7 @@ export const getRecording = async (accessToken: JwtToken, options: GetRecordingO
  */
 export const deleteRecording = async (accessToken: JwtToken, confId: string): Promise<void> => {
     const requestOptions = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v1/monitor/conferences/${confId}/recordings`,
         headers: {
             Accept: 'application/json',
@@ -169,7 +169,7 @@ export const deleteRecording = async (accessToken: JwtToken, confId: string): Pr
  */
 export const getDolbyVoiceRecording = async (accessToken: JwtToken, confId: string): Promise<DolbyVoiceRecording> => {
     const requestOptions = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v1/monitor/conferences/${confId}/recordings/audio`,
         headers: {
             Accept: 'application/json',
@@ -193,7 +193,7 @@ export const getDolbyVoiceRecording = async (accessToken: JwtToken, confId: stri
  */
 export const downloadMp4Recording = async (accessToken: JwtToken, confId: string, filepath: string): Promise<void> => {
     const requestOptions = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v1/monitor/conferences/${confId}/recordings/mp4`,
         headers: {
             Accept: 'video/mp4',
@@ -216,7 +216,7 @@ export const downloadMp4Recording = async (accessToken: JwtToken, confId: string
  */
 export const downloadMp3Recording = async (accessToken: JwtToken, confId: string, filepath: string): Promise<void> => {
     const requestOptions = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v1/monitor/conferences/${confId}/recordings/mp3`,
         headers: {
             Accept: 'video/mpeg',

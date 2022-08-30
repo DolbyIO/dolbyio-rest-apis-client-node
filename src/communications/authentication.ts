@@ -4,8 +4,8 @@ import JwtToken from './types/jwtToken';
 /**
  * Gets a JWT token for authorization.
  *
- * @param appKey Your Dolby.io Consumer Key.
- * @param appSecret Your Dolby.io Consumer Secret.
+ * @param appKey Your Dolby.io App Key.
+ * @param appSecret Your Dolby.io App Secret.
  * @param hostname
  * @param path
  *

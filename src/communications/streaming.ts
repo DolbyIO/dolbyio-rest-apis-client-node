@@ -17,7 +17,7 @@ export const startRtmp = async (accessToken: JwtToken, conferenceId: string, rtm
     const body = JSON.stringify({ uri: uri });
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/mix/${conferenceId}/rtmp/start`,
         headers: {
             Accept: 'application/json',
@@ -40,7 +40,7 @@ export const startRtmp = async (accessToken: JwtToken, conferenceId: string, rtm
  */
 export const stopRtmp = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/mix/${conferenceId}/rtmp/stop`,
         headers: {
             Accept: 'application/json',
@@ -53,13 +53,13 @@ export const stopRtmp = async (accessToken: JwtToken, conferenceId: string): Pro
 };
 
 /**
- * Starts a Low Latency Stream to Millicast.
+ * Starts low latency streaming using Millicast services.
  *
  * @link https://docs.dolby.io/communications-apis/reference/start-lls
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
- * @param streamName The Millicast stream name to which the conference will broadcasted.
+ * @param streamName The Millicast stream name to which the conference is broadcasted.
  * @param publishingToken The Millicast publishing token used to identify the broadcaster.
  */
 export const startLls = async (accessToken: JwtToken, conferenceId: string, streamName: string, publishingToken: string): Promise<void> => {
@@ -69,7 +69,7 @@ export const startLls = async (accessToken: JwtToken, conferenceId: string, stre
     });
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/mix/${conferenceId}/lls/start`,
         headers: {
             Accept: 'application/json',
@@ -83,7 +83,7 @@ export const startLls = async (accessToken: JwtToken, conferenceId: string, stre
 };
 
 /**
- * Stops an existing Low Latency Stream to Millicast.
+ * Stops low latency streaming to Millicast services.
  *
  * @link https://docs.dolby.io/communications-apis/reference/stop-lls
  *
@@ -92,7 +92,7 @@ export const startLls = async (accessToken: JwtToken, conferenceId: string, stre
  */
 export const stopLls = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/mix/${conferenceId}/lls/stop`,
         headers: {
             Accept: 'application/json',

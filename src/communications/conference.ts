@@ -46,7 +46,7 @@ export const createConference = async (accessToken: JwtToken, options: CreateCon
     }
 
     const requestOptions = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: '/v2/conferences/create',
         headers: {
             Accept: 'application/json',
@@ -86,7 +86,7 @@ export const invite = async (accessToken: JwtToken, conferenceId: string, partic
     });
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/${conferenceId}/invite`,
         headers: {
             Accept: 'application/json',
@@ -115,7 +115,7 @@ export const kick = async (accessToken: JwtToken, conferenceId: string, external
     });
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/${conferenceId}/kick`,
         headers: {
             Accept: 'application/json',
@@ -156,7 +156,7 @@ export const sendMessage = async (
     }
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/${conferenceId}/message`,
         headers: {
             Accept: 'application/json',
@@ -194,7 +194,7 @@ export const setSpatialListenersAudio = async (
     });
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/${conferenceId}/spatial-listeners-audio`,
         headers: {
             Accept: 'application/json',
@@ -233,7 +233,7 @@ export const updatePermissions = async (accessToken: JwtToken, conferenceId: str
     });
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/${conferenceId}/invite`,
         headers: {
             Accept: 'application/json',
@@ -257,7 +257,7 @@ export const updatePermissions = async (accessToken: JwtToken, conferenceId: str
  */
 export const terminate = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/${conferenceId}`,
         headers: {
             Accept: 'application/json',

@@ -42,7 +42,7 @@ export const getEvents = async (accessToken: JwtToken, options: GetWebhooksOptio
     }
 
     const requestOptions = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path,
         params,
         headers: {
@@ -91,7 +91,7 @@ export const getAllEvents = async (accessToken: JwtToken, options: GetAllWebhook
     }
 
     const requestOptions = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path,
         params,
         headers: {

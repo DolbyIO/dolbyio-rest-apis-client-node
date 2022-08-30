@@ -20,7 +20,7 @@ export const start = async (accessToken: JwtToken, conferenceId: string, layoutU
     if (layoutUrl) body['layoutUrl'] = layoutUrl;
 
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/mix/${conferenceId}/remix/start`,
         headers: {
             Accept: 'application/json',
@@ -46,7 +46,7 @@ export const start = async (accessToken: JwtToken, conferenceId: string, layoutU
  */
 export const getStatus = async (accessToken: JwtToken, conferenceId: string): Promise<RemixStatus> => {
     const options = {
-        hostname: 'api.voxeet.com',
+        hostname: 'comms.api.dolby.io',
         path: `/v2/conferences/mix/${conferenceId}/remix/status`,
         headers: {
             Accept: 'application/json',
