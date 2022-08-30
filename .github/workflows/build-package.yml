@@ -8,10 +8,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout 🛎️
-              uses: actions/checkout@v2.3.4
+              uses: actions/checkout@v3
               with:
                   persist-credentials: false
-
             - name: Print NPM version 🌎
               run: npm --version
             - name: Install the dependencies 🔧
