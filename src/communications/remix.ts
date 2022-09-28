@@ -12,7 +12,10 @@ import RemixStatus from './types/remixStatus';
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
- * @param layoutUrl Overwrites the layout URL configuration: `null`: uses the layout URL configured in the dashboard (if no URL is set in the dashboard, then uses the Dolby.io default); `default`: uses the Dolby.io default layout; URL string: uses this layout URL
+ * @param layoutUrl Overwrites the layout URL configuration:
+ *      - `null`: uses the layout URL configured in the dashboard (if no URL is set in the dashboard, then uses the Dolby.io default);
+ *      - `default`: uses the Dolby.io default layout;
+ *      - URL string: uses this layout URL
  *
  * @returns A `RemixStatus` object through a `Promise`.
  */
