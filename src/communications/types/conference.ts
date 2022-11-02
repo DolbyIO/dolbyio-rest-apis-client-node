@@ -17,7 +17,7 @@ export interface CreateConferenceOptions {
     rtcpMode?: RTCPMode;
     /** Specifies the time to live that enables customizing the waiting time (in seconds) and terminating empty conferences. */
     ttl?: number;
-    /** Specifies video codecs (VP8 or H264) for a specific conference. */
+    /** Specifies the video codec (VP8 or H264) for the conference. */
     videoCodec?: VideoCodec;
     /** If `true`, the conference does not allow participants to enable video. */
     audioOnly?: boolean;

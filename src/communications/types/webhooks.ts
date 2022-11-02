@@ -1,6 +1,6 @@
 import { PagedOptions, AllElementsOptions, PagedResponse } from './core';
 
-interface GetWebhooksOptionsBase extends PagedOptions {
+interface GetWebhooksOptionsBase {
     /** Identifier of the conference. */
     conferenceId?: string;
     /** The Webhook event type or an expression of its type (for example `Recording.Live.InProgress` or `Rec.*`). The default value of the type parameter returns all types of Webhooks. */

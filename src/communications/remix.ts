@@ -39,7 +39,7 @@ export const start = async (accessToken: JwtToken, conferenceId: string, layoutU
 };
 
 /**
- * Gets the status of a current mixing job. You must use this API if the conference is protected using enhanced conference access control.
+ * Gets the status of a current mixing job.
  *
  * @link https://docs.dolby.io/communications-apis/reference/get-conference-remix-status
  *

@@ -97,7 +97,7 @@ export const getAllRecordings = async (accessToken: JwtToken, options: GetAllRec
  * @link https://docs.dolby.io/communications-apis/reference/get-conference-recordings
  *
  * @param accessToken Access token to use for authentication.
- * @param options Options to request the webhooks.
+ * @param options Options to request the recording.
  *
  * @returns An array of `Recording` objects through a `Promise`.
  */
@@ -188,6 +188,8 @@ export const getDolbyVoiceRecording = async (accessToken: JwtToken, confId: stri
  *
  * @link https://docs.dolby.io/communications-apis/reference/get-mp4-recording
  *
+ * @deprecated The [Get recording details](https://docs.dolby.io/communications-apis/reference/get-recordings) and [Get the recordings of a specific conference](https://docs.dolby.io/communications-apis/reference/get-conference-recordings) REST APIs return AWS S3 presigned URLs to download the split recordings, audio recordings, and video recordings.
+ *
  * @param accessToken Access token to use for authentication.
  * @param confId Identifier of the conference.
  * @param filepath Where to save the file.
@@ -210,6 +212,8 @@ export const downloadMp4Recording = async (accessToken: JwtToken, confId: string
  * For more information, see the [Recording](https://docs.dolby.io/communications-apis/docs/guides-recording-mechanisms) document.
  *
  * @link https://docs.dolby.io/communications-apis/reference/get-mp3-recording
+ *
+ * @deprecated The [Get recording details](https://docs.dolby.io/communications-apis/reference/get-recordings) and [Get the recordings of a specific conference](https://docs.dolby.io/communications-apis/reference/get-conference-recordings) REST APIs return AWS S3 presigned URLs to download the split recordings, audio recordings, and video recordings.
  *
  * @param accessToken Access token to use for authentication.
  * @param confId Identifier of the conference.

@@ -1,5 +1,4 @@
-import { sendPost, sendGet, AuthRequestOptions } from './internal/httpHelpers';
-import { API_HOSTNAME } from './internal/urls';
+import { startJob, getJobResults } from './internal/jobsHelpers';
 import JwtToken from '../types/jwtToken';
 import { EnhanceJob } from './types/enhance';
 
@@ -20,23 +19,7 @@ import { EnhanceJob } from './types/enhance';
  * @returns The job identifier through a `Promise`.
  */
 export const start = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
-    const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
-        path: '/media/enhance',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        accessToken,
-        body: jobContent,
-    };
-
-    const response = await sendPost(requestOptions);
-    if (response.hasOwnProperty('job_id')) {
-        return response['job_id'];
-    }
-
-    return null;
+    return await startJob(accessToken, '/media/enhance', jobContent);
 };
 
 /**
@@ -54,16 +37,5 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
  * @returns The `EnhanceJob` object through a `Promise`.
  */
 export const getResults = async (accessToken: JwtToken, jobId: string): Promise<EnhanceJob> => {
-    const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
-        path: '/media/enhance',
-        params: {
-            job_id: jobId,
-        },
-        headers: {},
-        accessToken,
-    };
-
-    const response = await sendGet(requestOptions);
-    return response as EnhanceJob;
+    return await getJobResults<EnhanceJob>(accessToken, '/media/enhance', jobId);
 };

@@ -5,9 +5,9 @@ interface ListConferencesOptionsBase {
      * Search conferences using Alias. Use regular expression to search for conferences with similar aliases. For example:
      * * Use `foobar` to get all conferences with alias `foobar`.
      * * Use `.*foobar` to get all conferences with alias ending with `foobar.`
-     * * Use `foobar.*` to get all conferences with alias starting with foobar
-     * * Use `.*foobar.*` to get all conferences with alias containing foobar.
-     * * Use `.*2019.*|.*2020.*` to get all conferences with alias containing either 2019 or 2020
+     * * Use `foobar.*` to get all conferences with alias starting with `foobar`.
+     * * Use `.*foobar.*` to get all conferences with alias containing `foobar`.
+     * * Use `.*2021.*|.*2022.*` to get all conferences with alias containing either 2021 or 2022
      */
     alias?: string;
     /** Search for ongoing references (`true`) or all conferences (`false`). */
@@ -129,6 +129,6 @@ export interface Participants {
 }
 
 export interface ParticipantsResponse extends PagedResponse {
-    /** List of conferences. */
+    /** List of participants. */
     participants: Participants;
 }
