@@ -140,7 +140,7 @@ export const listAllConferences = async (accessToken: JwtToken, options: ListAll
 export const getConference = async (accessToken: JwtToken, conferenceId: string, livestats: boolean = false): Promise<Conference> => {
     const options = {
         hostname: COMMS_HOSTNAME,
-        path: `v1/monitor/conferences/${conferenceId}?livestats=${livestats}`,
+        path: `/v1/monitor/conferences/${conferenceId}?livestats=${livestats}`,
         headers: {
             Accept: 'application/json',
             Authorization: `${accessToken.token_type} ${accessToken.access_token}`,

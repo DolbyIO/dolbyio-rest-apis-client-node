@@ -56,17 +56,3 @@ export const sendDelete = (options: AuthRequestOptions) => {
 
     return httpHelpers.sendDelete(options);
 };
-
-/**
- * Download a file.
- *
- * @param filepath Where to save the file.
- * @param options Request options.
- *
- * @returns A JSON payload object through a Promise.
- */
-export const download = (filepath: string, options: AuthRequestOptions) => {
-    options.headers['Authorization'] = `Bearer ${options.accessToken.access_token}`;
-
-    return httpHelpers.download(filepath, options);
-};

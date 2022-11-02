@@ -1,5 +1,4 @@
-import { sendPost, sendGet, AuthRequestOptions } from './internal/httpHelpers';
-import { API_HOSTNAME } from './internal/urls';
+import { startJob, getJobResults } from './internal/jobsHelpers';
 import JwtToken from '../types/jwtToken';
 import { MasteringPreviewJob, MasteringJob } from './types/mastering';
 
@@ -16,31 +15,15 @@ import { MasteringPreviewJob, MasteringJob } from './types/mastering';
  *
  * To learn more, see the example requests and responses.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-music-mastering-post
+ * @link https://docs.dolby.io/media-apis/reference/media-music-mastering-preview-post
  *
  * @param accessToken Access token to use for authentication.
- * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-music-mastering-post
+ * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-music-mastering-preview-post
  *
  * @returns The job identifier through a `Promise`.
  */
 export const startPreview = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
-    const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
-        path: '/media/master/preview',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        accessToken,
-        body: jobContent,
-    };
-
-    const response = await sendPost(requestOptions);
-    if (response.hasOwnProperty('job_id')) {
-        return response['job_id'];
-    }
-
-    return null;
+    return await startJob(accessToken, '/media/master/preview', jobContent);
 };
 
 /**
@@ -57,18 +40,7 @@ export const startPreview = async (accessToken: JwtToken, jobContent: string): P
  * @returns The `MasteringPreviewJob` object through a `Promise`.
  */
 export const getPreviewResults = async (accessToken: JwtToken, jobId: string): Promise<MasteringPreviewJob> => {
-    const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
-        path: '/media/master/preview',
-        params: {
-            job_id: jobId,
-        },
-        headers: {},
-        accessToken,
-    };
-
-    const response = await sendGet(requestOptions);
-    return response as MasteringPreviewJob;
+    return await getJobResults<MasteringPreviewJob>(accessToken, '/media/master/preview', jobId);
 };
 
 /**
@@ -90,23 +62,7 @@ export const getPreviewResults = async (accessToken: JwtToken, jobId: string): P
  * @returns The job identifier through a `Promise`.
  */
 export const start = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
-    const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
-        path: '/media/master',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        accessToken,
-        body: jobContent,
-    };
-
-    const response = await sendPost(requestOptions);
-    if (response.hasOwnProperty('job_id')) {
-        return response['job_id'];
-    }
-
-    return null;
+    return await startJob(accessToken, '/media/master', jobContent);
 };
 
 /**
@@ -123,16 +79,5 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
  * @returns The `MasteringJob` object through a `Promise`.
  */
 export const getResults = async (accessToken: JwtToken, jobId: string): Promise<MasteringJob> => {
-    const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
-        path: '/media/master',
-        params: {
-            job_id: jobId,
-        },
-        headers: {},
-        accessToken,
-    };
-
-    const response = await sendGet(requestOptions);
-    return response as MasteringJob;
+    return await getJobResults<MasteringJob>(accessToken, '/media/master', jobId);
 };

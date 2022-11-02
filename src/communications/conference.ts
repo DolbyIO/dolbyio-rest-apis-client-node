@@ -236,7 +236,7 @@ export const updatePermissions = async (accessToken: JwtToken, conferenceId: str
 
     const options = {
         hostname: COMMS_HOSTNAME,
-        path: `/v2/conferences/${conferenceId}/invite`,
+        path: `/v2/conferences/${conferenceId}/permissions`,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',

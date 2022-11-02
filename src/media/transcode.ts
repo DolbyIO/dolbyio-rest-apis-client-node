@@ -1,5 +1,4 @@
-import { sendPost, sendGet, AuthRequestOptions } from './internal/httpHelpers';
-import { API_HOSTNAME } from './internal/urls';
+import { startJob, getJobResults } from './internal/jobsHelpers';
 import JwtToken from '../types/jwtToken';
 import { TranscodeJob } from './types/transcode';
 
@@ -16,23 +15,7 @@ import { TranscodeJob } from './types/transcode';
  * @returns The job identifier through a `Promise`.
  */
 export const start = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
-    const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
-        path: '/media/transcode',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        accessToken,
-        body: jobContent,
-    };
-
-    const response = await sendPost(requestOptions);
-    if (response.hasOwnProperty('job_id')) {
-        return response['job_id'];
-    }
-
-    return null;
+    return await startJob(accessToken, '/media/transcode', jobContent);
 };
 
 /**
@@ -50,16 +33,5 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
  * @returns The `TranscodeJob` object through a `Promise`.
  */
 export const getResults = async (accessToken: JwtToken, jobId: string): Promise<TranscodeJob> => {
-    const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
-        path: '/media/transcode',
-        params: {
-            job_id: jobId,
-        },
-        headers: {},
-        accessToken,
-    };
-
-    const response = await sendGet(requestOptions);
-    return response as TranscodeJob;
+    return await getJobResults<TranscodeJob>(accessToken, '/media/transcode', jobId);
 };

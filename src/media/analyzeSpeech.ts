@@ -1,5 +1,4 @@
-import { sendPost, sendGet, AuthRequestOptions } from './internal/httpHelpers';
-import { API_HOSTNAME } from './internal/urls';
+import { startJob, getJobResults } from './internal/jobsHelpers';
 import JwtToken from '../types/jwtToken';
 import { AnalyzeSpeechJob } from './types/analyzeSpeech';
 
@@ -23,23 +22,7 @@ import { AnalyzeSpeechJob } from './types/analyzeSpeech';
  * @returns The job identifier through a `Promise`.
  */
 export const start = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
-    const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
-        path: '/media/analyze/speech',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        accessToken,
-        body: jobContent,
-    };
-
-    const response = await sendPost(requestOptions);
-    if (response.hasOwnProperty('job_id')) {
-        return response['job_id'];
-    }
-
-    return null;
+    return await startJob(accessToken, '/media/analyze/speech', jobContent);
 };
 
 /**
@@ -57,16 +40,5 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
  * @returns The `AnalyzeSpeechJob` object through a `Promise`.
  */
 export const getResults = async (accessToken: JwtToken, jobId: string): Promise<AnalyzeSpeechJob> => {
-    const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
-        path: '/media/analyze/speech',
-        params: {
-            job_id: jobId,
-        },
-        headers: {},
-        accessToken,
-    };
-
-    const response = await sendGet(requestOptions);
-    return response as AnalyzeSpeechJob;
+    return await getJobResults<AnalyzeSpeechJob>(accessToken, '/media/analyze/speech', jobId);
 };

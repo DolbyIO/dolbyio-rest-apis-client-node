@@ -28,9 +28,9 @@ export interface RecordingFile {
     /** The size of the recording (in bytes). */
     size: number;
     /** The unique name of the recording file. */
-    fileName: number;
+    fileName: string;
     /** The presigned URL, with limited validity, where you can download the recording file with a GET. The URL only applies when accessing specific audio recording data. */
-    url: number;
+    url: string;
     /** The list of split audio recordings. */
     splits: Array<any>;
 }

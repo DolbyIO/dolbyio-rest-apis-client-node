@@ -2,7 +2,7 @@ export enum Permission {
     /** Allows a participant to invite participants to a conference. */
     INVITE = 'INVITE',
 
-    /** Allows a participant to join a conference */
+    /** Allows a participant to join a conference. */
     JOIN = 'JOIN',
 
     /** Allows a participant to send an audio stream during a conference. */

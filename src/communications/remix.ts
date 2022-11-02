@@ -12,7 +12,10 @@ import RemixStatus from './types/remixStatus';
  *
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
- * @param layoutUrl Overwrites the layout URL configuration: `null`: uses the layout URL configured in the dashboard (if no URL is set in the dashboard, then uses the Dolby.io default); `default`: uses the Dolby.io default layout; URL string: uses this layout URL
+ * @param layoutUrl Overwrites the layout URL configuration:
+ *      - `null`: uses the layout URL configured in the dashboard (if no URL is set in the dashboard, then uses the Dolby.io default);
+ *      - `default`: uses the Dolby.io default layout;
+ *      - URL string: uses this layout URL
  *
  * @returns A `RemixStatus` object through a `Promise`.
  */
@@ -36,7 +39,7 @@ export const start = async (accessToken: JwtToken, conferenceId: string, layoutU
 };
 
 /**
- * Gets the status of a current mixing job. You must use this API if the conference is protected using enhanced conference access control.
+ * Gets the status of a current mixing job.
  *
  * @link https://docs.dolby.io/communications-apis/reference/get-conference-remix-status
  *

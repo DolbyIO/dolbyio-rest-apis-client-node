@@ -11,6 +11,7 @@ import JwtToken from './types/jwtToken';
  *
  * @param appKey Your Dolby.io App Key.
  * @param appSecret Your Dolby.io App Secret.
+ * @param expiresIn API token expiration time in seconds. The maximum value is 86,400, indicating 24 hours. If no value is specified, the default is 1800, indicating 30 minutes.
  *
  * @returns A `JwtToken` object through a `Promise`.
  */
