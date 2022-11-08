@@ -49,10 +49,18 @@ const sendRequest = (options: SendRequestOptions) => {
 
             res.on('end', () => {
                 if (data.length > 0) {
-                    const json = JSON.parse(data);
-                    resolve(json);
+                    if (res.statusCode < 200 || res.statusCode >= 400) {
+                        reject('This request has been rejected with the response code ' + res.statusCode + ' and description: ' + data);
+                    } else {
+                        const json = JSON.parse(data);
+                        resolve(json);
+                    }
                 } else {
-                    resolve(null);
+                    if (res.statusCode < 200 || res.statusCode >= 400) {
+                        reject('This request has been rejected with the response code ' + res.statusCode);
+                    } else {
+                        resolve(null);
+                    }
                 }
             });
         });
