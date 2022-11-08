@@ -3,6 +3,7 @@ import { https } from 'follow-redirects';
 import coreHttp from 'http';
 import coreHttps from 'https';
 import { URLSearchParams } from 'url';
+import { version } from '../../package.json';
 
 interface SendRequestOptions extends RequestOptions {
     method: string;
@@ -38,6 +39,9 @@ const sendRequest = (options: SendRequestOptions) => {
             method: options.method,
             headers: options.headers,
         };
+
+        // Override the User Agent
+        opts.headers['User-Agent'] = `DolbyIoRestApiSdk/${version}; Node/${process.versions.node}`;
 
         const req = https.request(opts, (res) => {
             console.log(`[${opts.method}] ${res.statusCode} - https://${opts.hostname}${opts.path}`);
@@ -179,8 +183,15 @@ export const download = (filepath: string, options: RequestOptions) => {
             headers: sendRequestOptions.headers,
         };
 
+        // Override the User Agent
+        opts.headers['User-Agent'] = `DolbyIoRestApiSdk/${version}; Node/${process.versions.node}`;
+
         const req = https.request(opts, (res) => {
             console.log(`[${opts.method}] ${res.statusCode} - https://${opts.hostname}${opts.path}`);
+            if (res.statusCode < 200 || res.statusCode >= 400) {
+                reject('This request has been rejected with the response code ' + res.statusCode);
+                return;
+            }
 
             const fileStream = fs.createWriteStream(filepath, { autoClose: true });
 
