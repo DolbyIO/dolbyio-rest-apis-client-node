@@ -3,7 +3,7 @@ import { https } from 'follow-redirects';
 import coreHttp from 'http';
 import coreHttps from 'https';
 import { URLSearchParams } from 'url';
-import { version } from '../../package.json';
+import version from './version';
 
 interface SendRequestOptions extends RequestOptions {
     method: string;
