@@ -20,9 +20,9 @@ assignees: FabienLavocat
 
 **Specifications**
 
-  - OS: [e.g. Windows, Linux, macOS, ...]
-  - Version:
-    - _for each libraries : name -> version_
-    - [e.g. @dolbyio/dolbyio-rest-apis-client 1.8.7]
-    - [e.g. node 10.15.0]
-    - [...]
+-   OS: [e.g. Windows, Linux, macOS, ...]
+-   Version:
+    -   _for each libraries : name -> version_
+    -   [e.g. @dolbyio/dolbyio-rest-apis-client 1.8.7]
+    -   [e.g. node 10.15.0]
+    -   [...]
