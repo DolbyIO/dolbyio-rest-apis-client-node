@@ -16,10 +16,12 @@ import JwtToken from '../types/jwtToken';
  *      - `null`: uses the layout URL configured in the dashboard (if no URL is set in the dashboard, then uses the Dolby.io default);
  *      - `default`: uses the Dolby.io default layout;
  *      - URL string: uses this layout URL
+ * @param layoutName Defines a name for the given layout URL, which makes layout identification easier for customers especially when the layout URL is not explicit.
  */
-export const startRtmp = async (accessToken: JwtToken, conferenceId: string, rtmpUrl: string, layoutUrl?: string): Promise<void> => {
+export const startRtmp = async (accessToken: JwtToken, conferenceId: string, rtmpUrl: string, layoutUrl?: string, layoutName?: string): Promise<void> => {
     const body = { uri: rtmpUrl };
     if (layoutUrl) body['layoutUrl'] = layoutUrl;
+    if (layoutName) body['layoutName'] = layoutName;
 
     const options = {
         hostname: COMMS_HOSTNAME,
@@ -70,13 +72,15 @@ export const stopRtmp = async (accessToken: JwtToken, conferenceId: string): Pro
  *      - `null`: uses the layout URL configured in the dashboard (if no URL is set in the dashboard, then uses the Dolby.io default);
  *      - `default`: uses the Dolby.io default layout;
  *      - URL string: uses this layout URL
+ * @param layoutName Defines a name for the given layout URL, which makes layout identification easier for customers especially when the layout URL is not explicit.
  */
-export const startRts = async (accessToken: JwtToken, conferenceId: string, streamName: string, publishingToken: string, layoutUrl?: string): Promise<void> => {
+export const startRts = async (accessToken: JwtToken, conferenceId: string, streamName: string, publishingToken: string, layoutUrl?: string, layoutName?: string): Promise<void> => {
     const body = {
         streamName: streamName,
         publishingToken: publishingToken,
     };
     if (layoutUrl) body['layoutUrl'] = layoutUrl;
+    if (layoutName) body['layoutName'] = layoutName;
 
     const options = {
         hostname: COMMS_HOSTNAME,
