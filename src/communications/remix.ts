@@ -16,12 +16,14 @@ import RemixStatus from './types/remixStatus';
  *      - `null`: uses the layout URL configured in the dashboard (if no URL is set in the dashboard, then uses the Dolby.io default);
  *      - `default`: uses the Dolby.io default layout;
  *      - URL string: uses this layout URL
+ * @param layoutName Defines a name for the given layout URL, which makes layout identification easier for customers especially when the layout URL is not explicit.
  *
  * @returns A `RemixStatus` object through a `Promise`.
  */
-export const start = async (accessToken: JwtToken, conferenceId: string, layoutUrl?: string): Promise<RemixStatus> => {
+export const start = async (accessToken: JwtToken, conferenceId: string, layoutUrl?: string, layoutName?: string): Promise<RemixStatus> => {
     const body = {};
     if (layoutUrl) body['layoutUrl'] = layoutUrl;
+    if (layoutName) body['layoutName'] = layoutName;
 
     const options = {
         hostname: COMMS_HOSTNAME,
