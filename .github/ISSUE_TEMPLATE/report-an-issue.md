@@ -2,7 +2,7 @@
 name: Bug Report
 about: Use this template to report an issue.
 title: ''
-labels: enhancement
+labels: bug
 assignees: FabienLavocat
 ---
 
