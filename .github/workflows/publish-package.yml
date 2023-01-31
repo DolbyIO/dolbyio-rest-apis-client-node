@@ -2,23 +2,23 @@ name: Publish Package
 
 on:
   release:
-    types: [ published ]
+    types: [published]
 
 jobs:
   publish-package:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout 🛎️
-      uses: actions/checkout@v3
-      with:
-        persist-credentials: false
-    - name: Print NPM version 🌎
-      run: npm --version
-    - name: Install the dependencies 🔧
-      run: npm install
-    - name: Build the package 🔧
-      run: npm run build
-    - name: Deploy to NPMJS 🚀
-      run: |
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Print NPM version 🌎
+        run: npm --version
+      - name: Install the dependencies 🔧
+        run: npm install
+      - name: Build the package 🔧
+        run: npm run build
+      - name: Deploy to NPMJS 🚀
+        run: |
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPMJS_AUTH_TOKEN }}
           npm publish

@@ -3,19 +3,19 @@ name: Build Package
 on:
   push:
     branches:
-    - '**'
+      - '**'
 
 jobs:
   build-package:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout 🛎️
-      uses: actions/checkout@v3
-      with:
-        persist-credentials: false
-    - name: Print NPM version 🌎
-      run: npm --version
-    - name: Install the dependencies 🔧
-      run: npm install
-    - name: Build the package 🔧
-      run: npm run build
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Print NPM version 🌎
+        run: npm --version
+      - name: Install the dependencies 🔧
+        run: npm install
+      - name: Build the package 🔧
+        run: npm run build
