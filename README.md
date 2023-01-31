@@ -1,4 +1,9 @@
-# Dolby.io REST APIs
+[![Build Package](https://github.com/DolbyIO/dolbyio-rest-apis-client-node/actions/workflows/build-package.yml/badge.svg)](https://github.com/DolbyIO/dolbyio-rest-apis-client-node/actions/workflows/build-package.yml)
+[![Publish Package](https://github.com/DolbyIO/dolbyio-rest-apis-client-node/actions/workflows/publish-package.yml/badge.svg)](https://github.com/DolbyIO/dolbyio-rest-apis-client-node/actions/workflows/publish-package.yml)
+![npm](https://img.shields.io/npm/v/@dolbyio/dolbyio-rest-apis-client)
+[![License](https://img.shields.io/github/license/DolbyIO/dolbyio-rest-apis-client-node)](LICENSE)
+
+# Dolby.io REST APIs Client for Node.JS
 
 Node.JS wrapper for the dolby.io REST [Communications](https://docs.dolby.io/communications-apis/reference/authentication-api) and [Media](https://docs.dolby.io/media-processing/reference/media-enhance-overview) APIs.
 
