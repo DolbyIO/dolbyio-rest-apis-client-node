@@ -19,7 +19,6 @@ export const read = async (apiSecret: string): Promise<GeoRestrictions> => {
         path: '/api/geo/account',
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${apiSecret}`,
         },
     };
