@@ -1,6 +1,6 @@
 {
     "name": "@dolbyio/dolbyio-rest-apis-client",
-    "version": "3.4.5",
+    "version": "3.5.0",
     "description": "Node.JS wrapper for the dolby.io REST APIs",
     "main": "dist/index.js",
     "scripts": {

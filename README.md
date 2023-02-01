@@ -5,7 +5,7 @@
 
 # Dolby.io REST APIs Client for Node.JS
 
-Node.JS wrapper for the dolby.io REST [Communications](https://docs.dolby.io/communications-apis/reference/authentication-api) and [Media](https://docs.dolby.io/media-processing/reference/media-enhance-overview) APIs.
+Node.JS wrapper for the dolby.io REST [Communications](https://docs.dolby.io/communications-apis/reference/authentication-api), [Streaming](https://docs.dolby.io/streaming-apis/reference) and [Media](https://docs.dolby.io/media-processing/reference/media-enhance-overview) APIs.
 
 ## Install this project
 
@@ -78,6 +78,40 @@ const jwt = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
 const conference = await dolbyio.communications.conference.createConference(jwt, options);
 
 console.log(`Conference created: ${conference.conferenceId}`);
+```
+
+## Real-time Streaming Examples
+
+### Create a publish token
+
+```javascript
+const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
+
+const publishToken = await dolbyio.streaming.publishToken.create('api_secret', {
+    label: 'My token',
+    streams: [
+        {
+            streamName: 'feedA',
+        },
+    ],
+});
+console.log(publishToken);
+```
+
+### Create a subscribe token
+
+```javascript
+const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
+
+const subscribeToken = await dolbyio.streaming.subscribeToken.create('api_secret', {
+    label: 'My token',
+    streams: [
+        {
+            streamName: 'feedA',
+        },
+    ],
+});
+console.log(subscribeToken);
 ```
 
 ## Media Examples

@@ -157,6 +157,22 @@ export const sendDelete = async (options: RequestOptions) => {
 };
 
 /**
+ * Sends a PATCH request.
+ *
+ * @param options Request options.
+ *
+ * @returns A JSON payload object through a Promise.
+ */
+export const sendPatch = async (options: RequestOptions) => {
+    const sendRequestOptions: SendRequestOptions = {
+        method: 'PATCH',
+        ...options,
+    };
+
+    return await sendRequest(sendRequestOptions);
+};
+
+/**
  * Download a file.
  *
  * @param filepath Where to save the file.
