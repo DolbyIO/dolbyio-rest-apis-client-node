@@ -47,8 +47,11 @@ export const createConference = async (accessToken: JwtToken, options: CreateCon
         body['participants'] = obj_participants;
     }
 
+    // Compute the hostname based on the requested region
+    const hostname = options.region ? `${options.region}.${COMMS_HOSTNAME}` : COMMS_HOSTNAME;
+
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: hostname,
         path: '/v2/conferences/create',
         headers: {
             Accept: 'application/json',
