@@ -4,6 +4,7 @@ import JwtToken from './types/jwtToken';
 
 /**
  * Generates an API token.
+ *
  * To make any API call, you must acquire a JWT (JSON Web Token) format API token.
  *
  * @link https://docs.dolby.io/communications-apis/reference/get-api-token
@@ -13,9 +14,9 @@ import JwtToken from './types/jwtToken';
  * @param appSecret Your Dolby.io App Secret.
  * @param expiresIn API token expiration time in seconds. The maximum value is 86,400, indicating 24 hours. If no value is specified, the default is 1800, indicating 30 minutes.
  *
- * @returns A `JwtToken` object through a `Promise`.
+ * @returns A {@link JwtToken} object through a {@link Promise}.
  */
-export const getApiAccessToken = async (appKey: string, appSecret: string, expiresIn: number | undefined): Promise<JwtToken> => {
+export const getApiAccessToken = async (appKey: string, appSecret: string, expiresIn?: number): Promise<JwtToken> => {
     let body = 'grant_type=client_credentials';
     if (expiresIn) {
         body += `&expires_in=${expiresIn}`;
