@@ -14,7 +14,7 @@ import { RTCPMode } from './types/rtcpMode';
  * @param accessToken Access token to use for authentication.
  * @param options Options to create the conference.
  *
- * @returns A `Conference` object through a `Promise`.
+ * @returns A {@link Conference} object through a {@link Promise}.
  */
 export const createConference = async (accessToken: JwtToken, options: CreateConferenceOptions): Promise<Conference> => {
     const parameters = {
@@ -66,7 +66,9 @@ export const createConference = async (accessToken: JwtToken, options: CreateCon
 };
 
 /**
- * Invites participants to an ongoing conference. This API can also be used to generate new conference access tokens for an ongoing conference. If the invite request includes participants that are already in the conference, a new conference access token is not generated and an invitation is not sent.
+ * Invites participants to an ongoing conference.
+ * 
+ * This API can also be used to generate new conference access tokens for an ongoing conference. If the invite request includes participants that are already in the conference, a new conference access token is not generated and an invitation is not sent.
  *
  * @link https://docs.dolby.io/communications-apis/reference/invite-to-conference
  *

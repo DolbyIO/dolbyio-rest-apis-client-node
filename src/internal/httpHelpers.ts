@@ -22,7 +22,7 @@ export interface RequestOptions {
  *
  * @param options request options.
  *
- * @returns A JSON payload object through a Promise.
+ * @returns A JSON payload object through a {@link Promise}.
  */
 const sendRequest = (options: SendRequestOptions) => {
     return new Promise<any>((resolve, reject) => {
@@ -87,7 +87,7 @@ const sendRequest = (options: SendRequestOptions) => {
  *
  * @param options Request options.
  *
- * @returns A JSON payload object through a Promise.
+ * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendGet = (options: RequestOptions) => {
     const sendRequestOptions: SendRequestOptions = {
@@ -103,7 +103,7 @@ export const sendGet = (options: RequestOptions) => {
  *
  * @param options Request options.
  *
- * @returns A JSON payload object through a Promise.
+ * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendPost = (options: RequestOptions) => {
     if (!options.body) {
@@ -127,7 +127,7 @@ export const sendPost = (options: RequestOptions) => {
  *
  * @param options Request options.
  *
- * @returns A JSON payload object through a Promise.
+ * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendPut = (options: RequestOptions) => {
     options.headers['Content-Length'] = options.body.length;
@@ -145,7 +145,7 @@ export const sendPut = (options: RequestOptions) => {
  *
  * @param options Request options.
  *
- * @returns A JSON payload object through a Promise.
+ * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendDelete = async (options: RequestOptions) => {
     const sendRequestOptions: SendRequestOptions = {
@@ -161,7 +161,7 @@ export const sendDelete = async (options: RequestOptions) => {
  *
  * @param options Request options.
  *
- * @returns A JSON payload object through a Promise.
+ * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendPatch = async (options: RequestOptions) => {
     const sendRequestOptions: SendRequestOptions = {

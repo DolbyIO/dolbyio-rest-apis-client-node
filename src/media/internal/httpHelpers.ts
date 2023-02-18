@@ -10,7 +10,7 @@ export interface AuthRequestOptions extends httpHelpers.RequestOptions {
  *
  * @param options Request options.
  *
- * @returns A JSON payload object through a Promise.
+ * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendGet = (options: AuthRequestOptions) => {
     options.headers['Authorization'] = `Bearer ${options.accessToken.access_token}`;
@@ -23,7 +23,7 @@ export const sendGet = (options: AuthRequestOptions) => {
  *
  * @param options Request options.
  *
- * @returns A JSON payload object through a Promise.
+ * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendPost = (options: AuthRequestOptions) => {
     options.headers['Authorization'] = `Bearer ${options.accessToken.access_token}`;
@@ -36,7 +36,7 @@ export const sendPost = (options: AuthRequestOptions) => {
  *
  * @param options Request options.
  *
- * @returns A JSON payload object through a Promise.
+ * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendPut = (options: AuthRequestOptions) => {
     options.headers['Authorization'] = `Bearer ${options.accessToken.access_token}`;
@@ -49,7 +49,7 @@ export const sendPut = (options: AuthRequestOptions) => {
  *
  * @param options Request options.
  *
- * @returns A JSON payload object through a Promise.
+ * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendDelete = (options: AuthRequestOptions) => {
     options.headers['Authorization'] = `Bearer ${options.accessToken.access_token}`;

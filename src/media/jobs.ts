@@ -5,6 +5,7 @@ import { ListJobsOptions, ListAllJobsOptions, JobsResponse, Job } from './types/
 
 /**
  * Query Media Jobs.
+ * 
  * List of jobs previously submitted, up to the last 31 days.
  *
  * @link https://docs.dolby.io/media-apis/reference/media-jobs-get
@@ -12,7 +13,7 @@ import { ListJobsOptions, ListAllJobsOptions, JobsResponse, Job } from './types/
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the list of jobs.
  *
- * @returns A `JobsResponse` object through a `Promise`.
+ * @returns A {@link JobsResponse} object through a {@link Promise}.
  */
 export const list = async (accessToken: JwtToken, options: ListJobsOptions): Promise<JobsResponse> => {
     const params = {};
@@ -43,6 +44,7 @@ export const list = async (accessToken: JwtToken, options: ListJobsOptions): Pro
 
 /**
  * Query Media Jobs.
+ * 
  * List of all jobs previously submitted, up to the last 31 days.
  *
  * @link https://docs.dolby.io/media-apis/reference/media-jobs-get
@@ -50,7 +52,7 @@ export const list = async (accessToken: JwtToken, options: ListJobsOptions): Pro
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the list of jobs.
  *
- * @returns An array of `Job` objects through a `Promise`.
+ * @returns An array of {@link Job} objects through a {@link Promise}.
  */
 export const listAll = async (accessToken: JwtToken, options: ListAllJobsOptions): Promise<Array<Job>> => {
     const params = {};

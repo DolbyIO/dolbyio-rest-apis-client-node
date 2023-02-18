@@ -13,7 +13,7 @@ import { UpdateWebhookOptions, Webhook } from './types/webhooks';
  * @param url The callback url that will be called when job execution completes.
  * @param headers (Optional) Headers to include in the webhook call.
  *
- * @returns The webhook identifier through a `Promise`.
+ * @returns The webhook identifier through a {@link Promise}.
  */
 export const registerWebhook = async (accessToken: JwtToken, url: string, headers?: http.OutgoingHttpHeaders): Promise<string | null> => {
     const payload = {
@@ -89,7 +89,7 @@ export const updateWebhook = async (accessToken: JwtToken, options: UpdateWebhoo
  * @param accessToken Access token to use for authentication.
  * @param webhookId Identifier of the webhook to retrieve.
  *
- * @returns The `Webhook` object through a `Promise`.
+ * @returns The {@link Webhook} object through a {@link Promise}.
  */
 export const retrieveWebhook = async (accessToken: JwtToken, webhookId: string): Promise<Webhook> => {
     const requestOptions: AuthRequestOptions = {
@@ -114,7 +114,7 @@ export const retrieveWebhook = async (accessToken: JwtToken, webhookId: string):
  * @param accessToken Access token to use for authentication.
  * @param webhookId Identifier of the webhook to delete.
  *
- * @returns The webhook identifier through a `Promise`.
+ * @returns The webhook identifier through a {@link Promise}.
  */
 export const deleteWebhook = async (accessToken: JwtToken, webhookId: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {

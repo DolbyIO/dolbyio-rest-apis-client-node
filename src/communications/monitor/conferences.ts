@@ -26,7 +26,7 @@ import { PagedResponse } from '../types/core';
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the conferences.
  *
- * @returns A `ListConferencesResponse` object through a `Promise`.
+ * @returns A {@link ListConferencesResponse} object through a {@link Promise}.
  */
 export const listConferences = async (accessToken: JwtToken, options: ListConferencesOptions): Promise<ListConferencesResponse> => {
     const optionsDefault: ListConferencesOptions = {
@@ -82,7 +82,7 @@ export const listConferences = async (accessToken: JwtToken, options: ListConfer
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the conferences.
  *
- * @returns An array of `Conference` objects through a `Promise`.
+ * @returns An array of {@link Conference} objects through a {@link Promise}.
  */
 export const listAllConferences = async (accessToken: JwtToken, options: ListAllConferencesOptions): Promise<Array<Conference>> => {
     const optionsDefault: ListAllConferencesOptions = {
@@ -135,7 +135,7 @@ export const listAllConferences = async (accessToken: JwtToken, options: ListAll
  * @param conferenceId The identifier of the conference.
  * @param livestats For live conferences, the number of `user`, `listener`, and `pstn` participants.
  *
- * @returns A `Conference` object through a `Promise`.
+ * @returns A {@link Conference} object through a {@link Promise}.
  */
 export const getConference = async (accessToken: JwtToken, conferenceId: string, livestats: boolean = false): Promise<Conference> => {
     const options = {
@@ -152,7 +152,9 @@ export const getConference = async (accessToken: JwtToken, conferenceId: string,
 };
 
 /**
- * Get statistics of a terminated conference. The statistics include the maximum number of participants present during a conference and the maximum number of the transmitted and received packets, bytes, and streams.
+ * Get statistics of a terminated conference.
+ * 
+ * The statistics include the maximum number of participants present during a conference and the maximum number of the transmitted and received packets, bytes, and streams.
  *
  * **Note:** Only terminated conferences include a complete summary.
  *
@@ -161,7 +163,7 @@ export const getConference = async (accessToken: JwtToken, conferenceId: string,
  * @param accessToken Access token to use for authentication.
  * @param conferenceId The identifier of the conference.
  *
- * @returns A `Statistics` object through a `Promise`.
+ * @returns A {@link Statistics} object through a {@link Promise}.
  */
 export const getConferenceStatistics = async (accessToken: JwtToken, conferenceId: string): Promise<Statistics> => {
     const options = {
@@ -178,14 +180,16 @@ export const getConferenceStatistics = async (accessToken: JwtToken, conferenceI
 };
 
 /**
- * Get statistics and connection details of all participants in a conference. Optionally limit the search result with a specific time range.
+ * Get statistics and connection details of all participants in a conference.
+ * 
+ * Optionally limit the search result with a specific time range.
  *
  * @link https://docs.dolby.io/communications-apis/reference/get-info-conference-participants
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the participants.
  *
- * @returns A `ParticipantsResponse` object through a `Promise`.
+ * @returns A {@link ParticipantsResponse} object through a {@link Promise}.
  */
 export const getConferenceParticipants = async (accessToken: JwtToken, options: ListParticipantsOptions): Promise<ParticipantsResponse> => {
     const optionsDefault: ListParticipantsOptions = {
@@ -230,14 +234,16 @@ export const getConferenceParticipants = async (accessToken: JwtToken, options: 
 };
 
 /**
- * Get statistics and connection details of all participants in a conference. Optionally limit the search result with a specific time range.
+ * Get statistics and connection details of all participants in a conference.
+ * 
+ * Optionally limit the search result with a specific time range.
  *
  * @link https://docs.dolby.io/communications-apis/reference/get-info-conference-participants
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the participants.
  *
- * @returns A dictionary of `Participant` object through a `Promise`.
+ * @returns A dictionary of {@link Participant} object through a {@link Promise}.
  */
 export const getAllConferenceParticipants = async (accessToken: JwtToken, options: ListAllParticipantsOptions): Promise<NodeJS.Dict<Participant>> => {
     const optionsDefault: ListAllParticipantsOptions = {

@@ -6,7 +6,7 @@ import { BaseResponse } from '../types/core';
  *
  * @param options Request options.
  *
- * @returns A `TData` object through a Promise.
+ * @returns A {@link TData} object through a {@link Promise}.
  */
 export async function sendGet<TData>(options: httpHelpers.RequestOptions): Promise<TData> {
     const response = await httpHelpers.sendGet(options);
@@ -18,7 +18,7 @@ export async function sendGet<TData>(options: httpHelpers.RequestOptions): Promi
  *
  * @param options Request options.
  *
- * @returns A `TData` object through a Promise.
+ * @returns A {@link TData} object through a {@link Promise}.
  */
 export async function sendPost<TData>(options: httpHelpers.RequestOptions): Promise<TData> {
     const response = await httpHelpers.sendPost(options);
@@ -30,7 +30,7 @@ export async function sendPost<TData>(options: httpHelpers.RequestOptions): Prom
  *
  * @param options Request options.
  *
- * @returns A JSON payload object through a Promise.
+ * @returns A {@link TData} object through a {@link Promise}.
  */
 export async function sendPut<TData>(options: httpHelpers.RequestOptions): Promise<TData> {
     const response = await httpHelpers.sendPut(options);
@@ -42,7 +42,7 @@ export async function sendPut<TData>(options: httpHelpers.RequestOptions): Promi
  *
  * @param options Request options.
  *
- * @returns A `TData` object through a Promise.
+ * @returns A {@link TData} object through a {@link Promise}.
  */
 export async function sendDelete<TData>(options: httpHelpers.RequestOptions): Promise<TData> {
     const response = await httpHelpers.sendDelete(options);
@@ -54,7 +54,7 @@ export async function sendDelete<TData>(options: httpHelpers.RequestOptions): Pr
  *
  * @param options Request options.
  *
- * @returns A `TData` object through a Promise.
+ * @returns A {@link TData} object through a {@link Promise}.
  */
 export async function sendPatch<TData>(options: httpHelpers.RequestOptions): Promise<TData> {
     const response = await httpHelpers.sendPatch(options);

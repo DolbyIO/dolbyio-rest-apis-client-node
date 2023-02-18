@@ -7,7 +7,7 @@ import { PagedResponse } from '../types/core';
  * @param options Request options.
  * @param propertyName Name of the property that contains the elements of the page.
  *
- * @returns An array of objects of type `TReturn` through a Promise.
+ * @returns An array of objects of type {@link TReturn} through a {@link Promise}.
  */
 export async function getAll<TReturn>(options: RequestOptions, propertyName: string): Promise<Array<TReturn>> {
     if (!options.params) {

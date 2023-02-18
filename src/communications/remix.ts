@@ -18,7 +18,7 @@ import RemixStatus from './types/remixStatus';
  *      - URL string: uses this layout URL
  * @param layoutName Defines a name for the given layout URL, which makes layout identification easier for customers especially when the layout URL is not explicit.
  *
- * @returns A `RemixStatus` object through a `Promise`.
+ * @returns A {@link RemixStatus} object through a {@link Promise}.
  */
 export const start = async (accessToken: JwtToken, conferenceId: string, layoutUrl?: string, layoutName?: string): Promise<RemixStatus> => {
     const body = {};
@@ -48,7 +48,7 @@ export const start = async (accessToken: JwtToken, conferenceId: string, layoutU
  * @param accessToken Access token to use for authentication.
  * @param conferenceId Identifier of the conference.
  *
- * @returns A `RemixStatus` object through a `Promise`.
+ * @returns A {@link RemixStatus} object through a {@link Promise}.
  */
 export const getStatus = async (accessToken: JwtToken, conferenceId: string): Promise<RemixStatus> => {
     const options = {

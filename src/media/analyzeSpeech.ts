@@ -19,7 +19,7 @@ import { AnalyzeSpeechJob } from './types/analyzeSpeech';
  * @param accessToken Access token to use for authentication.
  * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-analyze-speech-post
  *
- * @returns The job identifier through a `Promise`.
+ * @returns The job identifier through a {@link Promise}.
  */
 export const start = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
     return await startJob(accessToken, '/media/analyze/speech', jobContent);
@@ -28,16 +28,16 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
 /**
  * Gets Speech Analytics Status.
  *
- * For a given job_id, this method will check if the processing task has completed.
+ * For a given {@link jobId}, this method will check if the processing task has completed.
  *
- * When `status` is `Success`, you'll be able to retrieve your result from the `output` location you provided in the original `POST`.
+ * When {@link AnalyzeSpeechJob.status} is `Success`, you'll be able to retrieve your result from the `output` location you provided in the original `POST`.
  *
  * @link https://docs.dolby.io/media-apis/reference/media-analyze-speech-get
  *
  * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to retrieve.
  *
- * @returns The `AnalyzeSpeechJob` object through a `Promise`.
+ * @returns The {@link AnalyzeSpeechJob} object through a {@link Promise}.
  */
 export const getResults = async (accessToken: JwtToken, jobId: string): Promise<AnalyzeSpeechJob> => {
     return await getJobResults<AnalyzeSpeechJob>(accessToken, '/media/analyze/speech', jobId);
