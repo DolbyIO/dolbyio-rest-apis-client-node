@@ -11,9 +11,9 @@ import JwtToken from '../types/jwtToken';
  * @param appSecret Your Dolby.io App Secret.
  * @param expiresIn Access token expiration time in seconds. The maximum value is 2,592,000, indicating 30 days. If no value is specified, the default is 3,600, indicating one hour.
  *
- * @returns A `JwtToken` object through a `Promise`.
+ * @returns A {@link JwtToken} object through a {@link Promise}.
  */
-export const getClientAccessToken = async (appKey: string, appSecret: string, expiresIn: number | undefined): Promise<JwtToken> => {
+export const getClientAccessToken = async (appKey: string, appSecret: string, expiresIn?: number): Promise<JwtToken> => {
     let body = 'grant_type=client_credentials';
     if (expiresIn) {
         body += `&expires_in=${expiresIn}`;

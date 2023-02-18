@@ -4,8 +4,9 @@ import JwtToken from '../types/jwtToken';
 
 /**
  * Starts recording for the specified conference.
+ *
  * You can specify a custom layout URL per recording request.
- * The `layoutURL` parameter overrides the layout URL configured in the dashboard.
+ * The {@link layoutUrl} parameter overrides the layout URL configured in the dashboard.
  *
  * @link https://docs.dolby.io/communications-apis/reference/api-recording-start
  *

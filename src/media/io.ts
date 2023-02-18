@@ -41,7 +41,7 @@ const getUrl = async (accessToken: JwtToken, endpointUrl: string, dlbUrl: string
  * @param accessToken Access token to use for authentication.
  * @param dlbUrl The `url` should be in the form `dlb://object-key` where the object-key can be any alpha-numeric string. The object-key is unique to your account API Key so there is no risk of collision with other users.
  *
- * @returns The upload URL through a `Promise`.
+ * @returns The upload URL through a {@link Promise}.
  */
 export const getUploadUrl = async (accessToken: JwtToken, dlbUrl: string): Promise<string | null> => {
     return await getUrl(accessToken, '/media/input', dlbUrl);
@@ -59,7 +59,7 @@ export const getUploadUrl = async (accessToken: JwtToken, dlbUrl: string): Promi
  * @param accessToken Access token to use for authentication.
  * @param dlbUrl The `url` should be in the form `dlb://object-key` where the object-key can be any alpha-numeric string. The object-key is unique to your account API Key so there is no risk of collision with other users.
  *
- * @returns The download URL through a `Promise`.
+ * @returns The download URL through a {@link Promise}.
  */
 export const getDownloadUrl = async (accessToken: JwtToken, dlbUrl: string): Promise<string | null> => {
     return await getUrl(accessToken, '/media/output', dlbUrl);

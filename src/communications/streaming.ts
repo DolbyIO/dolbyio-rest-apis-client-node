@@ -4,6 +4,7 @@ import JwtToken from '../types/jwtToken';
 
 /**
  * Starts the RTMP live stream for the specified conference.
+ *
  * Once the Dolby.io Communication API service started streaming to the target url,
  * a `Stream.Rtmp.InProgress` Webhook event will be sent.
  *

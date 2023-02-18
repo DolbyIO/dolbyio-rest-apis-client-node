@@ -2,6 +2,8 @@ import { VideoCodec } from './videoCodec';
 import { RTCPMode } from './rtcpMode';
 import Participant from './participant';
 
+export type Region = 'au' | 'ca' | 'eu' | 'in' | 'us';
+
 export interface CreateConferenceOptions {
     /** The conference owner's external ID. */
     ownerExternalId: string;
@@ -25,6 +27,15 @@ export interface CreateConferenceOptions {
     participants?: Array<Participant>;
     /** If specified, the default RecordingConfiguration is overridden. Specifies the recording format. Valid values are 'mp3' and 'mp4'. */
     recordingFormats?: Array<string>;
+    /**
+     * Dolby.io region where you want the conference to be hosted. Can be one of:
+     * - **au**: Australia
+     * - **ca**: Canada
+     * - **eu**: Europe
+     * - **in**: India
+     * - **us**: United States
+     */
+    region?: Region;
 }
 
 export interface UserTokens {

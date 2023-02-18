@@ -12,7 +12,7 @@ import { GetWebhooksOptions, GetAllWebhooksOptions, GetWebHookResponse, WebHook 
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the webhooks.
  *
- * @returns A `GetWebHookResponse` object through a `Promise`.
+ * @returns A {@link GetWebHookResponse} object through a {@link Promise}.
  */
 export const getEvents = async (accessToken: JwtToken, options: GetWebhooksOptions): Promise<GetWebHookResponse> => {
     const optionsDefault: GetWebhooksOptions = {
@@ -64,7 +64,7 @@ export const getEvents = async (accessToken: JwtToken, options: GetWebhooksOptio
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the webhooks.
  *
- * @returns An array of `WebHook` objects through a `Promise`.
+ * @returns An array of {@link WebHook} objects through a {@link Promise}.
  */
 export const getAllEvents = async (accessToken: JwtToken, options: GetAllWebhooksOptions): Promise<Array<WebHook>> => {
     const optionsDefault: GetAllWebhooksOptions = {

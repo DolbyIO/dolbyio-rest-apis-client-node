@@ -7,7 +7,7 @@ import { DiagnoseJob } from './types/diagnose';
  *
  * The `input` location of your source media file is required.
  *
- * This is an asynchronous operation so you will receive a `job_id` to be used to get the job status and result.
+ * This is an asynchronous operation so you will receive a job identifier to be used to get the job status and result.
  *
  * @link https://docs.dolby.io/media-apis/reference/media-diagnose-post
  *
@@ -19,7 +19,7 @@ import { DiagnoseJob } from './types/diagnose';
  * @param accessToken Access token to use for authentication.
  * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-diagnose-post
  *
- * @returns The job identifier through a `Promise`.
+ * @returns The job identifier through a {@link Promise}.
  */
 export const start = async (accessToken: JwtToken, jobContent: string): Promise<string | null> => {
     return await startJob(accessToken, '/media/diagnose', jobContent);
@@ -28,18 +28,18 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
 /**
  * Gets Diagnose Results.
  *
- * For a given job_id, this method will check if the processing task has completed.
+ * For a given {@link jobId}, this method will check if the processing task has completed.
  *
- * The `progress` attribute provides a percentage of job progress.
+ * The {@link DiagnoseJob.progress} attribute provides a percentage of job progress.
  *
- * If the `status` is Success then the json result will be returned in the response.
+ * If the {@link DiagnoseJob.status} is Success then the json result will be returned in the response.
  *
  * @link https://docs.dolby.io/media-apis/reference/media-diagnose-get
  *
  * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to retrieve.
  *
- * @returns The `DiagnoseJob` object through a `Promise`.
+ * @returns The {@link DiagnoseJob} object through a {@link Promise}.
  */
 export const getResults = async (accessToken: JwtToken, jobId: string): Promise<DiagnoseJob> => {
     return await getJobResults<DiagnoseJob>(accessToken, '/media/diagnose', jobId);

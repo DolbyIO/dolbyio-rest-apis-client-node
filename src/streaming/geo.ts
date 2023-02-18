@@ -11,7 +11,7 @@ import { GeoRestrictions } from './types/geo';
  *
  * @param apiSecret The API secret.
  *
- * @returns A `GeoRestrictions` object through a `Promise`.
+ * @returns A {@link GeoRestrictions} object through a {@link Promise}.
  */
 export const read = async (apiSecret: string): Promise<GeoRestrictions> => {
     const options = {
@@ -37,7 +37,7 @@ export const read = async (apiSecret: string): Promise<GeoRestrictions> => {
  * @param allowedCountries The publishing token. An empty array [] removes all rules.
  * @param deniedCountries The publishing token. An empty array [] removes all rules.
  *
- * @returns A `GeoRestrictions` object through a `Promise`.
+ * @returns A {@link GeoRestrictions} object through a {@link Promise}.
  */
 export const update = async (
     apiSecret: string,

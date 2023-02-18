@@ -14,7 +14,7 @@ import { GetRecordingsOptions, GetAllRecordingsOptions, GetRecordingsResponse, R
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the recordings.
  *
- * @returns A `GetRecordingsResponse` object through a `Promise`.
+ * @returns A {@link GetRecordingsResponse} object through a {@link Promise}.
  */
 export const getRecordings = async (accessToken: JwtToken, options: GetRecordingsOptions): Promise<GetRecordingsResponse> => {
     const optionsDefault: GetRecordingsOptions = {
@@ -59,7 +59,7 @@ export const getRecordings = async (accessToken: JwtToken, options: GetRecording
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the recordings.
  *
- * @returns An array of `Recording` objects through a `Promise`.
+ * @returns An array of {@link Recording} objects through a {@link Promise}.
  */
 export const getAllRecordings = async (accessToken: JwtToken, options: GetAllRecordingsOptions): Promise<Array<Recording>> => {
     const optionsDefault: GetAllRecordingsOptions = {
@@ -99,7 +99,7 @@ export const getAllRecordings = async (accessToken: JwtToken, options: GetAllRec
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the recording.
  *
- * @returns An array of `Recording` objects through a `Promise`.
+ * @returns An array of {@link Recording} objects through a {@link Promise}.
  */
 export const getRecording = async (accessToken: JwtToken, options: GetRecordingOptions): Promise<Array<Recording>> => {
     const optionsDefault: GetRecordingsOptions = {
@@ -166,7 +166,7 @@ export const deleteRecording = async (accessToken: JwtToken, confId: string): Pr
  * @param accessToken Access token to use for authentication.
  * @param confId Identifier of the conference.
  *
- * @returns A `DolbyVoiceRecording` object through a `Promise`.
+ * @returns A {@link DolbyVoiceRecording} object through a {@link Promise}.
  */
 export const getDolbyVoiceRecording = async (accessToken: JwtToken, confId: string): Promise<DolbyVoiceRecording> => {
     const requestOptions = {
@@ -180,54 +180,4 @@ export const getDolbyVoiceRecording = async (accessToken: JwtToken, confId: stri
 
     const response = await sendGet(requestOptions);
     return response as DolbyVoiceRecording;
-};
-
-/**
- * Download the conference recording in the MP4 video format.
- * For more information, see the [Recording](https://docs.dolby.io/communications-apis/docs/guides-recording-mechanisms) document.
- *
- * @link https://docs.dolby.io/communications-apis/reference/get-mp4-recording
- *
- * @deprecated The [Get recording details](https://docs.dolby.io/communications-apis/reference/get-recordings) and [Get the recordings of a specific conference](https://docs.dolby.io/communications-apis/reference/get-conference-recordings) REST APIs return AWS S3 presigned URLs to download the split recordings, audio recordings, and video recordings.
- *
- * @param accessToken Access token to use for authentication.
- * @param confId Identifier of the conference.
- * @param filepath Where to save the file.
- */
-export const downloadMp4Recording = async (accessToken: JwtToken, confId: string, filepath: string): Promise<void> => {
-    const requestOptions = {
-        hostname: COMMS_HOSTNAME,
-        path: `/v1/monitor/conferences/${confId}/recordings/mp4`,
-        headers: {
-            Accept: 'video/mp4',
-            Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
-        },
-    };
-
-    await download(filepath, requestOptions);
-};
-
-/**
- * Download the conference recording in the MP3 audio format.
- * For more information, see the [Recording](https://docs.dolby.io/communications-apis/docs/guides-recording-mechanisms) document.
- *
- * @link https://docs.dolby.io/communications-apis/reference/get-mp3-recording
- *
- * @deprecated The [Get recording details](https://docs.dolby.io/communications-apis/reference/get-recordings) and [Get the recordings of a specific conference](https://docs.dolby.io/communications-apis/reference/get-conference-recordings) REST APIs return AWS S3 presigned URLs to download the split recordings, audio recordings, and video recordings.
- *
- * @param accessToken Access token to use for authentication.
- * @param confId Identifier of the conference.
- * @param filepath Where to save the file.
- */
-export const downloadMp3Recording = async (accessToken: JwtToken, confId: string, filepath: string): Promise<void> => {
-    const requestOptions = {
-        hostname: COMMS_HOSTNAME,
-        path: `/v1/monitor/conferences/${confId}/recordings/mp3`,
-        headers: {
-            Accept: 'video/mpeg',
-            Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
-        },
-    };
-
-    await download(filepath, requestOptions);
 };

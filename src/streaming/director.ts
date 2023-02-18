@@ -10,7 +10,7 @@ import { PublishResponse, SubscribeResponse } from './types/director';
  * @param publishingToken The publishing token.
  * @param streamName The name of the stream.
  *
- * @returns A `PublishResponse` object through a `Promise`.
+ * @returns A {@link PublishResponse} object through a {@link Promise}.
  */
 export const publish = async (publishingToken: string, streamName: string): Promise<PublishResponse> => {
     const body = {
@@ -40,7 +40,7 @@ export const publish = async (publishingToken: string, streamName: string): Prom
  * @param streamAccountId Optional - The account identifier. Required only for published streams which have `subscribeRequiresAuth=false`.
  * @param subscribeToken Optional - The subscribe token.
  *
- * @returns A `SubscribeResponse` object through a `Promise`.
+ * @returns A {@link SubscribeResponse} object through a {@link Promise}.
  */
 export const subscribe = async (streamName: string, streamAccountId?: string, publishingToken?: string): Promise<SubscribeResponse> => {
     const body = {
