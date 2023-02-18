@@ -4,7 +4,7 @@ import JwtToken from '../types/jwtToken';
 
 /**
  * Starts recording for the specified conference.
- * 
+ *
  * You can specify a custom layout URL per recording request.
  * The {@link layoutUrl} parameter overrides the layout URL configured in the dashboard.
  *

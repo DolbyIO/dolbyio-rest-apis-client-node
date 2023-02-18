@@ -5,7 +5,7 @@ import { ListJobsOptions, ListAllJobsOptions, JobsResponse, Job } from './types/
 
 /**
  * Query Media Jobs.
- * 
+ *
  * List of jobs previously submitted, up to the last 31 days.
  *
  * @link https://docs.dolby.io/media-apis/reference/media-jobs-get
@@ -44,7 +44,7 @@ export const list = async (accessToken: JwtToken, options: ListJobsOptions): Pro
 
 /**
  * Query Media Jobs.
- * 
+ *
  * List of all jobs previously submitted, up to the last 31 days.
  *
  * @link https://docs.dolby.io/media-apis/reference/media-jobs-get

@@ -153,7 +153,7 @@ export const getConference = async (accessToken: JwtToken, conferenceId: string,
 
 /**
  * Get statistics of a terminated conference.
- * 
+ *
  * The statistics include the maximum number of participants present during a conference and the maximum number of the transmitted and received packets, bytes, and streams.
  *
  * **Note:** Only terminated conferences include a complete summary.
@@ -181,7 +181,7 @@ export const getConferenceStatistics = async (accessToken: JwtToken, conferenceI
 
 /**
  * Get statistics and connection details of all participants in a conference.
- * 
+ *
  * Optionally limit the search result with a specific time range.
  *
  * @link https://docs.dolby.io/communications-apis/reference/get-info-conference-participants
@@ -235,7 +235,7 @@ export const getConferenceParticipants = async (accessToken: JwtToken, options: 
 
 /**
  * Get statistics and connection details of all participants in a conference.
- * 
+ *
  * Optionally limit the search result with a specific time range.
  *
  * @link https://docs.dolby.io/communications-apis/reference/get-info-conference-participants
