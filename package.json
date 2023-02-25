@@ -13,6 +13,15 @@
     },
     "author": "Fabien Lavocat <fabien.lavocat@dolby.com>",
     "license": "MIT",
+    "keywords": [
+        "nodejs",
+        "api",
+        "sdk",
+        "rest",
+        "rest-api",
+        "webrtc",
+        "dolbyio"
+    ],
     "files": [
         "dist/*",
         "README.md"
