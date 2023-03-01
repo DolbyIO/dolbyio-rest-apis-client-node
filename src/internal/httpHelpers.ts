@@ -235,3 +235,41 @@ export const download = (filepath: string, options: RequestOptions) => {
         req.end();
     });
 };
+
+/**
+ * Upload a file.
+ *
+ * @param filepath The local path of the file to upload.
+ * @param uploadUrl Where to upload the file to.
+ */
+export const upload = (filepath: string, uploadUrl: string) => {
+    // Get the size of the file to upload
+    const fileSize = fs.statSync(filepath).size;
+
+    return new Promise<void>((resolve, reject) => {
+        const opts: coreHttps.RequestOptions = {
+            method: 'PUT',
+            headers: {
+                "Content-Length": fileSize
+            },
+        };
+
+        const req = coreHttps.request(uploadUrl, opts, (res) => {
+            console.log(`[${opts.method}] ${res.statusCode} - ${uploadUrl}`);
+
+            if (res.statusCode < 200 || res.statusCode >= 400) {
+                reject('This request has been rejected with the response code ' + res.statusCode);
+            } else {
+                resolve();
+            }
+        });
+
+        req.on('error', (error) => {
+            console.error(error);
+            reject(error);
+        });
+
+        // Start the upload of the file
+        fs.createReadStream(filepath).pipe(req);
+    });
+};

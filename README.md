@@ -116,9 +116,11 @@ console.log(subscribeToken);
 
 ## Media Examples
 
-### Start an enhance job
+Here is an example on how to upload a file to the Dolby.io temporary cloud storage, enhance that file and download the result.
 
-To start an enhance job, use the following code:
+### Get an API token
+
+Get the App Key and Secret from the Dolby.io dashboard and use the following code in your python script.
 
 ```javascript
 const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
@@ -128,16 +130,70 @@ const APP_SECRET = 'YOUR_APP_SECRET';
 
 // Request an Access Token
 const jwt = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
+console.log('Access token', jwt);
+```
+
+### Upload a file for processing
+
+Upload a media file to the Dolby.io temporary cloud storage for processing:
+
+```javascript
+// Temporary storage URL that will be used as reference for the job processing
+const inputUrl = 'dlb://in/file.mp4';
+// Local path of the file to upload
+const originalFilePath = '/path/to/original_file.mp4';
+
+await dolbyio.io.uploadFile(jwt, inputUrl, originalFilePath);
+```
+
+### Start an enhance job
+
+Generate a job description and send it to Dolby.io.
+
+```javascript
+// Temporary storage URL that will be used as reference for the job processing
+const outputUrl = 'dlb://out/file.mp4';
 
 const jobDescription = JSON.stringify({
     content: { type: 'podcast' },
-    input: 'dlb://in/file.mp4',
-    output: 'dlb://out/file.mp4',
+    input: inputUrl,
+    output: outputUrl,
 });
 
 const jobId = await dolbyio.media.enhance.start(jwt, jobDescription);
-
 console.log(`Job ID: ${jobId}`);
+```
+
+### Wait for the job to complete
+
+Get the job status and wait until it is completed.
+
+```javascript
+const sleep = (delay) => new Promise((r) => setTimeout(r, delay));
+
+let result = await dolbyio.media.enhance.getResults(jwt, jobId);
+while (result.status === 'Pending' || result.status === 'Running') {
+    console.log(`Job status is ${result.status}, taking a 5 second break...`);
+    await sleep(5000);
+
+    result = await dolbyio.media.enhance.getResults(jwt, jobId);
+}
+
+if (result.status !== 'Success') {
+    console.error('There was a problem with processing the file', result);
+    return;
+}
+```
+
+### Download a processed file
+
+At this stage, the file has been processed and written to the temporary storage so we can download it.
+
+```javascript
+// Local path where to download the file to
+const enhancedFilePath = '/path/to/enhanced_file.mp4';
+
+await dolbyio.io.downloadFile(jwt, outputUrl, enhancedFilePath);
 ```
 
 ## Build this project

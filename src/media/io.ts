@@ -1,5 +1,5 @@
 import { sendPost, AuthRequestOptions } from './internal/httpHelpers';
-import { download, RequestOptions } from '../internal/httpHelpers';
+import { download, upload, RequestOptions } from '../internal/httpHelpers';
 import { API_HOSTNAME } from './internal/urls';
 import JwtToken from '../types/jwtToken';
 
@@ -63,6 +63,22 @@ export const getUploadUrl = async (accessToken: JwtToken, dlbUrl: string): Promi
  */
 export const getDownloadUrl = async (accessToken: JwtToken, dlbUrl: string): Promise<string | null> => {
     return await getUrl(accessToken, '/media/output', dlbUrl);
+};
+
+/**
+ * Upload a media file to the Dolby.io temporary storage.
+ *
+ * The temporary storage should allow you to read and write to the dlb:// locations for a period of at least 24 hours before it is removed.
+ *
+ * @link https://docs.dolby.io/media-apis/reference/media-input-post
+ *
+ * @param accessToken Access token to use for authentication.
+ * @param dlbUrl The `url` should be in the form `dlb://object-key` where the object-key can be any alpha-numeric string. The object-key is unique to your account API Key so there is no risk of collision with other users.
+ * @param filePath Local path of the file you want to upload.
+ */
+export const uploadFile = async (accessToken: JwtToken, dlbUrl: string, filePath: string): Promise<void> => {
+    const uploadUrl: string = await getUploadUrl(accessToken, dlbUrl);
+    return upload(filePath, uploadUrl);
 };
 
 /**

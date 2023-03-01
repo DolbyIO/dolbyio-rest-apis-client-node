@@ -1,6 +1,6 @@
 {
     "name": "@dolbyio/dolbyio-rest-apis-client",
-    "version": "3.5.1",
+    "version": "3.5.2",
     "description": "Node.JS wrapper for the dolby.io REST APIs",
     "main": "dist/index.js",
     "scripts": {
@@ -13,6 +13,15 @@
     },
     "author": "Fabien Lavocat <fabien.lavocat@dolby.com>",
     "license": "MIT",
+    "keywords": [
+        "nodejs",
+        "api",
+        "sdk",
+        "rest",
+        "rest-api",
+        "webrtc",
+        "dolbyio"
+    ],
     "files": [
         "dist/*",
         "README.md"
