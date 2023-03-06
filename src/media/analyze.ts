@@ -36,7 +36,7 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
  *
  * For a given job_id, this method will check the job status.
  *
- * When `status==Success` you'll be able to retrieve your result from the output location you provided in the original POST.
+ * When {@link AnalyzeJob.status} is `Success`, you'll be able to retrieve your result from the `output` location you provided in the original {@link start} request.
  *
  * @link https://docs.dolby.io/media-apis/reference/media-analyze-get
  *
