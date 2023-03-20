@@ -54,6 +54,21 @@ export interface Statistics {
     network: object;
 }
 
+export interface StreamingAPIUsage {
+    /** */
+    bytesIn?: number;
+    /** */
+    bytesOut?: number;
+    /** */
+    publishDurationSec?: number;
+    /** */
+    publishes?: number;
+    /** */
+    viewDurationSec?: number;
+    /** */
+    views?: number;
+}
+
 export interface Conference {
     /** The identifier of the conference. */
     confId: string;
@@ -93,6 +108,8 @@ export interface Conference {
     owner: ConferenceOwner;
     /** The conference statistics of a terminated conference. The statistics include the maximum number of participants present during a conference and the maximum number of the transmitted and received packets, bytes, and streams. */
     statistics: Statistics;
+    /** The Real-time streaming usage in the conference. */
+    streamingAPIUsage: StreamingAPIUsage;
 }
 
 export interface ListConferencesResponse extends PagedResponse {
