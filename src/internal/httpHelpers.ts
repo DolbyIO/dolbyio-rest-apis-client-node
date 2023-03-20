@@ -250,7 +250,7 @@ export const upload = (filepath: string, uploadUrl: string) => {
         const opts: coreHttps.RequestOptions = {
             method: 'PUT',
             headers: {
-                "Content-Length": fileSize
+                'Content-Length': fileSize,
             },
         };
 
