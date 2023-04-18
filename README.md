@@ -1,6 +1,6 @@
 [![Build Package](https://github.com/DolbyIO/dolbyio-rest-apis-client-node/actions/workflows/build-package.yml/badge.svg)](https://github.com/DolbyIO/dolbyio-rest-apis-client-node/actions/workflows/build-package.yml)
 [![Publish Package](https://github.com/DolbyIO/dolbyio-rest-apis-client-node/actions/workflows/publish-package.yml/badge.svg)](https://github.com/DolbyIO/dolbyio-rest-apis-client-node/actions/workflows/publish-package.yml)
-![npm](https://img.shields.io/npm/v/@dolbyio/dolbyio-rest-apis-client)
+[![npm](https://img.shields.io/npm/v/@dolbyio/dolbyio-rest-apis-client)](https://www.npmjs.com/package/@dolbyio/dolbyio-rest-apis-client)
 [![License](https://img.shields.io/github/license/DolbyIO/dolbyio-rest-apis-client-node)](LICENSE)
 
 # Dolby.io REST APIs Client for Node.JS
