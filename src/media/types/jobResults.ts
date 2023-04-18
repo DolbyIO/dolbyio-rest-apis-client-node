@@ -6,6 +6,7 @@ export interface ErrorResult {
 
 export interface JobResult<T> {
     api_version: string;
+    path: string;
     status: string;
     progress: number;
     result: T;
