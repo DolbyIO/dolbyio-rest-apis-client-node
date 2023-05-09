@@ -17,9 +17,11 @@ import JwtToken from './types/jwtToken';
  * @returns A {@link JwtToken} object through a {@link Promise}.
  */
 export const getApiAccessToken = async (appKey: string, appSecret: string, expiresIn?: number): Promise<JwtToken> => {
-    let body = 'grant_type=client_credentials';
+    const body = new URLSearchParams({
+        grant_type: 'client_credentials',
+    });
     if (expiresIn) {
-        body += `&expires_in=${expiresIn}`;
+        body.append('expires_in', expiresIn.toFixed(0));
     }
 
     const authz = Buffer.from(`${appKey}:${appSecret}`).toString('base64');
@@ -32,7 +34,7 @@ export const getApiAccessToken = async (appKey: string, appSecret: string, expir
             'Cache-Control': 'no-cache',
             Authorization: `Basic ${authz}`,
         },
-        body,
+        body: body.toString(),
     };
 
     const response = await sendPost(options);
