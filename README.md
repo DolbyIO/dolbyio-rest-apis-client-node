@@ -30,6 +30,20 @@ const jwt = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
 console.log(`Access Token: ${jwt.access_token}`);
 ```
 
+To request a particular scope for this access token:
+
+```javascript
+const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
+
+const APP_KEY = 'YOUR_APP_KEY';
+const APP_SECRET = 'YOUR_APP_SECRET';
+
+const jwt = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET, 3600, ['comms:client_access_token:create']);
+
+console.log(`Access Token: ${jwt.access_token}`);
+console.log(`Scope: ${jwt.scope}`);
+```
+
 ## Communications Examples
 
 ### Authenticate
@@ -42,9 +56,16 @@ const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
 const APP_KEY = 'YOUR_APP_KEY';
 const APP_SECRET = 'YOUR_APP_SECRET';
 
-const at = await dolbyio.communications.authentication.getClientAccessToken(APP_KEY, APP_SECRET);
+// Request an API Token
+const api_token = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET, 3600, ['comms:client_access_token:create']);
 
-console.log(`Access Token: ${at.access_token}`);
+// Request the Client Access Token
+const cat = await dolbyio.communications.authentication.getClientAccessToken({
+    accessToken: api_token,
+    sessionScope: ['*'],
+});
+
+console.log(`Client Access Token: ${cat.access_token}`);
 ```
 
 ### Create a conference
@@ -71,8 +92,8 @@ const options = {
     ],
 };
 
-// Request an Access Token
-const jwt = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
+// Request an API Token
+const jwt = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET, 3600, ['comms:conf:create']);
 
 // Create the conference
 const conference = await dolbyio.communications.conference.createConference(jwt, options);
