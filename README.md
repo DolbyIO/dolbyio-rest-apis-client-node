@@ -214,7 +214,7 @@ At this stage, the file has been processed and written to the temporary storage 
 // Local path where to download the file to
 const enhancedFilePath = '/path/to/enhanced_file.mp4';
 
-await dolbyio.io.downloadFile(jwt, outputUrl, enhancedFilePath);
+await dolbyio.media.io.downloadFile(jwt, outputUrl, enhancedFilePath);
 ```
 
 ## Build this project
