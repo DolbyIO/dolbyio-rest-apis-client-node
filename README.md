@@ -60,7 +60,7 @@ const APP_SECRET = 'YOUR_APP_SECRET';
 const api_token = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET, 3600, ['comms:client_access_token:create']);
 
 // Request the Client Access Token
-const cat = await dolbyio.communications.authentication.getClientAccessToken({
+const cat = await dolbyio.communications.authentication.getClientAccessTokenV2({
     accessToken: api_token,
     sessionScope: ['*'],
 });
