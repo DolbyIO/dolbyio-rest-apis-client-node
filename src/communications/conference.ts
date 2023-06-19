@@ -1,6 +1,6 @@
-import { sendDelete, sendPost, sendPut } from '../internal/httpHelpers';
+import { sendDelete, sendGet, sendPost, sendPut } from '../internal/httpHelpers';
 import { COMMS_HOSTNAME } from './internal/urls';
-import { CreateConferenceOptions, Conference, UserTokens } from './types/conference';
+import { CreateConferenceOptions, Conference, UserTokens, ListParticipantsResponse } from './types/conference';
 import { SpatialEnvironment, SpatialListener, SpatialUsers } from './types/spatialAudio';
 import JwtToken from '../types/jwtToken';
 import Participant from './types/participant';
@@ -252,6 +252,31 @@ export const updatePermissions = async (accessToken: JwtToken, conferenceId: str
 
     const response = await sendPost(options);
     return response as UserTokens;
+};
+
+/**
+ * Returns the current participant list.
+ *
+ * @link https://docs.dolby.io/communications-apis/reference/return-participant-list
+ *
+ * @param accessToken Access token to use for authentication.
+ * @param conferenceId Identifier of the conference.
+ *
+ * @returns The list of participants in the conference.
+ */
+export const participants = async (accessToken: JwtToken, conferenceId: string): Promise<ListParticipantsResponse> => {
+    const requestOptions = {
+        hostname: COMMS_HOSTNAME,
+        path: `/v2/conferences/${conferenceId}/participants`,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
+        },
+    };
+
+    const response = await sendGet(requestOptions);
+    return response as ListParticipantsResponse;
 };
 
 /**

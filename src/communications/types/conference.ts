@@ -56,3 +56,27 @@ export interface Conference {
     /** The conference access token of the conference participants. */
     usersTokens: UserTokens;
 }
+
+export interface Participants {
+    /** The participant ID, in UUID (Universally Unique Identifier) format. The Dolby.io Communications APIs platform automatically generates an ID for each participant connected to the conference. */
+    userId: string;
+    /** The external ID of the participant. */
+    externalId: string;
+    /** The name of the participant. */
+    name: string;
+    /** The URL of the participant's avatar. */
+    avatarUrl: string;
+    /** The last external IP used by the participant in the conference. */
+    ipAddress: string;
+    /** The participant's user agent. */
+    userAgent: string;
+    /** The timestamp of the last time when the participant joined the conference. */
+    lastJoinTimestamp: number;
+    /** The number of times the participant joined the conference. */
+    nbSession: number;
+}
+
+export interface ListParticipantsResponse {
+    /** The ID of the created conference. */
+    participants: Participants[];
+}
