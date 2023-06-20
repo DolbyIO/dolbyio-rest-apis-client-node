@@ -1,6 +1,6 @@
 import { sendGet, sendDelete, download } from '../../internal/httpHelpers';
 import { getAll } from '../internal/httpHelpers';
-import { COMMS_HOSTNAME } from '../internal/urls';
+import Urls from '../../urls';
 import JwtToken from '../../types/jwtToken';
 import { GetRecordingsOptions, GetAllRecordingsOptions, GetRecordingsResponse, Recording, GetRecordingOptions, DolbyVoiceRecording } from '../types/recordings';
 
@@ -36,7 +36,7 @@ export const getRecordings = async (accessToken: JwtToken, options: GetRecording
     }
 
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: '/v1/monitor/recordings',
         params,
         headers: {
@@ -77,7 +77,7 @@ export const getAllRecordings = async (accessToken: JwtToken, options: GetAllRec
     };
 
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: '/v1/monitor/recordings',
         params,
         headers: {
@@ -121,7 +121,7 @@ export const getRecording = async (accessToken: JwtToken, options: GetRecordingO
     }
 
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v1/monitor/conferences/${opts.confId}/recordings`,
         params,
         headers: {
@@ -146,7 +146,7 @@ export const getRecording = async (accessToken: JwtToken, options: GetRecordingO
  */
 export const deleteRecording = async (accessToken: JwtToken, confId: string): Promise<void> => {
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v1/monitor/conferences/${confId}/recordings`,
         headers: {
             Accept: 'application/json',
@@ -170,7 +170,7 @@ export const deleteRecording = async (accessToken: JwtToken, confId: string): Pr
  */
 export const getDolbyVoiceRecording = async (accessToken: JwtToken, confId: string): Promise<DolbyVoiceRecording> => {
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v1/monitor/conferences/${confId}/recordings/audio`,
         headers: {
             Accept: 'application/json',

@@ -1,5 +1,5 @@
 import { sendPost } from '../internal/httpHelpers';
-import { COMMS_HOSTNAME } from './internal/urls';
+import Urls from '../urls';
 import JwtToken from '../types/jwtToken';
 
 /**
@@ -24,7 +24,7 @@ export const start = async (accessToken: JwtToken, conferenceId: string, layoutU
     if (layoutUrl) body['layoutUrl'] = layoutUrl;
 
     const options = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v2/conferences/mix/${conferenceId}/recording/start`,
         headers: {
             Accept: 'application/json',
@@ -47,7 +47,7 @@ export const start = async (accessToken: JwtToken, conferenceId: string, layoutU
  */
 export const stop = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
     const options = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v2/conferences/mix/${conferenceId}/recording/stop`,
         headers: {
             Accept: 'application/json',

@@ -1,10 +1,10 @@
 import { sendPost, sendGet, AuthRequestOptions } from './httpHelpers';
-import { API_HOSTNAME } from './urls';
+import Urls from '../../urls';
 import JwtToken from '../../types/jwtToken';
 
 export const startJob = async (accessToken: JwtToken, urlPath: string, jobContent: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
+        hostname: Urls.getMapiHostname(),
         path: urlPath,
         headers: {
             Accept: 'application/json',
@@ -24,7 +24,7 @@ export const startJob = async (accessToken: JwtToken, urlPath: string, jobConten
 
 export const getJobResults = async <TResult>(accessToken: JwtToken, urlPath: string, jobId: string): Promise<TResult> => {
     const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
+        hostname: Urls.getMapiHostname(),
         path: urlPath,
         params: {
             job_id: jobId,

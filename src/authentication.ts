@@ -1,5 +1,5 @@
 import { sendPost } from './internal/httpHelpers';
-import { AUTH_HOSTNAME } from './internal/urls';
+import Urls from './urls';
 import JwtToken from './types/jwtToken';
 
 /**
@@ -43,7 +43,7 @@ export const getApiAccessToken = async (appKey: string, appSecret: string, expir
     const authz = Buffer.from(`${appKey}:${appSecret}`).toString('base64');
 
     const options = {
-        hostname: AUTH_HOSTNAME,
+        hostname: Urls.getApiHostname(),
         path: '/v1/auth/token',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

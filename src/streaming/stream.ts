@@ -1,5 +1,5 @@
 import { sendPost } from '../internal/httpHelpers';
-import { SAPI_HOSTNAME } from './internal/urls';
+import Urls from '../urls';
 
 export const stop = async (apiSecret: string, streamId: string): Promise<void> => {
     const body = {
@@ -7,7 +7,7 @@ export const stop = async (apiSecret: string, streamId: string): Promise<void> =
     };
 
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/stream/stop',
         headers: {
             Accept: 'application/json',
@@ -22,7 +22,7 @@ export const stop = async (apiSecret: string, streamId: string): Promise<void> =
 
 export const stopAll = async (apiSecret: string): Promise<void> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/stream/stop/all',
         headers: {
             Accept: 'application/json',

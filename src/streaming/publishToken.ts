@@ -1,10 +1,10 @@
 import { sendDelete, sendGet, sendPost, sendPut, sendPatch } from './internal/httpHelpers';
-import { SAPI_HOSTNAME } from './internal/urls';
+import Urls from '../urls';
 import { ActivePublishToken, CreatePublishToken, PublishToken, UpdatePublishToken, DisablePublishTokenResponse } from './types/publishToken';
 
 export const read = async (apiSecret: string, tokenId: number): Promise<PublishToken> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: `/api/publish_token/${tokenId}`,
         headers: {
             Accept: 'application/json',
@@ -17,7 +17,7 @@ export const read = async (apiSecret: string, tokenId: number): Promise<PublishT
 
 export const deleteToken = async (apiSecret: string, tokenId: number): Promise<boolean> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: `/api/publish_token/${tokenId}`,
         headers: {
             Accept: 'application/json',
@@ -30,7 +30,7 @@ export const deleteToken = async (apiSecret: string, tokenId: number): Promise<b
 
 export const update = async (apiSecret: string, tokenId: number, publishToken: UpdatePublishToken): Promise<PublishToken> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: `/api/publish_token/${tokenId}`,
         headers: {
             Accept: 'application/json',
@@ -58,7 +58,7 @@ export const list = async (
     };
 
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/publish_token/list',
         params,
         headers: {
@@ -72,7 +72,7 @@ export const list = async (
 
 export const create = async (apiSecret: string, publishToken: CreatePublishToken): Promise<PublishToken> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/publish_token/',
         headers: {
             Accept: 'application/json',
@@ -91,7 +91,7 @@ export const getActivePublishTokenId = async (apiSecret: string, streamId: strin
     };
 
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/publish_token/active',
         params,
         headers: {
@@ -105,7 +105,7 @@ export const getActivePublishTokenId = async (apiSecret: string, streamId: strin
 
 export const getAllActivePublishTokenId = async (apiSecret: string): Promise<ActivePublishToken> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/publish_token/active/all',
         headers: {
             Accept: 'application/json',
@@ -122,7 +122,7 @@ export const disable = async (apiSecret: string, tokenIds: number[]): Promise<Di
     };
 
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/publish_token/active/all',
         headers: {
             Accept: 'application/json',

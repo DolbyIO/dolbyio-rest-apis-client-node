@@ -1,5 +1,5 @@
 import { sendPost } from './internal/httpHelpers';
-import { SAPI_DIRECTOR_HOSTNAME } from './internal/urls';
+import Urls from '../urls';
 import { PublishResponse, SubscribeResponse } from './types/director';
 
 /**
@@ -18,7 +18,7 @@ export const publish = async (publishingToken: string, streamName: string): Prom
     };
 
     const options = {
-        hostname: SAPI_DIRECTOR_HOSTNAME,
+        hostname: Urls.getRtsDirectorHostname(),
         path: '/api/director/publish',
         headers: {
             Accept: 'application/json',
@@ -49,7 +49,7 @@ export const subscribe = async (streamName: string, streamAccountId?: string, pu
     if (streamAccountId) body['streamAccountId'] = streamAccountId;
 
     const options = {
-        hostname: SAPI_DIRECTOR_HOSTNAME,
+        hostname: Urls.getRtsDirectorHostname(),
         path: '/api/director/subscribe',
         headers: {
             Accept: 'application/json',
