@@ -2,7 +2,7 @@ import * as authentication from './authentication';
 import * as communications from './communications';
 import * as media from './media';
 import * as streaming from './streaming';
-import urls from './urls';
+import * as urls from './urls';
 
 declare const __VERSION__: string;
 

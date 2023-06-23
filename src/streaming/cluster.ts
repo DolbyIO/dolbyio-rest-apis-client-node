@@ -1,5 +1,5 @@
 import { sendGet, sendPut } from './internal/httpHelpers';
-import Urls from '../urls';
+import * as Urls from '../urls';
 import { ClusterResponse } from './types/cluster';
 
 export const read = async (apiSecret: string): Promise<ClusterResponse> => {

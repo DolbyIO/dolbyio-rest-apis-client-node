@@ -1,5 +1,5 @@
 import { sendDelete, sendGet, sendPost, sendPut } from '../internal/httpHelpers';
-import Urls from '../urls';
+import * as Urls from '../urls';
 import { CreateConferenceOptions, Conference, UserTokens, ListParticipantsResponse } from './types/conference';
 import { SpatialEnvironment, SpatialListener, SpatialUsers } from './types/spatialAudio';
 import JwtToken from '../types/jwtToken';

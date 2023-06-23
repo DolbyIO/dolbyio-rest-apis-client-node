@@ -1,48 +1,47 @@
-class Urls {
-    #API_HOSTNAME = 'api.dolby.io';
-    #COMMS_HOSTNAME = 'comms.api.dolby.io';
-    #COMMS_SESSION_HOSTNAME = 'session.voxeet.com';
-
-    #RTS_HOSTNAME = 'api.millicast.com';
-    #RTS_DIRECTOR_HOSTNAME = 'director.millicast.com';
-
-    #MAPI_HOSTNAME = 'api.dolby.com';
-
-    setApiHostname(value: string) {
-        this.#API_HOSTNAME = value;
-    }
-
-    getApiHostname() {
-        return this.#API_HOSTNAME;
-    }
-
-    setCommsHostname(value: string) {
-        this.#COMMS_HOSTNAME = value;
-    }
-
-    getCommsHostname(region?: string) {
-        return region ? `${region}.${this.#COMMS_HOSTNAME}` : this.#COMMS_HOSTNAME;
-    }
-
-    setCommsSessionHostname(value: string) {
-        this.#COMMS_SESSION_HOSTNAME = value;
-    }
-
-    getCommsSessionHostname() {
-        return this.#COMMS_SESSION_HOSTNAME;
-    }
-
-    getRtsHostname() {
-        return this.#RTS_HOSTNAME;
-    }
-
-    getRtsDirectorHostname() {
-        return this.#RTS_DIRECTOR_HOSTNAME;
-    }
-
-    getMapiHostname() {
-        return this.#MAPI_HOSTNAME;
-    }
+export interface Hostnames {
+    api?: string;
+    comms?: string;
+    commsSession?: string;
+    rts?: string;
+    rtsDirector?: string;
+    mapi?: string;
 }
 
-export default new Urls();
+const hostnames: Hostnames = {
+    api: 'api.dolby.io',
+    comms: 'comms.api.dolby.io',
+    commsSession: 'session.voxeet.com',
+
+    rts: 'api.millicast.com',
+    rtsDirector: 'director.millicast.com',
+
+    mapi: 'api.dolby.com',
+};
+
+export const initialize = (newHostnames: Hostnames) => {
+    Object.assign(hostnames, newHostnames);
+};
+
+export const getApiHostname = () => {
+    return hostnames.api;
+};
+
+export const getCommsHostname = (region?: string) => {
+    return region ? `${region}.${hostnames.comms}` : hostnames.comms;
+};
+
+export const getCommsSessionHostname = () => {
+    return hostnames.commsSession;
+};
+
+export const getRtsHostname = () => {
+    return hostnames.rts;
+};
+
+export const getRtsDirectorHostname = () => {
+    return hostnames.rtsDirector;
+};
+
+export const getMapiHostname = () => {
+    return hostnames.mapi;
+};

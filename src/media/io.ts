@@ -1,6 +1,6 @@
 import { sendPost, AuthRequestOptions } from './internal/httpHelpers';
 import { download, upload, RequestOptions } from '../internal/httpHelpers';
-import Urls from '../urls';
+import * as Urls from '../urls';
 import JwtToken from '../types/jwtToken';
 
 const getUrl = async (accessToken: JwtToken, endpointUrl: string, dlbUrl: string): Promise<string | null> => {

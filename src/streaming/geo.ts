@@ -1,5 +1,5 @@
 import { sendGet, sendPost } from './internal/httpHelpers';
-import Urls from '../urls';
+import * as Urls from '../urls';
 import { GeoRestrictions } from './types/geo';
 
 /**

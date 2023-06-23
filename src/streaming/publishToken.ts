@@ -1,5 +1,5 @@
 import { sendDelete, sendGet, sendPost, sendPut, sendPatch } from './internal/httpHelpers';
-import Urls from '../urls';
+import * as Urls from '../urls';
 import { ActivePublishToken, CreatePublishToken, PublishToken, UpdatePublishToken, DisablePublishTokenResponse } from './types/publishToken';
 
 export const read = async (apiSecret: string, tokenId: number): Promise<PublishToken> => {

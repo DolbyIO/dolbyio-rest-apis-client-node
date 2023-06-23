@@ -1,5 +1,5 @@
 import { sendDelete, sendGet, sendPost, sendPut } from './internal/httpHelpers';
-import Urls from '../urls';
+import * as Urls from '../urls';
 import { CreateSubscribeToken, SubscribeToken, UpdateSubscribeToken } from './types/subscribeToken';
 
 export const read = async (apiSecret: string, tokenId: number): Promise<SubscribeToken> => {

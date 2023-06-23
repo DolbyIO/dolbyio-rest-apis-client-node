@@ -1,6 +1,6 @@
 import { sendGet, sendDelete, download } from '../../internal/httpHelpers';
 import { getAll } from '../internal/httpHelpers';
-import Urls from '../../urls';
+import * as Urls from '../../urls';
 import JwtToken from '../../types/jwtToken';
 import { GetRecordingsOptions, GetAllRecordingsOptions, GetRecordingsResponse, Recording, GetRecordingOptions, DolbyVoiceRecording } from '../types/recordings';
 

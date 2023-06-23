@@ -1,5 +1,5 @@
 import { sendPost } from '../internal/httpHelpers';
-import Urls from '../urls';
+import * as Urls from '../urls';
 
 export const stop = async (apiSecret: string, streamId: string): Promise<void> => {
     const body = {

@@ -1,6 +1,6 @@
 import { sendGet } from '../../internal/httpHelpers';
 import { getAll } from '../internal/httpHelpers';
-import Urls from '../../urls';
+import * as Urls from '../../urls';
 import JwtToken from '../../types/jwtToken';
 import { GetWebhooksOptions, GetAllWebhooksOptions, GetWebHookResponse, WebHook } from '../types/webhooks';
 
