@@ -1,5 +1,5 @@
 import { sendGet, sendPost, AuthRequestOptions } from './internal/httpHelpers';
-import { API_HOSTNAME } from './internal/urls';
+import * as Urls from '../urls';
 import JwtToken from '../types/jwtToken';
 import { ListJobsOptions, ListAllJobsOptions, JobsResponse, Job } from './types/jobs';
 
@@ -31,7 +31,7 @@ export const list = async (accessToken: JwtToken, options: ListJobsOptions): Pro
     }
 
     const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
+        hostname: Urls.getMapiHostname(),
         path: '/media/jobs',
         params,
         headers: {},
@@ -67,7 +67,7 @@ export const listAll = async (accessToken: JwtToken, options: ListAllJobsOptions
     }
 
     const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
+        hostname: Urls.getMapiHostname(),
         path: '/media/jobs',
         headers: {},
         accessToken,
@@ -109,7 +109,7 @@ export const cancel = async (accessToken: JwtToken, jobId: string): Promise<void
     };
 
     const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
+        hostname: Urls.getMapiHostname(),
         path: '/media/jobs/cancel',
         headers: {
             Accept: 'application/json',

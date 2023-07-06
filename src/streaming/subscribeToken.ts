@@ -1,10 +1,10 @@
 import { sendDelete, sendGet, sendPost, sendPut } from './internal/httpHelpers';
-import { SAPI_HOSTNAME } from './internal/urls';
+import * as Urls from '../urls';
 import { CreateSubscribeToken, SubscribeToken, UpdateSubscribeToken } from './types/subscribeToken';
 
 export const read = async (apiSecret: string, tokenId: number): Promise<SubscribeToken> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: `/api/subscribe_token/${tokenId}`,
         headers: {
             Accept: 'application/json',
@@ -17,7 +17,7 @@ export const read = async (apiSecret: string, tokenId: number): Promise<Subscrib
 
 export const deleteToken = async (apiSecret: string, tokenId: number): Promise<boolean> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: `/api/subscribe_token/${tokenId}`,
         headers: {
             Accept: 'application/json',
@@ -30,7 +30,7 @@ export const deleteToken = async (apiSecret: string, tokenId: number): Promise<b
 
 export const update = async (apiSecret: string, tokenId: number, subscribeToken: UpdateSubscribeToken): Promise<SubscribeToken> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: `/api/subscribe_token/${tokenId}`,
         headers: {
             Accept: 'application/json',
@@ -58,7 +58,7 @@ export const list = async (
     };
 
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/subscribe_token/list',
         params,
         headers: {
@@ -72,7 +72,7 @@ export const list = async (
 
 export const create = async (apiSecret: string, subscribeToken: CreateSubscribeToken): Promise<SubscribeToken> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/subscribe_token/',
         headers: {
             Accept: 'application/json',

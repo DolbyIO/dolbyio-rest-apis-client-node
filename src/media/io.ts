@@ -1,6 +1,6 @@
 import { sendPost, AuthRequestOptions } from './internal/httpHelpers';
 import { download, upload, RequestOptions } from '../internal/httpHelpers';
-import { API_HOSTNAME } from './internal/urls';
+import * as Urls from '../urls';
 import JwtToken from '../types/jwtToken';
 
 const getUrl = async (accessToken: JwtToken, endpointUrl: string, dlbUrl: string): Promise<string | null> => {
@@ -9,7 +9,7 @@ const getUrl = async (accessToken: JwtToken, endpointUrl: string, dlbUrl: string
     };
 
     const requestOptions: AuthRequestOptions = {
-        hostname: API_HOSTNAME,
+        hostname: Urls.getMapiHostname(),
         path: endpointUrl,
         headers: {
             Accept: 'application/json',

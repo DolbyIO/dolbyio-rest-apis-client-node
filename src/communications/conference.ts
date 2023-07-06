@@ -1,5 +1,5 @@
 import { sendDelete, sendGet, sendPost, sendPut } from '../internal/httpHelpers';
-import { COMMS_HOSTNAME } from './internal/urls';
+import * as Urls from '../urls';
 import { CreateConferenceOptions, Conference, UserTokens, ListParticipantsResponse } from './types/conference';
 import { SpatialEnvironment, SpatialListener, SpatialUsers } from './types/spatialAudio';
 import JwtToken from '../types/jwtToken';
@@ -47,11 +47,8 @@ export const createConference = async (accessToken: JwtToken, options: CreateCon
         body['participants'] = obj_participants;
     }
 
-    // Compute the hostname based on the requested region
-    const hostname = options.region ? `${options.region}.${COMMS_HOSTNAME}` : COMMS_HOSTNAME;
-
     const requestOptions = {
-        hostname: hostname,
+        hostname: Urls.getCommsHostname(options.region),
         path: '/v2/conferences/create',
         headers: {
             Accept: 'application/json',
@@ -93,7 +90,7 @@ export const invite = async (accessToken: JwtToken, conferenceId: string, partic
     });
 
     const options = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v2/conferences/${conferenceId}/invite`,
         headers: {
             Accept: 'application/json',
@@ -122,7 +119,7 @@ export const kick = async (accessToken: JwtToken, conferenceId: string, external
     });
 
     const options = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v2/conferences/${conferenceId}/kick`,
         headers: {
             Accept: 'application/json',
@@ -163,7 +160,7 @@ export const sendMessage = async (
     }
 
     const options = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v2/conferences/${conferenceId}/message`,
         headers: {
             Accept: 'application/json',
@@ -201,7 +198,7 @@ export const setSpatialListenersAudio = async (
     });
 
     const options = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v2/conferences/${conferenceId}/spatial-listeners-audio`,
         headers: {
             Accept: 'application/json',
@@ -240,7 +237,7 @@ export const updatePermissions = async (accessToken: JwtToken, conferenceId: str
     });
 
     const options = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v2/conferences/${conferenceId}/permissions`,
         headers: {
             Accept: 'application/json',
@@ -266,7 +263,7 @@ export const updatePermissions = async (accessToken: JwtToken, conferenceId: str
  */
 export const participants = async (accessToken: JwtToken, conferenceId: string): Promise<ListParticipantsResponse> => {
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v2/conferences/${conferenceId}/participants`,
         headers: {
             Accept: 'application/json',
@@ -289,7 +286,7 @@ export const participants = async (accessToken: JwtToken, conferenceId: string):
  */
 export const terminate = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
     const options = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v2/conferences/${conferenceId}`,
         headers: {
             Accept: 'application/json',

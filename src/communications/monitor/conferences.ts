@@ -1,6 +1,6 @@
 import { sendGet } from '../../internal/httpHelpers';
 import { getAll } from '../internal/httpHelpers';
-import { COMMS_HOSTNAME } from '../internal/urls';
+import * as Urls from '../../urls';
 import JwtToken from '../../types/jwtToken';
 import {
     ListConferencesOptions,
@@ -58,7 +58,7 @@ export const listConferences = async (accessToken: JwtToken, options: ListConfer
     }
 
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: '/v1/monitor/conferences',
         params,
         headers: {
@@ -111,7 +111,7 @@ export const listAllConferences = async (accessToken: JwtToken, options: ListAll
     }
 
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: '/v1/monitor/conferences',
         params,
         headers: {
@@ -139,7 +139,7 @@ export const listAllConferences = async (accessToken: JwtToken, options: ListAll
  */
 export const getConference = async (accessToken: JwtToken, conferenceId: string, livestats: boolean = false): Promise<Conference> => {
     const options = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v1/monitor/conferences/${conferenceId}?livestats=${livestats}`,
         headers: {
             Accept: 'application/json',
@@ -167,7 +167,7 @@ export const getConference = async (accessToken: JwtToken, conferenceId: string,
  */
 export const getConferenceStatistics = async (accessToken: JwtToken, conferenceId: string): Promise<Statistics> => {
     const options = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: `/v1/monitor/conferences/${conferenceId}/statistics`,
         headers: {
             Accept: 'application/json',
@@ -220,7 +220,7 @@ export const getConferenceParticipants = async (accessToken: JwtToken, options: 
     }
 
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: path,
         params,
         headers: {
@@ -271,7 +271,7 @@ export const getAllConferenceParticipants = async (accessToken: JwtToken, option
     }
 
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: path,
         params,
         headers: {

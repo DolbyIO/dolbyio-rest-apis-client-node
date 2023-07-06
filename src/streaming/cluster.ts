@@ -1,10 +1,10 @@
 import { sendGet, sendPut } from './internal/httpHelpers';
-import { SAPI_HOSTNAME } from './internal/urls';
+import * as Urls from '../urls';
 import { ClusterResponse } from './types/cluster';
 
 export const read = async (apiSecret: string): Promise<ClusterResponse> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/cluster',
         headers: {
             Accept: 'application/json',
@@ -21,7 +21,7 @@ export const update = async (apiSecret: string, defaultCluster: string): Promise
     };
 
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/cluster',
         headers: {
             Accept: 'application/json',

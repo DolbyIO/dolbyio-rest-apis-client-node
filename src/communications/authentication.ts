@@ -1,5 +1,5 @@
 import { sendPost } from '../internal/httpHelpers';
-import { COMMS_HOSTNAME, SESSION_HOSTNAME } from './internal/urls';
+import * as Urls from '../urls';
 import JwtToken from '../types/jwtToken';
 import { GetClientAccessTokenOptions } from './types/authentication';
 
@@ -13,7 +13,7 @@ import { GetClientAccessTokenOptions } from './types/authentication';
  * @param expiresIn Access token expiration time in seconds. If no value is specified, the default is 3,600, indicating one hour. The maximum value is 86,400, indicating 24 hours.
  *
  * @returns A {@link JwtToken} object through a {@link Promise}.
- * 
+ *
  * @deprecated This function is now deprecated and will be removed in the next release of this SDK. Please start using {@link getClientAccessTokenV2} instead.
  */
 export const getClientAccessToken = async (appKey: string, appSecret: string, expiresIn?: number): Promise<JwtToken> => {
@@ -27,7 +27,7 @@ export const getClientAccessToken = async (appKey: string, appSecret: string, ex
     const authz = Buffer.from(`${appKey}:${appSecret}`).toString('base64');
 
     const options = {
-        hostname: SESSION_HOSTNAME,
+        hostname: Urls.getCommsSessionHostname(),
         path: '/v1/oauth2/token',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -43,7 +43,7 @@ export const getClientAccessToken = async (appKey: string, appSecret: string, ex
 
 /**
  * Generates a client access token.
- * 
+ *
  * This API returns a client access token that your backend can request on behalf of a client to initialize the Dolby.io SDK in a secure way.
  *
  * @link https://docs.dolby.io/communications-apis/reference/get-client-access-token
@@ -60,7 +60,7 @@ export const getClientAccessTokenV2 = async (options: GetClientAccessTokenOption
     if (options.expiresIn) body['expiresIn'] = options.expiresIn;
 
     const postOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path: '/v2/client-access-token',
         headers: {
             'Cache-Control': 'no-cache',

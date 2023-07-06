@@ -1,6 +1,6 @@
 import { sendGet } from '../../internal/httpHelpers';
 import { getAll } from '../internal/httpHelpers';
-import { COMMS_HOSTNAME } from '../internal/urls';
+import * as Urls from '../../urls';
 import JwtToken from '../../types/jwtToken';
 import { GetWebhooksOptions, GetAllWebhooksOptions, GetWebHookResponse, WebHook } from '../types/webhooks';
 
@@ -43,7 +43,7 @@ export const getEvents = async (accessToken: JwtToken, options: GetWebhooksOptio
     }
 
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path,
         params,
         headers: {
@@ -92,7 +92,7 @@ export const getAllEvents = async (accessToken: JwtToken, options: GetAllWebhook
     }
 
     const requestOptions = {
-        hostname: COMMS_HOSTNAME,
+        hostname: Urls.getCommsHostname(),
         path,
         params,
         headers: {

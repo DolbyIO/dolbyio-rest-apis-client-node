@@ -1,5 +1,5 @@
 import { sendGet, sendPost } from './internal/httpHelpers';
-import { SAPI_HOSTNAME } from './internal/urls';
+import * as Urls from '../urls';
 import { GeoRestrictions } from './types/geo';
 
 /**
@@ -15,7 +15,7 @@ import { GeoRestrictions } from './types/geo';
  */
 export const read = async (apiSecret: string): Promise<GeoRestrictions> => {
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/geo/account',
         headers: {
             Accept: 'application/json',
@@ -49,7 +49,7 @@ export const update = async (
     if (deniedCountries) body['updateDeniedCountries'] = deniedCountries;
 
     const options = {
-        hostname: SAPI_HOSTNAME,
+        hostname: Urls.getRtsHostname(),
         path: '/api/geo/account',
         headers: {
             Accept: 'application/json',
