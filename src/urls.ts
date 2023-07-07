@@ -18,30 +18,30 @@ const hostnames: Hostnames = {
     mapi: 'api.dolby.com',
 };
 
-export const initialize = (newHostnames: Hostnames) => {
+export const initialize = (newHostnames: Hostnames): void => {
     Object.assign(hostnames, newHostnames);
 };
 
-export const getApiHostname = () => {
+export const getApiHostname = (): string => {
     return hostnames.api;
 };
 
-export const getCommsHostname = (region?: string) => {
+export const getCommsHostname = (region?: string): string => {
     return region ? `${region}.${hostnames.comms}` : hostnames.comms;
 };
 
-export const getCommsSessionHostname = () => {
+export const getCommsSessionHostname = (): string => {
     return hostnames.commsSession;
 };
 
-export const getRtsHostname = () => {
+export const getRtsHostname = (): string => {
     return hostnames.rts;
 };
 
-export const getRtsDirectorHostname = () => {
+export const getRtsDirectorHostname = (): string => {
     return hostnames.rtsDirector;
 };
 
-export const getMapiHostname = () => {
+export const getMapiHostname = (): string => {
     return hostnames.mapi;
 };

@@ -1,42 +1,62 @@
 import { sendPost } from '../internal/httpHelpers';
+import { Expand, ExpandRecursively } from '../internal/utils';
 import * as Urls from '../urls';
 import JwtToken from '../types/jwtToken';
+import { RtmpMixOptionsBase, RtmpMixOptionsComplex, RtmpMixOptions, MixOptionsBase, MixOptionsComplex, MixOptions } from './types/mixOptions';
 
 /**
  * Starts the RTMP live stream for the specified conference.
  *
- * Once the Dolby.io Communication API service started streaming to the target url,
- * a `Stream.Rtmp.InProgress` Webhook event will be sent.
+ * Once the Dolby.io Communications APIs service starts streaming to the target URL,
+ * the platform sends the `Stream.Rtmp.InProgress` webhook event.
+ * Providing multiple destination URIs in a requests does not cause sending multiple webhook events.
  *
  * @link https://docs.dolby.io/communications-apis/reference/start-rtmp
  *
- * @param accessToken Access token to use for authentication.
- * @param conferenceId Identifier of the conference.
- * @param rtmpUrl The destination URI provided by the RTMP service.
- * @param layoutUrl Overwrites the layout URL configuration:
- *      - `null`: uses the layout URL configured in the dashboard (if no URL is set in the dashboard, then uses the Dolby.io default);
- *      - `default`: uses the Dolby.io default layout;
- *      - URL string: uses this layout URL
- * @param layoutName Defines a name for the given layout URL, which makes layout identification easier for customers especially when the layout URL is not explicit.
+ * @param options RTMP options.
  */
-export const startRtmp = async (accessToken: JwtToken, conferenceId: string, rtmpUrl: string, layoutUrl?: string, layoutName?: string): Promise<void> => {
-    const body = { uri: rtmpUrl };
-    if (layoutUrl) body['layoutUrl'] = layoutUrl;
-    if (layoutName) body['layoutName'] = layoutName;
+export async function startRtmp(options: Expand<RtmpMixOptionsBase>): Promise<void>;
 
-    const options = {
+/**
+ * Starts the RTMP live stream for the specified conference.
+ *
+ * Once the Dolby.io Communications APIs service starts streaming to the target URL,
+ * the platform sends the `Stream.Rtmp.InProgress` webhook event.
+ * Providing multiple destination URIs in a requests does not cause sending multiple webhook events.
+ *
+ * You can also specify the resolution of the RTMP stream.
+ * The default mixer layout application supports both 1920x1080 (16:9 aspect ratio) and 1080x1920 (9:16 aspect ratio).
+ * If the {@link RtmpMixOptionsComplex.resolution} parameter is not specified, then the system defaults to 1920x1080.
+ *
+ * @link https://docs.dolby.io/communications-apis/reference/start-rtmp
+ *
+ * @param options RTMP options.
+ */
+export async function startRtmp(options: ExpandRecursively<RtmpMixOptionsComplex>): Promise<void>;
+
+export async function startRtmp(options: ExpandRecursively<RtmpMixOptions>): Promise<void> {
+    const body = { uri: options.uri };
+    const optionsExt = options as RtmpMixOptionsComplex;
+    if (optionsExt.layoutUrl) body['layoutUrl'] = optionsExt.layoutUrl;
+    if (optionsExt.resolution) {
+        body['height'] = optionsExt.resolution.height;
+        body['width'] = optionsExt.resolution.width;
+    }
+    if (optionsExt.mixId) body['mixId'] = optionsExt.mixId;
+
+    const requestOptions = {
         hostname: Urls.getCommsHostname(),
-        path: `/v2/conferences/mix/${conferenceId}/rtmp/start`,
+        path: `/v2/conferences/mix/${options.conferenceId}/rtmp/start`,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
+            Authorization: `${options.accessToken.token_type} ${options.accessToken.access_token}`,
         },
         body: JSON.stringify(body),
     };
 
-    await sendPost(options);
-};
+    await sendPost(requestOptions);
+}
 
 /**
  * Stops the RTMP stream of the specified conference.
@@ -65,44 +85,48 @@ export const stopRtmp = async (accessToken: JwtToken, conferenceId: string): Pro
  *
  * @link https://docs.dolby.io/communications-apis/reference/start-rts
  *
- * @param accessToken Access token to use for authentication.
- * @param conferenceId Identifier of the conference.
- * @param streamName The Millicast stream name to which the conference is broadcasted.
- * @param publishingToken The Millicast publishing token used to identify the broadcaster.
- * @param layoutUrl Overwrites the layout URL configuration:
- *      - `null`: uses the layout URL configured in the dashboard (if no URL is set in the dashboard, then uses the Dolby.io default);
- *      - `default`: uses the Dolby.io default layout;
- *      - URL string: uses this layout URL
- * @param layoutName Defines a name for the given layout URL, which makes layout identification easier for customers especially when the layout URL is not explicit.
+ * @param options RTS streaming options.
  */
-export const startRts = async (
-    accessToken: JwtToken,
-    conferenceId: string,
-    streamName: string,
-    publishingToken: string,
-    layoutUrl?: string,
-    layoutName?: string
-): Promise<void> => {
-    const body = {
-        streamName: streamName,
-        publishingToken: publishingToken,
-    };
-    if (layoutUrl) body['layoutUrl'] = layoutUrl;
-    if (layoutName) body['layoutName'] = layoutName;
+export async function startRts(options: Expand<MixOptionsBase>): Promise<void>;
 
-    const options = {
+/**
+ * Starts real-time streaming using Dolby.io Real-time Streaming services (formerly Millicast).
+ *
+ * You can also specify the resolution of the RTS stream.
+ * The default mixer layout application supports both 1920x1080 (16:9 aspect ratio) and 1080x1920 (9:16 aspect ratio).
+ * If the {@link MixOptionsComplex.resolution} parameter is not specified, then the system defaults to 1920x1080.
+ *
+ * Starting multiple streams is currently not supported, even after proving multiple identifiers.
+ *
+ * @link https://docs.dolby.io/communications-apis/reference/start-rts
+ *
+ * @param options RTS streaming options.
+ */
+export async function startRts(options: ExpandRecursively<MixOptionsComplex>): Promise<void>;
+
+export async function startRts(options: ExpandRecursively<MixOptions>): Promise<void> {
+    const body = {};
+    const optionsExt = options as MixOptionsComplex;
+    if (optionsExt.layoutUrl) body['layoutUrl'] = optionsExt.layoutUrl;
+    if (optionsExt.resolution) {
+        body['height'] = optionsExt.resolution.height;
+        body['width'] = optionsExt.resolution.width;
+    }
+    if (optionsExt.mixId) body['mixId'] = optionsExt.mixId;
+
+    const requestOptions = {
         hostname: Urls.getCommsHostname(),
-        path: `/v2/conferences/mix/${conferenceId}/rts/start`,
+        path: `/v2/conferences/mix/${options.conferenceId}/rts/start`,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: `${accessToken.token_type} ${accessToken.access_token}`,
+            Authorization: `${options.accessToken.token_type} ${options.accessToken.access_token}`,
         },
         body: JSON.stringify(body),
     };
 
-    await sendPost(options);
-};
+    await sendPost(requestOptions);
+}
 
 /**
  * Stops real-time streaming to Dolby.io Real-time Streaming services.
