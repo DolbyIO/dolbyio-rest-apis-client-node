@@ -3,6 +3,7 @@ import { Expand, ExpandRecursively } from '../internal/utils';
 import * as Urls from '../urls';
 import JwtToken from '../types/jwtToken';
 import { RtmpMixOptionsBase, RtmpMixOptionsComplex, RtmpMixOptions, MixOptionsBase, MixOptionsComplex, MixOptions } from './types/mixOptions';
+import RtsStream from './types/rtsStream';
 
 /**
  * Starts the RTMP live stream for the specified conference.
@@ -86,8 +87,10 @@ export const stopRtmp = async (accessToken: JwtToken, conferenceId: string): Pro
  * @link https://docs.dolby.io/communications-apis/reference/start-rts
  *
  * @param options RTS streaming options.
+ *
+ * @returns A {@link RtsStream} object through a {@link Promise}.
  */
-export async function startRts(options: Expand<MixOptionsBase>): Promise<void>;
+export async function startRts(options: Expand<MixOptionsBase>): Promise<RtsStream>;
 
 /**
  * Starts real-time streaming using Dolby.io Real-time Streaming services (formerly Millicast).
@@ -101,10 +104,12 @@ export async function startRts(options: Expand<MixOptionsBase>): Promise<void>;
  * @link https://docs.dolby.io/communications-apis/reference/start-rts
  *
  * @param options RTS streaming options.
+ *
+ * @returns A {@link RtsStream} object through a {@link Promise}.
  */
-export async function startRts(options: ExpandRecursively<MixOptionsComplex>): Promise<void>;
+export async function startRts(options: ExpandRecursively<MixOptionsComplex>): Promise<RtsStream>;
 
-export async function startRts(options: ExpandRecursively<MixOptions>): Promise<void> {
+export async function startRts(options: ExpandRecursively<MixOptions>): Promise<RtsStream> {
     const body = {};
     const optionsExt = options as MixOptionsComplex;
     if (optionsExt.layoutUrl) body['layoutUrl'] = optionsExt.layoutUrl;
@@ -125,7 +130,8 @@ export async function startRts(options: ExpandRecursively<MixOptions>): Promise<
         body: JSON.stringify(body),
     };
 
-    await sendPost(requestOptions);
+    const response = await sendPost(requestOptions);
+    return response as RtsStream;
 }
 
 /**
