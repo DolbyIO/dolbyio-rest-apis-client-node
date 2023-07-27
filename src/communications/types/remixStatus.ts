@@ -3,6 +3,7 @@ export default interface RemixStatus {
      * The status of the current remix job.
      * The possible values are:
      * - UNKNOWN
+     * - AUDIO_REMIX_NOT_AVAILABLE
      * - ERROR
      * - IN_PROGRESS
      * - COMPLETED
