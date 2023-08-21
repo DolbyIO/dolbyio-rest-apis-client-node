@@ -164,7 +164,7 @@ const inputUrl = 'dlb://in/file.mp4';
 // Local path of the file to upload
 const originalFilePath = '/path/to/original_file.mp4';
 
-await dolbyio.io.uploadFile(jwt, inputUrl, originalFilePath);
+await dolbyio.media.io.uploadFile(jwt, inputUrl, originalFilePath);
 ```
 
 ### Start an enhance job
