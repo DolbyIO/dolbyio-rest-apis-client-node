@@ -121,7 +121,7 @@ export async function startRts(options: ExpandRecursively<MixOptions>): Promise<
 
     const requestOptions = {
         hostname: Urls.getCommsHostname(),
-        path: `/v2/conferences/mix/${options.conferenceId}/rts/start`,
+        path: `/v3/conferences/mix/${options.conferenceId}/rts/start`,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ export async function startRts(options: ExpandRecursively<MixOptions>): Promise<
 export const stopRts = async (accessToken: JwtToken, conferenceId: string): Promise<void> => {
     const options = {
         hostname: Urls.getCommsHostname(),
-        path: `/v2/conferences/mix/${conferenceId}/rts/stop`,
+        path: `/v3/conferences/mix/${conferenceId}/rts/stop`,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
