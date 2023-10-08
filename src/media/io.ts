@@ -102,7 +102,7 @@ export const downloadFile = async (accessToken: JwtToken, dlbUrl: string, filePa
 
     const requestOptions: RequestOptions = {
         hostname: downloadUrl.substring(0, idx),
-        path: downloadUrl.substring(idx + 1),
+        path: downloadUrl.substring(idx),
         headers: {},
     };
 
