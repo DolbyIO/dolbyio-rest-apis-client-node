@@ -1,12 +1,11 @@
-import * as analyze from './analyze';
-import * as analyzeSpeech from './analyzeSpeech';
-import * as analyzeMusic from './analyzeMusic';
-import * as diagnose from './diagnose';
-import * as enhance from './enhance';
-import * as io from './io';
-import * as jobs from './jobs';
-import * as mastering from './mastering';
-import * as transcode from './transcode';
-import * as webhooks from './webhooks';
-
-export { analyze, analyzeSpeech, analyzeMusic, diagnose, enhance, io, jobs, mastering, transcode, webhooks };
+export * from './types';
+export * as analyze from './analyze';
+export * as analyzeSpeech from './analyzeSpeech';
+export * as analyzeMusic from './analyzeMusic';
+export * as diagnose from './diagnose';
+export * as enhance from './enhance';
+export * as io from './io';
+export * as jobs from './jobs';
+export * as mastering from './mastering';
+export * as transcode from './transcode';
+export * as webhooks from './webhooks';

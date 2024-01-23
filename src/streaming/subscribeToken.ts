@@ -2,6 +2,16 @@ import { sendDelete, sendGet, sendPost, sendPut } from './internal/httpHelpers';
 import * as Urls from '../urls';
 import { CreateSubscribeToken, SubscribeToken, UpdateSubscribeToken } from './types/subscribeToken';
 
+/**
+ * Gets the specified subscribe token.
+ * 
+ * @link https://docs.dolby.io/streaming-apis/reference/subscribetokenv1_readtoken
+ * 
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param tokenId Identifier of the subscribe token to read.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link SubscribeToken} object.
+ */
 export const read = async (apiSecret: string, tokenId: number): Promise<SubscribeToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),
@@ -15,6 +25,16 @@ export const read = async (apiSecret: string, tokenId: number): Promise<Subscrib
     return await sendGet<SubscribeToken>(options);
 };
 
+/**
+ * Deletes the subscribe token.
+ * 
+ * @link https://docs.dolby.io/streaming-apis/reference/subscribetokenv1_deletetoken
+ * 
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param tokenId Identifier of the subscribe token to delete.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a flag to indicate if the operation succeeded or not.
+ */
 export const deleteToken = async (apiSecret: string, tokenId: number): Promise<boolean> => {
     const options = {
         hostname: Urls.getRtsHostname(),
@@ -28,6 +48,17 @@ export const deleteToken = async (apiSecret: string, tokenId: number): Promise<b
     return await sendDelete<boolean>(options);
 };
 
+/**
+ * Updates the subscribe token.
+ * 
+ * @link https://docs.dolby.io/streaming-apis/reference/subscribetokenv1_updatetoken
+ * 
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param tokenId Identifier of the subscribe token to update.
+ * @param subscribeToken Settings of the subscribe token to update.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link SubscribeToken} object.
+ */
 export const update = async (apiSecret: string, tokenId: number, subscribeToken: UpdateSubscribeToken): Promise<SubscribeToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),
@@ -43,6 +74,19 @@ export const update = async (apiSecret: string, tokenId: number, subscribeToken:
     return await sendPut<SubscribeToken>(options);
 };
 
+/**
+ * Lists all subscribe tokens with specific sorting and pagination.
+ * 
+ * @link https://docs.dolby.io/streaming-apis/reference/subscribetokenv1_listtokens
+ * 
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param sortBy How to sort the response.
+ * @param page Number of the page to retrieve.
+ * @param itemsOnPage Number of items per page.
+ * @param isDescending Sort by descending order.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives an array of {@link SubscribeToken} objects.
+ */
 export const list = async (
     apiSecret: string,
     sortBy: 'Name' | 'AddedOn',
@@ -70,6 +114,16 @@ export const list = async (
     return await sendGet<SubscribeToken[]>(options);
 };
 
+/**
+ * Creates a subscribe token.
+ * 
+ * @link https://docs.dolby.io/streaming-apis/reference/subscribetokenv1_createtoken
+ * 
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param subscribeToken Information about the new subscribe token.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link SubscribeToken} object.
+ */
 export const create = async (apiSecret: string, subscribeToken: CreateSubscribeToken): Promise<SubscribeToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),

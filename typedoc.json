@@ -1,0 +1,23 @@
+{
+    "navigationLinks": {
+        "GitHub": "https://github.com/DolbyIO/dolbyio-rest-apis-client-node"
+    },
+    "includeVersion": true,
+    "entryPoints": ["src/index.ts"],
+    "entryPointStrategy": "expand",
+    "excludeExternals": true,
+    "excludePrivate": true,
+    "excludeNotDocumented": false,
+    "excludeNotDocumentedKinds": ["Property", "Interface", "TypeAlias"],
+    "plugin": ["typedoc-plugin-mdn-links"],
+    "externalSymbolLinkMappings": {
+        // used by {@link !Promise}
+        "global": {
+            "Error": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error"
+        },
+        "typescript": {
+            "Error": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error"
+        }
+    },
+    "out": "docs"
+}

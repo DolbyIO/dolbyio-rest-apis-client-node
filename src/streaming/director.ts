@@ -37,8 +37,8 @@ export const publish = async (publishingToken: string, streamName: string): Prom
  * @link https://docs.dolby.io/streaming-apis/reference/director_subscribe
  *
  * @param streamName The name of the stream.
- * @param streamAccountId Optional - The account identifier. Required only for published streams which have `subscribeRequiresAuth=false`.
- * @param subscribeToken Optional - The subscribe token.
+ * @param streamAccountId The account identifier. Required only for published streams which have `subscribeRequiresAuth=false`.
+ * @param subscribeToken The subscribe token.
  *
  * @returns A {@link SubscribeResponse} object through a {@link Promise}.
  */

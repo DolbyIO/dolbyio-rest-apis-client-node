@@ -1,7 +1,17 @@
 import { sendDelete, sendGet, sendPost, sendPut, sendPatch } from './internal/httpHelpers';
 import * as Urls from '../urls';
-import { ActivePublishToken, CreatePublishToken, PublishToken, UpdatePublishToken, DisablePublishTokenResponse } from './types/publishToken';
+import { ActivePublishTokenResponse, CreatePublishToken, PublishToken, UpdatePublishToken, DisablePublishTokenResponse } from './types/publishToken';
 
+/**
+ * Gets the specified publish token.
+ *
+ * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_readtoken
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param tokenId Identifier of the publish token to read.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link PublishToken} object.
+ */
 export const read = async (apiSecret: string, tokenId: number): Promise<PublishToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),
@@ -15,6 +25,16 @@ export const read = async (apiSecret: string, tokenId: number): Promise<PublishT
     return await sendGet<PublishToken>(options);
 };
 
+/**
+ * Deletes the publish token.
+ *
+ * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_deletetoken
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param tokenId Identifier of the publish token to delete.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a flag to indicate if the operation succeeded or not.
+ */
 export const deleteToken = async (apiSecret: string, tokenId: number): Promise<boolean> => {
     const options = {
         hostname: Urls.getRtsHostname(),
@@ -28,6 +48,17 @@ export const deleteToken = async (apiSecret: string, tokenId: number): Promise<b
     return await sendDelete<boolean>(options);
 };
 
+/**
+ * Updates the publish token.
+ *
+ * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_updatetoken
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param tokenId Identifier of the publish token to update.
+ * @param publishToken Settings of the publish token to update.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link PublishToken} object.
+ */
 export const update = async (apiSecret: string, tokenId: number, publishToken: UpdatePublishToken): Promise<PublishToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),
@@ -43,6 +74,19 @@ export const update = async (apiSecret: string, tokenId: number, publishToken: U
     return await sendPut<PublishToken>(options);
 };
 
+/**
+ * Lists all publish tokens with specific sorting and pagination.
+ *
+ * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_listtokens
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param sortBy How to sort the response.
+ * @param page Number of the page to retrieve.
+ * @param itemsOnPage Number of items per page.
+ * @param isDescending Sort by descending order.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives an array of {@link PublishToken} objects.
+ */
 export const list = async (
     apiSecret: string,
     sortBy: 'Name' | 'AddedOn',
@@ -70,6 +114,16 @@ export const list = async (
     return await sendGet<PublishToken[]>(options);
 };
 
+/**
+ * Creates a publish token.
+ *
+ * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_createtoken
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param publishToken Information about the new publish token.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link PublishToken} object.
+ */
 export const create = async (apiSecret: string, publishToken: CreatePublishToken): Promise<PublishToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),
@@ -85,7 +139,17 @@ export const create = async (apiSecret: string, publishToken: CreatePublishToken
     return await sendPost<PublishToken>(options);
 };
 
-export const getActivePublishTokenId = async (apiSecret: string, streamId: string): Promise<ActivePublishToken> => {
+/**
+ * Gets the Publish Token ID of an active stream by its Stream ID.
+ *
+ * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_getactivetokenbystreamid
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param streamId Stream ID for which to get the publish token IDs.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link ActivePublishTokenResponse} object.
+ */
+export const getActivePublishTokenId = async (apiSecret: string, streamId: string): Promise<ActivePublishTokenResponse> => {
     const params = {
         streamId,
     };
@@ -100,10 +164,19 @@ export const getActivePublishTokenId = async (apiSecret: string, streamId: strin
         },
     };
 
-    return await sendGet<ActivePublishToken>(options);
+    return await sendGet<ActivePublishTokenResponse>(options);
 };
 
-export const getAllActivePublishTokenId = async (apiSecret: string): Promise<ActivePublishToken> => {
+/**
+ * Gets all Publish Token IDs for active streams on the account.
+ *
+ * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_getallactivetokensbyaccount
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link ActivePublishTokenResponse} object.
+ */
+export const getAllActivePublishTokenId = async (apiSecret: string): Promise<ActivePublishTokenResponse> => {
     const options = {
         hostname: Urls.getRtsHostname(),
         path: '/api/publish_token/active/all',
@@ -113,9 +186,19 @@ export const getAllActivePublishTokenId = async (apiSecret: string): Promise<Act
         },
     };
 
-    return await sendGet<ActivePublishToken>(options);
+    return await sendGet<ActivePublishTokenResponse>(options);
 };
 
+/**
+ * Disables Publish Token(s) by their Token ID. An array of Token IDs can be used for bulk disable.
+ *
+ * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_disabletokens
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param tokenIds List of token IDs to disable.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link DisablePublishTokenResponse} object.
+ */
 export const disable = async (apiSecret: string, tokenIds: number[]): Promise<DisablePublishTokenResponse> => {
     const body = {
         tokenIds,

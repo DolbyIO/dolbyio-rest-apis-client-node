@@ -1,8 +1,9 @@
-import * as cluster from './cluster';
-import * as director from './director';
-import * as geo from './geo';
-import * as publishToken from './publishToken';
-import * as stream from './stream';
-import * as subscribeToken from './subscribeToken';
+export * from './types';
 
-export { cluster, director, geo, publishToken, stream, subscribeToken };
+/** APIs for the Dolby.io Real-time streaming clusters for the account. */
+export * as cluster from './cluster';
+export * as director from './director';
+export * as geo from './geo';
+export * as publishToken from './publishToken';
+export * as stream from './stream';
+export * as subscribeToken from './subscribeToken';

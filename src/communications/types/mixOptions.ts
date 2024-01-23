@@ -1,4 +1,4 @@
-import JwtToken from '../../types/jwtToken';
+import { JwtToken } from '../../types/jwtToken';
 
 export type Resolution = {
     /** The frame height can range between 390 and 1920 pixels and is set to 1080 by default. */
