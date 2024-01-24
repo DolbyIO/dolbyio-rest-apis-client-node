@@ -1,5 +1,7 @@
 export * from './types';
 
+/** APIs for the Dolby.io Real-time account level settings. */
+export * as account from './account';
 /** APIs for the Dolby.io Real-time streaming clusters for the account. */
 export * as cluster from './cluster';
 export * as director from './director';
