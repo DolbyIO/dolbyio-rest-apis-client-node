@@ -62,6 +62,11 @@ export interface SubscribeToken {
      * Value for each property will either be token or account level settings.
      */
     effectiveSettings: SubscribeTokenEffectiveSettings;
+    /** Tracking information. */
+    tracking: {
+        /** Tracking identifier for Stream Syndication. */
+        trackingId?: string;
+    }
 }
 
 export interface SubscribeTokenEffectiveSettings {
@@ -183,4 +188,12 @@ export interface CreateSubscribeToken {
      * @defaultValue Default is the account's default cluster.
      */
     originCluster?: string;
+    /**
+     * Tracking Information for the Stream Syndication capability.
+     * @link https://docs.dolby.io/streaming-apis/docs/syndication.
+     */
+    tracking?: {
+        /** Tracking identifier for Stream Syndication. */
+        trackingId?: string;
+    }
 }
