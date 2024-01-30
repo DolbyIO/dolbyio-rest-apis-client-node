@@ -1,7 +1,7 @@
 import { sendPost, sendGet } from '../internal/httpHelpers';
 import { Expand, ExpandRecursively } from '../internal/utils';
 import * as Urls from '../urls';
-import JwtToken from '../types/jwtToken';
+import { JwtToken } from '../types/jwtToken';
 import RemixStatus from './types/remixStatus';
 import { MixOptionsBase, MixOptionsComplex, MixOptions } from './types/mixOptions';
 

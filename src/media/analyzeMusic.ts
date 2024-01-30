@@ -1,5 +1,5 @@
 import { startJob, getJobResults } from './internal/jobsHelpers';
-import JwtToken from '../types/jwtToken';
+import { JwtToken } from '../types/jwtToken';
 import { AnalyzeMusicJob } from './types/analyzeMusic';
 
 /**

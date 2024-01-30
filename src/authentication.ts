@@ -1,6 +1,6 @@
 import { sendPost } from './internal/httpHelpers';
 import * as Urls from './urls';
-import JwtToken from './types/jwtToken';
+import { JwtToken } from './types/jwtToken';
 
 /**
  * Generates an API token.

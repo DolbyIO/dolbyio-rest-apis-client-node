@@ -1,4 +1,4 @@
-import JwtToken from '../../types/jwtToken';
+import { JwtToken } from '../../types/jwtToken';
 
 export interface GetClientAccessTokenOptions {
     /**

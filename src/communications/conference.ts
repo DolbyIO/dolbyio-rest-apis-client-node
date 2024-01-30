@@ -2,7 +2,7 @@ import { sendDelete, sendGet, sendPost, sendPut } from '../internal/httpHelpers'
 import * as Urls from '../urls';
 import { CreateConferenceOptions, Conference, UserTokens, ListParticipantsResponse } from './types/conference';
 import { SpatialEnvironment, SpatialListener, SpatialUsers } from './types/spatialAudio';
-import JwtToken from '../types/jwtToken';
+import { JwtToken } from '../types/jwtToken';
 import Participant from './types/participant';
 import { RTCPMode } from './types/rtcpMode';
 
