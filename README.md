@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/@dolbyio/dolbyio-rest-apis-client)](https://www.npmjs.com/package/@dolbyio/dolbyio-rest-apis-client)
 [![License](https://img.shields.io/github/license/DolbyIO/dolbyio-rest-apis-client-node)](LICENSE)
 
-Dolby.io REST APIs Client for Node.JS is wrapper for the dolby.io [Real-time Streaming](https://docs.dolby.io/streaming-apis/reference), [Media](https://docs.dolby.io/media-processing/reference/media-enhance-overview) and [Communications](https://docs.dolby.io/communications-apis/reference/authentication-api) REST APIs.
+Dolby.io REST APIs Client for Node.JS is wrapper for the dolby.io [Real-time Streaming](https://docs.dolby.io/streaming-apis/reference), [Media](https://docs.dolby.io/media-processing/reference/media-enhance-overview) and [Communications](https://docs.dolby.io/communications-apis/reference/authentication-api) REST APIs. Read the [online documentation](https://api-references.dolby.io/dolbyio-rest-apis-client-node/) for this library.
 
 # Install this project
 
