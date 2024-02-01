@@ -4,3 +4,4 @@ export * from './director';
 export * from './geo';
 export * from './publishToken';
 export * from './subscribeToken';
+export * from './transcoders';

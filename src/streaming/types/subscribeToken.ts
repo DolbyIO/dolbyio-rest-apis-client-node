@@ -66,7 +66,7 @@ export interface SubscribeToken {
     tracking: {
         /** Tracking identifier for Stream Syndication. */
         trackingId?: string;
-    }
+    };
 }
 
 export interface SubscribeTokenEffectiveSettings {
@@ -195,5 +195,5 @@ export interface CreateSubscribeToken {
     tracking?: {
         /** Tracking identifier for Stream Syndication. */
         trackingId?: string;
-    }
+    };
 }
