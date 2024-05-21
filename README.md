@@ -132,6 +132,18 @@ const enhancedFilePath = '/path/to/enhanced_file.mp4';
 await media.io.downloadFile(jwt, outputUrl, enhancedFilePath);
 ```
 
+# Logs
+
+You can also print the logs in the console and select the log level by using the following code.
+
+```ts
+import { Logger } from '@dolbyio/dolbyio-rest-apis-client';
+
+Logger.useDefaults({
+    defaultLevel: Logger.TRACE,
+});
+```
+
 # How to
 
 To build the `dist` folder, run the command:
@@ -149,3 +161,4 @@ npm run docs
 ## Related Projects
 
 -   [TypeDoc](https://typedoc.org)
+-   [js-logger](https://github.com/jonnyreeves/js-logger)

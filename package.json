@@ -41,6 +41,7 @@
         "typescript": "^5.4.5"
     },
     "dependencies": {
-        "follow-redirects": "^1.15.6"
+        "follow-redirects": "^1.15.6",
+        "js-logger": "^1.6.1"
     }
 }
