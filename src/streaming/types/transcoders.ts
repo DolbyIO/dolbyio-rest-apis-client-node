@@ -30,7 +30,7 @@ export interface ListTranscodersInstancesSortOptions extends ListSortOptions<'Cr
 }
 
 /** Represents the options to sort the response for listing transcoder profiles. */
-export interface ListTranscodersProfilesSortOptions extends ListSortOptions<'Name'> {}
+export interface ListTranscodersProfilesSortOptions extends ListSortOptions<'Name' | 'Height' | 'FrameRate'> {}
 
 /** Represents a cloud transcoder. */
 export interface Transcoder {

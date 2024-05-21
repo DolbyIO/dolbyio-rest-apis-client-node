@@ -1,5 +1,5 @@
 /**
- * Represents the geo restrictions for a stream.
+ * Represents the geo restrictions rules.
  */
 export interface GeoRestrictions {
     /** List of allowed countries. */

@@ -67,38 +67,44 @@ export interface PublishToken {
     record: boolean;
     /** Is multisource enabled or not. */
     multisource: boolean;
+    /** Is low latency mode for RTMP ingest enabled or not. */
+    lowLatencyRtmp?: boolean;
+    /** Is thumbnails generation enabled or not. */
+    enableThumbnails?: boolean;
+    /** Display passphrase encryption settings in the dashboard as well as returning the SRT passphrase in response to this API call. */
+    displaySrtPassphrase: boolean;
+    /** The SRT passphrase. */
+    srtPassphrase?: string;
     /** Geo cascade settings for cascading stream to other clusters. */
     geoCascade: PublishTokenGeoCascade;
     /**
      * Token effective settings for properties that use account default settings.
      * Value for each property will either be token or account level settings.
      */
-    effectiveSettings: PublishTokenEffectiveSettings;
-}
-
-export interface PublishTokenEffectiveSettings {
-    /** Cluster to route specified streams to. */
-    originCluster?: string;
-    /**
-     * Specify the ISO 3166-1 two letter country codes to explicitly allow viewer to watch the stream from.
-     * If the viewer's location does not match any of the specified countries, they will be blocked from viewing stream, else they will be allowed to view stream.
-     * This geo-fencing rule works in concert with the IP and domain restrictions as well.
-     * Specifying geo restriction rules in a token will override account-wide rules.
-     * Only one of {@link allowedCountries} or {@link deniedCountries} should be specified.
-     * If the specified streams require authentication, the list of allowed countries can be overridden by the subscribe token.
-     */
-    allowedCountries?: string[];
-    /**
-     * Specify the ISO 3166-1 two letter country codes to explicitly deny viewer to watch the stream from.
-     * If the viewer's location does match any of the specified countries, they will be blocked from viewing stream, else they will be allowed to view stream.
-     * This geo-fencing rule works in concert with the IP and domain restrictions as well.
-     * Specifying geo restriction rules in a token will override account-wide rules.
-     * Only one of {@link allowedCountries} or {@link deniedCountries} should be specified.
-     * If the specified streams require authentication, the list of denied countries can be overridden by the subscribe token.
-     */
-    deniedCountries?: string[];
-    /** Geo cascade settings for cascading stream to other clusters. */
-    geoCascade: PublishTokenGeoCascade;
+    effectiveSettings: {
+        /** Cluster to route specified streams to. */
+        originCluster?: string;
+        /**
+         * Specify the ISO 3166-1 two letter country codes to explicitly allow viewer to watch the stream from.
+         * If the viewer's location does not match any of the specified countries, they will be blocked from viewing stream, else they will be allowed to view stream.
+         * This geo-fencing rule works in concert with the IP and domain restrictions as well.
+         * Specifying geo restriction rules in a token will override account-wide rules.
+         * Only one of {@link allowedCountries} or {@link deniedCountries} should be specified.
+         * If the specified streams require authentication, the list of allowed countries can be overridden by the subscribe token.
+         */
+        allowedCountries?: string[];
+        /**
+         * Specify the ISO 3166-1 two letter country codes to explicitly deny viewer to watch the stream from.
+         * If the viewer's location does match any of the specified countries, they will be blocked from viewing stream, else they will be allowed to view stream.
+         * This geo-fencing rule works in concert with the IP and domain restrictions as well.
+         * Specifying geo restriction rules in a token will override account-wide rules.
+         * Only one of {@link allowedCountries} or {@link deniedCountries} should be specified.
+         * If the specified streams require authentication, the list of denied countries can be overridden by the subscribe token.
+         */
+        deniedCountries?: string[];
+        /** Geo cascade settings for cascading stream to other clusters. */
+        geoCascade: PublishTokenGeoCascade;
+    };
 }
 
 /** Represents the changes requested for a publish token. */
@@ -229,6 +235,14 @@ export interface CreatePublishToken {
      * @defaultValue Defaults to account related setting if unset.
      */
     geoCascade?: PublishTokenGeoCascade;
+    /**
+     * Set to `true` to allow this publish token to enable live clipping on specified streams.
+     * This flag cannot be set to `true` when the {@link record} flag is enabled.
+     * @defaultValue `false`.
+     * @beta
+     * @remarks Live clipping is currently in Beta phase.
+     */
+    clip?: boolean;
 }
 
 /**
@@ -257,14 +271,6 @@ export interface ActivePublishTokenResponse {
     tokenIds: number[];
 }
 
-/** Represents a publish token that failed to be disabled. */
-export interface FailedToken {
-    /** Identifier of the token. */
-    tokenId: number;
-    /** Reason why the token has failed to be disabled. */
-    errorMessage?: string;
-}
-
 /**
  * Represents the response to a {@link disable} request.
  */
@@ -272,5 +278,10 @@ export interface DisablePublishTokenResponse {
     /** List of tokens successfully disabled. */
     successfulTokens?: number[];
     /** List of tokens that failed to be disabled. */
-    failedTokens?: FailedToken[];
+    failedTokens?: {
+        /** Identifier of the token. */
+        tokenId: number;
+        /** Reason why the token has failed to be disabled. */
+        errorMessage?: string;
+    }[];
 }

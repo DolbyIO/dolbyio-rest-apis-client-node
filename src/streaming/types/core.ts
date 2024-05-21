@@ -1,3 +1,4 @@
+/** @ignore */
 export interface BaseResponse<TData> {
     status: string;
 

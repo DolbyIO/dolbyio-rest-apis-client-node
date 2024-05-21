@@ -106,14 +106,6 @@ export const sendGet = (options: RequestOptions) => {
  * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendPost = (options: RequestOptions) => {
-    if (!options.body) {
-        // The REST APIs don't support an empty payload
-        options.body = '{}';
-        options.headers['Content-Type'] = 'application/json';
-    }
-
-    options.headers['Content-Length'] = options.body.length;
-
     const sendRequestOptions: SendRequestOptions = {
         method: 'POST',
         ...options,
@@ -130,8 +122,6 @@ export const sendPost = (options: RequestOptions) => {
  * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendPut = (options: RequestOptions) => {
-    options.headers['Content-Length'] = options.body.length;
-
     const sendRequestOptions: SendRequestOptions = {
         method: 'PUT',
         ...options,

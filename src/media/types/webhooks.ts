@@ -9,15 +9,13 @@ export interface UpdateWebhookOptions {
     headers?: http.OutgoingHttpHeaders;
 }
 
-export interface WebhookCallback {
-    /** The callback url that will be called when job execution completes. */
-    url: string;
-    /** Headers to include in the webhook call. */
-    headers: any;
-}
-
 export interface Webhook {
     /** The identifier for the webhook. */
     webhook_id: string;
-    callback: WebhookCallback;
+    callback: {
+        /** The callback url that will be called when job execution completes. */
+        url: string;
+        /** Headers to include in the webhook call. */
+        headers: any;
+    };
 }

@@ -1,5 +1,5 @@
 import { startJob, getJobResults } from './internal/jobsHelpers';
-import { JwtToken } from '../types/jwtToken';
+import { JwtToken } from './types/jwtToken';
 import { DiagnoseJob } from './types/diagnose';
 
 /**
@@ -10,11 +10,6 @@ import { DiagnoseJob } from './types/diagnose';
  * This is an asynchronous operation so you will receive a job identifier to be used to get the job status and result.
  *
  * @link https://docs.dolby.io/media-apis/reference/media-diagnose-post
- *
- * Beta API
- * This API is being made available as an early preview.
- * If you have feedback on how you'd like to use the API please reach out to share your feedback with our team.
- * https://dolby.io/contact
  *
  * @param accessToken Access token to use for authentication.
  * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-diagnose-post

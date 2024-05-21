@@ -3,25 +3,27 @@
 [![Publish Package](https://github.com/DolbyIO/dolbyio-rest-apis-client-node/actions/workflows/publish-package.yml/badge.svg)](https://github.com/DolbyIO/dolbyio-rest-apis-client-node/actions/workflows/publish-package.yml)
 [![npm](https://img.shields.io/npm/v/@dolbyio/dolbyio-rest-apis-client)](https://www.npmjs.com/package/@dolbyio/dolbyio-rest-apis-client)
 [![License](https://img.shields.io/github/license/DolbyIO/dolbyio-rest-apis-client-node)](LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-_?logo=GitHub&labelColor=black&color=blue)](https://github.com/DolbyIO/dolbyio-rest-apis-client-node)
+[![Documentation](https://img.shields.io/badge/Documentation-_?logo=readthedocs&labelColor=black&color=blue)](https://api-references.dolby.io/dolbyio-rest-apis-client-node/)
 
-Dolby.io REST APIs Client for Node.JS is wrapper for the dolby.io [Real-time Streaming](https://docs.dolby.io/streaming-apis/reference), [Media](https://docs.dolby.io/media-processing/reference/media-enhance-overview) and [Communications](https://docs.dolby.io/communications-apis/reference/authentication-api) REST APIs. Read the [online documentation](https://api-references.dolby.io/dolbyio-rest-apis-client-node/) for this library.
+Dolby.io REST APIs Client for Node.JS is wrapper for the [Dolby Millicast](https://docs.dolby.io/streaming-apis/reference) and [Dolby.io Media](https://docs.dolby.io/media-processing/reference/media-enhance-overview) REST APIs.
 
 # Install this project
 
 Run the npm command to install the package `@dolbyio/dolbyio-rest-apis-client` into your Node project:
 
 ```bash
-npm install @dolbyio/dolbyio-rest-apis-client --save
+npm install @dolbyio/dolbyio-rest-apis-client
 ```
 
-# Real-time Streaming Examples
+# Dolby Millicast Examples
 
 ## Create a publish token
 
-```javascript
-const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
+```ts
+import { streaming } from '@dolbyio/dolbyio-rest-apis-client';
 
-const publishToken = await dolbyio.streaming.publishToken.create('api_secret', {
+const publishToken = await streaming.publishToken.create('api_secret', {
     label: 'My token',
     streams: [
         {
@@ -34,10 +36,10 @@ console.log(publishToken);
 
 ## Create a subscribe token
 
-```javascript
-const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
+```ts
+import { streaming } from '@dolbyio/dolbyio-rest-apis-client';
 
-const subscribeToken = await dolbyio.streaming.subscribeToken.create('api_secret', {
+const subscribeToken = await streaming.subscribeToken.create('api_secret', {
     label: 'My token',
     streams: [
         {
@@ -56,14 +58,14 @@ Here is an example on how to upload a file to the Dolby.io temporary cloud stora
 
 Get the App Key and Secret from the Dolby.io dashboard and use the following code in your python script.
 
-```javascript
-const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
+```ts
+import { media } from '@dolbyio/dolbyio-rest-apis-client';
 
 const APP_KEY = 'YOUR_APP_KEY';
 const APP_SECRET = 'YOUR_APP_SECRET';
 
 // Request an Access Token
-const jwt = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
+const jwt = await media.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
 console.log('Access token', jwt);
 ```
 
@@ -71,20 +73,20 @@ console.log('Access token', jwt);
 
 Upload a media file to the Dolby.io temporary cloud storage for processing:
 
-```javascript
+```ts
 // Temporary storage URL that will be used as reference for the job processing
 const inputUrl = 'dlb://in/file.mp4';
 // Local path of the file to upload
 const originalFilePath = '/path/to/original_file.mp4';
 
-await dolbyio.media.io.uploadFile(jwt, inputUrl, originalFilePath);
+await media.io.uploadFile(jwt, inputUrl, originalFilePath);
 ```
 
 ## Start an enhance job
 
 Generate a job description and send it to Dolby.io.
 
-```javascript
+```ts
 // Temporary storage URL that will be used as reference for the job processing
 const outputUrl = 'dlb://out/file.mp4';
 
@@ -94,7 +96,7 @@ const jobDescription = JSON.stringify({
     output: outputUrl,
 });
 
-const jobId = await dolbyio.media.enhance.start(jwt, jobDescription);
+const jobId = await media.enhance.start(jwt, jobDescription);
 console.log(`Job ID: ${jobId}`);
 ```
 
@@ -105,12 +107,12 @@ Get the job status and wait until it is completed.
 ```javascript
 const sleep = (delay) => new Promise((r) => setTimeout(r, delay));
 
-let result = await dolbyio.media.enhance.getResults(jwt, jobId);
+let result = await media.enhance.getResults(jwt, jobId);
 while (result.status === 'Pending' || result.status === 'Running') {
     console.log(`Job status is ${result.status}, taking a 5 second break...`);
     await sleep(5000);
 
-    result = await dolbyio.media.enhance.getResults(jwt, jobId);
+    result = await media.enhance.getResults(jwt, jobId);
 }
 
 if (result.status !== 'Success') {
@@ -127,64 +129,7 @@ At this stage, the file has been processed and written to the temporary storage 
 // Local path where to download the file to
 const enhancedFilePath = '/path/to/enhanced_file.mp4';
 
-await dolbyio.media.io.downloadFile(jwt, outputUrl, enhancedFilePath);
-```
-
-# Communications Examples
-
-## Authenticate
-
-To get an access token that will be used by the client SDK for an end user to open a session against dolby.io, use the following code:
-
-```javascript
-const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
-
-const APP_KEY = 'YOUR_APP_KEY';
-const APP_SECRET = 'YOUR_APP_SECRET';
-
-// Request an API Token
-const api_token = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET, 3600, ['comms:client_access_token:create']);
-
-// Request the Client Access Token
-const cat = await dolbyio.communications.authentication.getClientAccessTokenV2({
-    accessToken: api_token,
-    sessionScope: ['*'],
-});
-
-console.log(`Client Access Token: ${cat.access_token}`);
-```
-
-## Create a conference
-
-To create a Dolby Voice conference, you first must retrieve an API Access Token, then use the following code to create the conference.
-
-```javascript
-const dolbyio = require('@dolbyio/dolbyio-rest-apis-client');
-
-const APP_KEY = 'YOUR_APP_KEY';
-const APP_SECRET = 'YOUR_APP_SECRET';
-
-const ownerExternalId = ''; // Identifier of the owner of the conference
-const alias = ''; // Conference alias
-
-const options = {
-    ownerExternalId: ownerExternalId,
-    alias: alias,
-    dolbyVoice: true,
-    liveRecording: false,
-    participants: [
-        { externalId: 'hostA', permissions: ['JOIN', 'SEND_AUDIO', 'SEND_VIDEO'], notify: true },
-        { externalId: 'listener1', permissions: ['JOIN'], notify: false },
-    ],
-};
-
-// Request an API Token
-const jwt = await dolbyio.authentication.getApiAccessToken(APP_KEY, APP_SECRET, 3600, ['comms:conf:create']);
-
-// Create the conference
-const conference = await dolbyio.communications.conference.createConference(jwt, options);
-
-console.log(`Conference created: ${conference.conferenceId}`);
+await media.io.downloadFile(jwt, outputUrl, enhancedFilePath);
 ```
 
 # How to
@@ -200,3 +145,7 @@ The documentation is built on [TypeDoc](https://typedoc.org), to generate the do
 ```bash
 npm run docs
 ```
+
+## Related Projects
+
+-   [TypeDoc](https://typedoc.org)

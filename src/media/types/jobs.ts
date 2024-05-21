@@ -12,7 +12,9 @@ export interface ListAllJobsOptions {
     status?: string;
 }
 
+/** Represents a job submitted to the Media APIs. */
 export interface Job {
+    /** Job identifier. */
     job_id: string;
     api_version: string;
     path: string;

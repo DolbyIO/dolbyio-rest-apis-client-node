@@ -1,7 +1,7 @@
 import { read, update } from '../cluster';
 
 /**
- * Represents a Dolby.io Real-time Streaming cluster.
+ * Represents a Dolby Millicast cluster.
  */
 export interface Cluster {
     /** Unique identifier of the cluster. */
@@ -12,6 +12,15 @@ export interface Cluster {
     rtmp: string;
     /** SRT publish domain for cluster. */
     srt: string;
+    /** Location of this cluster. */
+    location: {
+        /** City of the cluster. */
+        city: string;
+        /** Region of the cluster. */
+        region: string;
+        /** Country of the cluster. */
+        country: string;
+    };
 }
 
 /**

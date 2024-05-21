@@ -4,6 +4,7 @@ import { GeoRestrictions } from './types/geo';
 
 /**
  * Gets the account geo restrictions.
+ *
  * If a Token (either Publish or Subscribe) does not define any geo restrictions, the account wide rules are used.
  *
  * @link https://docs.dolby.io/streaming-apis/reference/geo_geo
