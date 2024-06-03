@@ -104,19 +104,19 @@ export const deleteTranscoder = async (apiSecret: string, transcoderId: number):
 /**
  * Creates a cloud transcoder.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_createtoken
+ * @link https://docs.dolby.io/streaming-apis/reference/transcoder_createtranscoder
  * @beta
  * @remarks Cloud transcoder usage is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
- * @param publishToken Information about the new publish token.
+ * @param transcoder Information about the new cloud transcoder.
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link Transcoder} object.
  */
 export const createTranscoder = async (apiSecret: string, transcoder: CreateTranscoderRequest): Promise<Transcoder> => {
     if (transcoder.startNow == null) {
-        transcoder.startNow = true;
+        transcoder.startNow = false;
     }
     if (transcoder.passThrough == null) {
         transcoder.passThrough = false;
@@ -136,7 +136,7 @@ export const createTranscoder = async (apiSecret: string, transcoder: CreateTran
 };
 
 /**
- * Updates the cloud transcoder.
+ * Configures an existing Transcoder.
  *
  * @link https://docs.dolby.io/streaming-apis/reference/transcoder_configuretranscoder
  * @beta
@@ -144,8 +144,8 @@ export const createTranscoder = async (apiSecret: string, transcoder: CreateTran
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
- * @param transcoderId Identifier of the publish token to update.
- * @param publishToken Settings of the publish token to update.
+ * @param transcoderId Identifier of the cloud transcoder to update.
+ * @param transcoder Settings of the cloud transcoder to update.
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link Transcoder} object.
  */
@@ -173,7 +173,7 @@ export const updateTranscoder = async (apiSecret: string, transcoderId: string, 
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
- * @param transcoderId Identifier of the transcoder to start.
+ * @param transcoderId Identifier of the cloud transcoder to start.
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives a flag to indicate if the operation succeeded or not.
  */
@@ -199,7 +199,7 @@ export const startTranscoder = async (apiSecret: string, transcoderId: string): 
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
- * @param transcoderId Identifier of the transcoder to stop.
+ * @param transcoderId Identifier of the cloud transcoder to stop.
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives a flag to indicate if the operation succeeded or not.
  */

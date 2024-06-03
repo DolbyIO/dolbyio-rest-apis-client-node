@@ -21,9 +21,11 @@ npm install @dolbyio/dolbyio-rest-apis-client
 ## Create a publish token
 
 ```ts
-import { streaming } from '@dolbyio/dolbyio-rest-apis-client';
+import { streaming } from '@dolbyio/dolbyio-rest-apis-client'
 
-const publishToken = await streaming.publishToken.create('api_secret', {
+const API_KEY = process.env.DOLBYIO_API_SECRET;;
+
+const publishToken = await streaming.publishToken.create(API_KEY, {
     label: 'My token',
     streams: [
         {
@@ -39,7 +41,9 @@ console.log(publishToken);
 ```ts
 import { streaming } from '@dolbyio/dolbyio-rest-apis-client';
 
-const subscribeToken = await streaming.subscribeToken.create('api_secret', {
+const API_KEY = process.env.DOLBYIO_API_SECRET;
+
+const subscribeToken = await streaming.subscribeToken.create(API_KEY, {
     label: 'My token',
     streams: [
         {
@@ -61,8 +65,8 @@ Get the App Key and Secret from the Dolby.io dashboard and use the following cod
 ```ts
 import { media } from '@dolbyio/dolbyio-rest-apis-client';
 
-const APP_KEY = 'YOUR_APP_KEY';
-const APP_SECRET = 'YOUR_APP_SECRET';
+const APP_KEY = process.env.DOLBYIO_APP_KEY;
+const APP_SECRET = process.env.DOLBYIO_APP_SECRET;
 
 // Request an Access Token
 const jwt = await media.authentication.getApiAccessToken(APP_KEY, APP_SECRET);
