@@ -61,10 +61,16 @@ export interface PublishToken {
     deniedCountries: string[];
     /** Cluster to route specified streams to. */
     originCluster: string;
-    /** Does the publish token require authentication to subscribe to the specified streams */
+    /** Does the publish token require authentication to subscribe to the specified streams. */
     subscribeRequiresAuth: boolean;
-    /** Is the publish token allowed to record the specified streams */
+    /** Is the publish token allowed to record the specified streams. */
     record: boolean;
+    /**
+     * Is the publish token allowed to create clips the specified streams.
+     * @beta
+     * @remarks Live clipping is currently in Beta phase.
+     */
+    clip: boolean;
     /** Is multisource enabled or not. */
     multisource: boolean;
     /** Is low latency mode for RTMP ingest enabled or not. */
@@ -77,6 +83,17 @@ export interface PublishToken {
     srtPassphrase?: string;
     /** Geo cascade settings for cascading stream to other clusters. */
     geoCascade: PublishTokenGeoCascade;
+    /**
+     * List of endpoints to restream the stream.
+     * @beta
+     * @remarks Restream is currently in Beta phase.
+     */
+    restream: {
+        /** The endpoint to restream media */
+        url: string;
+        /** Secret key for restreaming endpoint. */
+        key: string;
+    }[];
     /**
      * Token effective settings for properties that use account default settings.
      * Value for each property will either be token or account level settings.
@@ -145,6 +162,23 @@ export interface UpdatePublishToken {
     displaySrtPassphrase?: boolean;
     /** Update the geo cascading rules for this publish token. */
     updateGeoCascade?: PublishTokenGeoCascade;
+    /**
+     * Allow or disallow to create clips of the specified streams.
+     * @beta
+     * @remarks Live clipping is currently in Beta phase.
+     */
+    clip?: boolean;
+    /**
+     * List of endpoints to restream media.
+     * @beta
+     * @remarks Restream is currently in Beta phase.
+     */
+    updateRestream?: {
+        /** The endpoint to restream the stream */
+        url: string;
+        /** Secret key for restreaming endpoint. */
+        key: string;
+    }[];
 }
 
 /** Represents the information to create a publish token. */
@@ -243,6 +277,17 @@ export interface CreatePublishToken {
      * @remarks Live clipping is currently in Beta phase.
      */
     clip?: boolean;
+    /**
+     * List of endpoints to restream the stream.
+     * @beta
+     * @remarks Restream is currently in Beta phase.
+     */
+    restream?: {
+        /** The endpoint to restream media */
+        url: string;
+        /** Secret key for restreaming endpoint. */
+        key: string;
+    }[];
 }
 
 /**
