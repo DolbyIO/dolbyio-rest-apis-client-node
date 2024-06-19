@@ -5,6 +5,7 @@ export * from './diagnose';
 export * from './enhance';
 export * from './jobResults';
 export * from './jobs';
+export * from './jwtToken';
 export * from './mastering';
 export * from './transcode';
 export * from './webhooks';

@@ -61,55 +61,48 @@ export interface SubscribeToken {
      * Token effective settings for properties that use account default settings.
      * Value for each property will either be token or account level settings.
      */
-    effectiveSettings: SubscribeTokenEffectiveSettings;
+    effectiveSettings: {
+        /** Cluster to route specified streams to. */
+        originCluster?: string;
+        /**
+         * Specify the ISO 3166-1 two letter country codes to explicitly allow viewer to watch the stream from.
+         * If the viewer's location does not match any of the specified countries, they will be blocked from viewing stream, else they will be allowed to view stream.
+         * This geo-fencing rule works in concert with the IP and domain restrictions as well.
+         * Specifying geo restriction rules in a token will override account-wide rules.
+         * Only one of {@link allowedCountries} or {@link deniedCountries} should be specified.
+         * If the specified streams require authentication, the list of allowed countries can be overridden by the subscribe token.
+         */
+        allowedCountries?: string[];
+        /**
+         * Specify the ISO 3166-1 two letter country codes to explicitly deny viewer to watch the stream from.
+         * If the viewer's location does match any of the specified countries, they will be blocked from viewing stream, else they will be allowed to view stream.
+         * This geo-fencing rule works in concert with the IP and domain restrictions as well.
+         * Specifying geo restriction rules in a token will override account-wide rules.
+         * Only one of {@link allowedCountries} or {@link deniedCountries} should be specified.
+         * If the specified streams require authentication, the list of denied countries can be overridden by the subscribe token.
+         */
+        deniedCountries?: string[];
+        /** Geo cascade settings for cascading stream to other clusters. */
+        geoCascade: {
+            /**
+             * Enable or Disable geo cascade.
+             * @defaultValue Defaults to Account settings if unset for subscribe token.
+             */
+            isEnabled?: boolean;
+            /**
+             * List of cluster IDs to geo cascade subscribe stream.
+             * Cannot be empty when {@link isEnabled} is `true`.
+             * This list is ignored when {@link isEnabled} is set to `false`.
+             * @defaultValue Defaults to `["all"]` if unset.
+             */
+            clusters?: string[];
+        };
+    };
     /** Tracking information. */
     tracking: {
         /** Tracking identifier for Stream Syndication. */
         trackingId?: string;
-    }
-}
-
-export interface SubscribeTokenEffectiveSettings {
-    /** Cluster to route specified streams to. */
-    originCluster?: string;
-    /**
-     * Specify the ISO 3166-1 two letter country codes to explicitly allow viewer to watch the stream from.
-     * If the viewer's location does not match any of the specified countries, they will be blocked from viewing stream, else they will be allowed to view stream.
-     * This geo-fencing rule works in concert with the IP and domain restrictions as well.
-     * Specifying geo restriction rules in a token will override account-wide rules.
-     * Only one of {@link allowedCountries} or {@link deniedCountries} should be specified.
-     * If the specified streams require authentication, the list of allowed countries can be overridden by the subscribe token.
-     */
-    allowedCountries?: string[];
-    /**
-     * Specify the ISO 3166-1 two letter country codes to explicitly deny viewer to watch the stream from.
-     * If the viewer's location does match any of the specified countries, they will be blocked from viewing stream, else they will be allowed to view stream.
-     * This geo-fencing rule works in concert with the IP and domain restrictions as well.
-     * Specifying geo restriction rules in a token will override account-wide rules.
-     * Only one of {@link allowedCountries} or {@link deniedCountries} should be specified.
-     * If the specified streams require authentication, the list of denied countries can be overridden by the subscribe token.
-     */
-    deniedCountries?: string[];
-    /** Geo cascade settings for cascading stream to other clusters. */
-    geoCascade: SubscribeTokenGeoCascade;
-}
-
-/**
- * Represents the definition of the geo cascading rules for a subscribe token.
- */
-export interface SubscribeTokenGeoCascade {
-    /**
-     * Enable or Disable geo cascade.
-     * @defaultValue Defaults to Account settings if unset for subscribe token.
-     */
-    isEnabled?: boolean;
-    /**
-     * List of cluster IDs to geo cascade subscribe stream.
-     * Cannot be empty when {@link isEnabled} is `true`.
-     * This list is ignored when {@link isEnabled} is set to `false`.
-     * @defaultValue Defaults to `["all"]` if unset.
-     */
-    clusters?: string[];
+    };
 }
 
 /** Represents the changes requested for a subscribe token. */
@@ -195,5 +188,5 @@ export interface CreateSubscribeToken {
     tracking?: {
         /** Tracking identifier for Stream Syndication. */
         trackingId?: string;
-    }
+    };
 }

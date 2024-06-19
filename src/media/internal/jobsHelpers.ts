@@ -1,6 +1,6 @@
 import { sendPost, sendGet, AuthRequestOptions } from './httpHelpers';
 import * as Urls from '../../urls';
-import { JwtToken } from '../../types/jwtToken';
+import { JwtToken } from '../types/jwtToken';
 
 export const startJob = async (accessToken: JwtToken, urlPath: string, jobContent: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {

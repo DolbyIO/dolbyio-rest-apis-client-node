@@ -2,6 +2,7 @@ import fs from 'fs';
 import { https } from 'follow-redirects';
 import coreHttp from 'http';
 import coreHttps from 'https';
+import Logger from 'js-logger';
 import { URLSearchParams } from 'url';
 import { version } from '../index';
 
@@ -44,7 +45,7 @@ const sendRequest = (options: SendRequestOptions) => {
         opts.headers['User-Agent'] = `DolbyIoRestApiSdk/${version}; Node/${process.versions.node}`;
 
         const req = https.request(opts, (res) => {
-            console.log(`[${opts.method}] ${res.statusCode} - https://${opts.hostname}${opts.path}`);
+            Logger.info(`[${opts.method}] ${res.statusCode} - https://${opts.hostname}${opts.path}`);
 
             let data = '';
             res.on('data', (chunk) => {
@@ -70,7 +71,7 @@ const sendRequest = (options: SendRequestOptions) => {
         });
 
         req.on('error', (error) => {
-            console.error(error);
+            Logger.error(error);
             reject(error);
         });
 
@@ -106,14 +107,6 @@ export const sendGet = (options: RequestOptions) => {
  * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendPost = (options: RequestOptions) => {
-    if (!options.body) {
-        // The REST APIs don't support an empty payload
-        options.body = '{}';
-        options.headers['Content-Type'] = 'application/json';
-    }
-
-    options.headers['Content-Length'] = options.body.length;
-
     const sendRequestOptions: SendRequestOptions = {
         method: 'POST',
         ...options,
@@ -130,8 +123,6 @@ export const sendPost = (options: RequestOptions) => {
  * @returns A JSON payload object through a {@link Promise}.
  */
 export const sendPut = (options: RequestOptions) => {
-    options.headers['Content-Length'] = options.body.length;
-
     const sendRequestOptions: SendRequestOptions = {
         method: 'PUT',
         ...options,
@@ -203,7 +194,7 @@ export const download = (filepath: string, options: RequestOptions) => {
         opts.headers['User-Agent'] = `DolbyIoRestApiSdk/${version}; Node/${process.versions.node}`;
 
         const req = https.request(opts, (res) => {
-            console.log(`[${opts.method}] ${res.statusCode} - https://${opts.hostname}${opts.path}`);
+            Logger.info(`[${opts.method}] ${res.statusCode} - https://${opts.hostname}${opts.path}`);
             if (res.statusCode < 200 || res.statusCode >= 400) {
                 reject('This request has been rejected with the response code ' + res.statusCode);
                 return;
@@ -216,7 +207,7 @@ export const download = (filepath: string, options: RequestOptions) => {
             });
 
             fileStream.on('error', (error) => {
-                console.error(error);
+                Logger.error(error);
                 reject(error);
             });
 
@@ -224,7 +215,7 @@ export const download = (filepath: string, options: RequestOptions) => {
         });
 
         req.on('error', (error) => {
-            console.error(error);
+            Logger.error(error);
             reject(error);
         });
 
@@ -255,7 +246,7 @@ export const upload = (filepath: string, uploadUrl: string) => {
         };
 
         const req = coreHttps.request(uploadUrl, opts, (res) => {
-            console.log(`[${opts.method}] ${res.statusCode} - ${uploadUrl}`);
+            Logger.info(`[${opts.method}] ${res.statusCode} - ${uploadUrl}`);
 
             if (res.statusCode < 200 || res.statusCode >= 400) {
                 reject('This request has been rejected with the response code ' + res.statusCode);
@@ -265,7 +256,7 @@ export const upload = (filepath: string, uploadUrl: string) => {
         });
 
         req.on('error', (error) => {
-            console.error(error);
+            Logger.error(error);
             reject(error);
         });
 

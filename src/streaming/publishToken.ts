@@ -206,7 +206,7 @@ export const disable = async (apiSecret: string, tokenIds: number[]): Promise<Di
 
     const options = {
         hostname: Urls.getRtsHostname(),
-        path: '/api/publish_token/active/all',
+        path: '/api/publish_token/disable',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',

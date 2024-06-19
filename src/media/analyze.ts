@@ -1,5 +1,5 @@
 import { startJob, getJobResults } from './internal/jobsHelpers';
-import { JwtToken } from '../types/jwtToken';
+import { JwtToken } from './types/jwtToken';
 import { AnalyzeJob } from './types/analyze';
 
 /**
@@ -12,11 +12,6 @@ import { AnalyzeJob } from './types/analyze';
  * There are additional optional parameters that can be provided to identify the type of content and additional loudness or validation requirements. See the samples for examples of what requests and responses look like.
  *
  * @link https://docs.dolby.io/media-apis/reference/media-analyze-post
- *
- * Beta API
- * This API is being made available as an early preview.
- * If you have feedback on how you'd like to use the API please reach out to share your feedback with our team.
- * https://dolby.io/contact
  *
  * Content Length
  *

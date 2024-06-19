@@ -1,6 +1,5 @@
 export interface Hostnames {
     api?: string;
-    comms?: string;
     rts?: string;
     rtsDirector?: string;
     mapi?: string;
@@ -8,7 +7,6 @@ export interface Hostnames {
 
 const hostnames: Hostnames = {
     api: 'api.dolby.io',
-    comms: 'comms.api.dolby.io',
 
     rts: 'api.millicast.com',
     rtsDirector: 'director.millicast.com',
@@ -22,10 +20,6 @@ export const initialize = (newHostnames: Hostnames): void => {
 
 export const getApiHostname = (): string => {
     return hostnames.api;
-};
-
-export const getCommsHostname = (region?: string): string => {
-    return region ? `${region}.${hostnames.comms}` : hostnames.comms;
 };
 
 export const getRtsHostname = (): string => {

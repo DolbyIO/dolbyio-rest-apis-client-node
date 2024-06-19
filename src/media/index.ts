@@ -2,6 +2,7 @@ export * from './types';
 export * as analyze from './analyze';
 export * as analyzeSpeech from './analyzeSpeech';
 export * as analyzeMusic from './analyzeMusic';
+export * as authentication from './authentication';
 export * as diagnose from './diagnose';
 export * as enhance from './enhance';
 export * as io from './io';

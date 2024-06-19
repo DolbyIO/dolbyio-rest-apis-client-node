@@ -1,7 +1,7 @@
 import http from 'http';
 import { sendGet, sendPost, sendPut, sendDelete, AuthRequestOptions } from './internal/httpHelpers';
 import * as Urls from '../urls';
-import { JwtToken } from '../types/jwtToken';
+import { JwtToken } from './types/jwtToken';
 import { UpdateWebhookOptions, Webhook } from './types/webhooks';
 
 /**

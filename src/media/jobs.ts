@@ -1,6 +1,6 @@
 import { sendGet, sendPost, AuthRequestOptions } from './internal/httpHelpers';
 import * as Urls from '../urls';
-import { JwtToken } from '../types/jwtToken';
+import { JwtToken } from './types/jwtToken';
 import { ListJobsOptions, ListAllJobsOptions, JobsResponse, Job } from './types/jobs';
 
 /**

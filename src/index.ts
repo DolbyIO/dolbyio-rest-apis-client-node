@@ -1,12 +1,3 @@
-export * as authentication from './authentication';
-export * from './types/jwtToken';
-
-/**
- * Communications APIs.
- * @link https://docs.dolby.io/communications-apis/reference
- */
-export * as communications from './communications';
-
 /**
  * Media APIs.
  * @link https://docs.dolby.io/media-apis/reference
@@ -14,13 +5,16 @@ export * as communications from './communications';
 export * as media from './media';
 
 /**
- * Real-time Streaming APIs.
+ * Dolby Millicast APIs.
  * @link https://docs.dolby.io/streaming-apis/reference
  */
 export * as streaming from './streaming';
 
 /** @ignore */
 export * as urls from './urls';
+
+// Expose the logger to control when/where to log
+export { default as Logger } from 'js-logger';
 
 declare const __VERSION__: string;
 

@@ -3,4 +3,8 @@ export * from './cluster';
 export * from './director';
 export * from './geo';
 export * from './publishToken';
+export * from './recordFiles';
+export * from './stream';
 export * from './subscribeToken';
+export * from './transcoders';
+export * from './webhooks';
