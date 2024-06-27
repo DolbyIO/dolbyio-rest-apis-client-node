@@ -7,11 +7,17 @@ export * as cluster from './cluster';
 /**
  * APIs for the Dolby Millicast cloud transcoders.
  * @beta
- * @remarks Cloud transcoder usage is not currently available for general usage.
+ * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team
  */
 export * as transcoders from './transcoders';
 export * as director from './director';
+/**
+ * The APIs to access the GraphQL endpoint.
+ * 
+ * @link https://docs.dolby.io/streaming-apis/page/graphql-api-reference
+ */
+export * as graphql from './graphql';
 export * as publishToken from './publishToken';
 export * as recordFiles from './recordFiles';
 export * as stream from './stream';

@@ -23,9 +23,9 @@ npm install @dolbyio/dolbyio-rest-apis-client
 ```ts
 import { streaming } from '@dolbyio/dolbyio-rest-apis-client';
 
-const API_KEY = process.env.DOLBYIO_API_SECRET;
+const API_SECRET = process.env.DOLBYIO_API_SECRET;
 
-const publishToken = await streaming.publishToken.create(API_KEY, {
+const publishToken = await streaming.publishToken.create(API_SECRET, {
     label: 'My token',
     streams: [
         {
@@ -41,9 +41,9 @@ console.log(publishToken);
 ```ts
 import { streaming } from '@dolbyio/dolbyio-rest-apis-client';
 
-const API_KEY = process.env.DOLBYIO_API_SECRET;
+const API_SECRET = process.env.DOLBYIO_API_SECRET;
 
-const subscribeToken = await streaming.subscribeToken.create(API_KEY, {
+const subscribeToken = await streaming.subscribeToken.create(API_SECRET, {
     label: 'My token',
     streams: [
         {
@@ -162,7 +162,7 @@ The documentation is built on [TypeDoc](https://typedoc.org), to generate the do
 npm run docs
 ```
 
-## Related Projects
+# Related Projects
 
 -   [TypeDoc](https://typedoc.org)
 -   [js-logger](https://github.com/jonnyreeves/js-logger)
