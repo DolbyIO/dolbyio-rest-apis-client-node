@@ -1,6 +1,7 @@
 export * from './account';
 export * from './cluster';
 export * from './director';
+export * from './graphql';
 export * from './publishToken';
 export * from './recordFiles';
 export * from './stream';

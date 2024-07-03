@@ -11,12 +11,15 @@ import * as Urls from '../urls';
  *
  * @returns A GraphQL response object through a {@link Promise}.
  * @typeParam T The response object type.
- * 
+ *
  * @example
+ * import { streaming } from '@dolbyio/dolbyio-rest-apis-client';
+ * import { StreamViewsAggregatedByStreamIdPagination } from '@dolbyio/dolbyio-rest-apis-client/dist/streaming';
+ *
  * const API_SECRET = process.env.DOLBYIO_API_SECRET;
- * 
- * await sdk.streaming.graphql
- *      .request(API_SECRET, 'query StreamStatPagination($page: Int = 1)
+ *
+ * const result: StreamViewsAggregatedByStreamIdPagination = await streaming.graphql
+ *      .request(API_SECRET, `query StreamStatPagination($page: Int = 1)
  *          {
  *              streamStatPagination(
  *                  page: $page,
@@ -41,9 +44,9 @@ import * as Urls from '../urls';
  *                          hasNextPage
  *                  }
  *              }
- *          }');
+ *          }`);
  */
-export const request = async<T> (apiSecret: string, graphQlRequest: string): Promise<T> => {
+export const request = async <T>(apiSecret: string, graphQlRequest: string): Promise<T> => {
     const body = {
         query: graphQlRequest,
     };
