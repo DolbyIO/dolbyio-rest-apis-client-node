@@ -3,11 +3,11 @@
  */
 export interface AccountGeoCascade {
     /**
-     * Enable or Disable geo cascade.
+     * Enable or disable geo cascading.
      */
     isEnabled: boolean;
     /**
-     * List of cluster IDs to geo cascade publish stream.
+     * List of cluster IDs to geo cascade a publish stream to.
      * This list cannot be empty when {@link isEnabled} is `true`.
      * This list is ignored when {@link isEnabled} is set to `false`.
      * @defaultValue Defaults to `["all"]` if unset.
@@ -16,7 +16,7 @@ export interface AccountGeoCascade {
 }
 
 /**
- * Represents the geo restrictions rules.
+ * Represents the geo restriction rules.
  */
 export interface GeoRestrictions {
     /** List of allowed countries. */

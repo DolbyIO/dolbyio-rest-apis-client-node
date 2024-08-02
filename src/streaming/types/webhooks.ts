@@ -10,7 +10,7 @@ export interface Webhook {
     isFeedHooks: boolean;
     /** If `true` sends webhook events on recording `start/error/complete/deleted`. */
     isRecordingHooks: boolean;
-    /** If `true` sends webhook events on transcoder instance updates. */
+    /** If `true` sends webhook events on thumbnail generation. */
     isThumbnailHooks: boolean;
     /** If `true` sends webhook events on transcoder instance updates. */
     isTranscoderHooks: boolean;
@@ -22,17 +22,17 @@ export interface Webhook {
 export interface UpdateWebhookRequest {
     /** Url to send webhook data to. */
     url?: string;
-    /** If `true` will generate new signing secret for the webhook. */
+    /** Set to `true` to generate new signing secret for the webhook. */
     refreshSecret?: boolean;
-    /** If `true` sends webhook events on feeds `start/stop`. */
+    /** Set to `true` to send webhook events on feeds `start/stop`. */
     isFeedHooks?: boolean;
-    /** If `true` sends webhook events on recording `start/error/complete/deleted`. */
+    /** Set to `true` to send webhook events on recording `start/error/complete/deleted`. */
     isRecordingHooks?: boolean;
-    /** If `true` sends webhook events on transcoder instance updates. */
+    /** Set to `true` to send webhook events on thumbnail generation. */
     isThumbnailHooks?: boolean;
-    /** If `true` sends webhook events on transcoder instance updates. */
+    /** Set to `true` to send webhook events on transcoder instance updates. */
     isTranscoderHooks?: boolean;
-    /** If `true` sends webhook events on clip `start/error/complete/deleted`. */
+    /** Set to `true` to send webhook events on clip `start/error/complete/deleted`. */
     isClipHooks?: boolean;
 }
 
@@ -50,22 +50,22 @@ export interface ListWebhooksRequest {
 export interface AddWebhookRequest {
     /** Url to send webhook data to. */
     url: string;
-    /** If `true` sends webhook events on feeds `start/stop`. */
+    /** Set to `true` to send webhook events on feeds `start/stop`. */
     isFeedHooks: boolean;
-    /** If `true` sends webhook events on recording `start/error/complete/deleted`. */
+    /** Set to `true` to send webhook events on recording `start/error/complete/deleted`. */
     isRecordingHooks: boolean;
     /**
-     * If `true` sends webhook events on transcoder instance updates.
+     * Set to `true` to send webhook events on transcoder instance updates.
      * @defaultValue `false`.
      */
     isThumbnailHooks?: boolean;
     /**
-     * If `true` sends webhook events on transcoder instance updates.
+     * Set to `true` to send webhook events on transcoder instance updates.
      * @defaultValue `false`.
      */
     isTranscoderHooks?: boolean;
     /**
-     * If `true` sends webhook events on clip `start/error/complete/deleted`.
+     * Set to `true` to send webhook events on clip `start/error/complete/deleted`.
      * @defaultValue `false`.
      */
     isClipHooks?: boolean;

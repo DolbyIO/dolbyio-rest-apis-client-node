@@ -3,7 +3,7 @@ import * as Urls from '../urls';
 import { AccountGeoCascade, GeoRestrictions } from './types/account';
 
 /**
- * Gets account wide geo cascade settings.
+ * Gets the account geo cascading settings.
  * If a Publish Token does not define any geo cascade settings, the account wide settings are used.
  *
  * @link https://docs.dolby.io/streaming-apis/reference/account_getgeocascade
@@ -26,7 +26,7 @@ export const getGeoCascade = async (apiSecret: string): Promise<AccountGeoCascad
 };
 
 /**
- * Update account wide geo cascade settings to enable/disable the feature or update the account default cluster list.
+ * Update account wide geo cascading settings to enable/disable the feature or update the account default cluster list.
  * `["all"]` could be used in place of cluster list to cascade stream to all existing and any future clusters available to the account.
  *
  * @link https://docs.dolby.io/streaming-apis/reference/account_updategeocascade
@@ -51,9 +51,9 @@ export const updateGeoCascade = async (apiSecret: string, settings: AccountGeoCa
 };
 
 /**
- * Gets the account geo restrictions.
+ * Gets the account geo restriction rules.
  *
- * If a Token (either Publish or Subscribe) does not define any geo restrictions, the account wide rules are used.
+ * If a token (either Publish or Subscribe) does not define any geo restrictions, the account wide rules are used.
  *
  * @link https://docs.dolby.io/streaming-apis/reference/geo_geo
  *
@@ -75,13 +75,13 @@ export const readGeoRestrictions = async (apiSecret: string): Promise<GeoRestric
 };
 
 /**
- * Updates the account geo restrictions.
+ * Updates the account geo restriction rules.
  *
  * @link https://docs.dolby.io/streaming-apis/reference/geo_updategeo
  *
  * @param apiSecret The API Secret used to authenticate this request.
- * @param allowedCountries The list of allowed countries. An empty array [] removes all rules.
- * @param deniedCountries The list of denied countries. An empty array [] removes all rules.
+ * @param allowedCountries The list of allowed countries. An empty array `[]` removes all rules.
+ * @param deniedCountries The list of denied countries. An empty array `[]` removes all rules.
  *
  * @returns A {@link GeoRestrictions} object through a {@link Promise}.
  */
