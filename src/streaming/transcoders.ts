@@ -16,7 +16,7 @@ import {
  *
  * @link https://docs.dolby.io/streaming-apis/reference/transcoder_listtranscoders
  * @beta
- * @remarks Cloud transcoder usage is not currently available for general usage.
+ * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
@@ -54,7 +54,7 @@ export const listTranscoders = async (apiSecret: string, options: ListTranscoder
  *
  * @link https://docs.dolby.io/streaming-apis/reference/transcoder_gettranscoder
  * @beta
- * @remarks Cloud transcoder usage is not currently available for general usage.
+ * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
@@ -80,7 +80,7 @@ export const getTranscoder = async (apiSecret: string, transcoderId: string): Pr
  *
  * @link https://docs.dolby.io/streaming-apis/reference/transcoder_deletetranscoder
  * @beta
- * @remarks Cloud transcoder usage is not currently available for general usage.
+ * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
@@ -106,7 +106,7 @@ export const deleteTranscoder = async (apiSecret: string, transcoderId: number):
  *
  * @link https://docs.dolby.io/streaming-apis/reference/transcoder_createtranscoder
  * @beta
- * @remarks Cloud transcoder usage is not currently available for general usage.
+ * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
@@ -140,7 +140,7 @@ export const createTranscoder = async (apiSecret: string, transcoder: CreateTran
  *
  * @link https://docs.dolby.io/streaming-apis/reference/transcoder_configuretranscoder
  * @beta
- * @remarks Cloud transcoder usage is not currently available for general usage.
+ * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
@@ -169,7 +169,7 @@ export const updateTranscoder = async (apiSecret: string, transcoderId: string, 
  *
  * @link https://docs.dolby.io/streaming-apis/reference/transcoder_starttranscoder
  * @beta
- * @remarks Cloud transcoder usage is not currently available for general usage.
+ * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
@@ -195,7 +195,7 @@ export const startTranscoder = async (apiSecret: string, transcoderId: string): 
  *
  * @link https://docs.dolby.io/streaming-apis/reference/transcoder_stoptranscoder
  * @beta
- * @remarks Cloud transcoder usage is not currently available for general usage.
+ * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
@@ -222,7 +222,7 @@ export const stopTranscoder = async (apiSecret: string, transcoderId: string): P
  *
  * @link https://docs.dolby.io/streaming-apis/reference/transcoder_listtranscoderinstances
  * @beta
- * @remarks Cloud transcoder usage is not currently available for general usage.
+ * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team
  *
  * @param apiSecret The API Secret used to authenticate this request.
@@ -266,7 +266,7 @@ export const listTranscoderInstances = async (apiSecret: string, options: ListTr
  *
  * @link https://docs.dolby.io/streaming-apis/reference/transcoder_gettranscoderinstance
  * @beta
- * @remarks Cloud transcoder usage is not currently available for general usage.
+ * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
@@ -292,7 +292,7 @@ export const getTranscoderInstance = async (apiSecret: string, transcoderInstanc
  *
  * @link https://docs.dolby.io/streaming-apis/reference/transcoder_listtranscoderprofiles
  * @beta
- * @remarks Cloud transcoder usage is not currently available for general usage.
+ * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.

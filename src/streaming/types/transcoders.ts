@@ -35,22 +35,20 @@ export interface ListTranscodersProfilesSortOptions extends ListSortOptions<'Nam
 /** Represents a cloud transcoder. */
 export interface Transcoder {
     /** Identifier of the transcoder. */
-    id: string;
-    /** Millicast account identifier. */
-    accountId: number;
+    transcoderId: string;
     /** Display name of the transcoder. */
     name: string;
     /** A string corresponding to the region that this transcoder is be deployed to. */
     cluster: string;
     /** DNS name of the transcoder. */
     dnsName: string;
-    /** */
-    profile: string;
+    /** Profile selected by user or derived from input height and frame rate. */
+    profile?: TranscoderProfile;
     /** Transcoder creation date. */
     createdOn: Date;
     /** Date when the transcoded was ended. */
     endedOn?: Date;
-    /** */
+    /** Information on the most recent transcoder instance. */
     instance?: TranscoderInstance;
     /** Current status of the transcoder. */
     status: TranscoderStatus;

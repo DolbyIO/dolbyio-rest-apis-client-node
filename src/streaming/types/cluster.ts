@@ -8,11 +8,11 @@ export interface Cluster {
     id: string;
     /** Display name of the cluster. */
     name: string;
-    /** RTMP publish domain for cluster. */
+    /** RTMP publish domain for the cluster. */
     rtmp: string;
-    /** SRT publish domain for cluster. */
+    /** SRT publish domain for the cluster. */
     srt: string;
-    /** Location of this cluster. */
+    /** Location of the cluster. */
     location: {
         /** City of the cluster. */
         city: string;
@@ -27,8 +27,8 @@ export interface Cluster {
  * Represents the response to a {@link read} or {@link update} request.
  */
 export interface ClusterResponse {
-    /** Used as cluster when not explicitly specified during Token creation. */
+    /** Used as default cluster when not explicitly specified during Token creation. */
     defaultCluster: string;
-    /** List of clusters available. */
+    /** List of available clusters. */
     availableClusters: Cluster[];
 }
