@@ -21,6 +21,11 @@ export interface Cluster {
         /** Country of the cluster. */
         country: string;
     };
+    /** Features available in this cluster. */
+    features: {
+        /** Indicates whether the Transcoder feature is supported in the corresponding cluster. */
+        transcoding: boolean;
+    };
 }
 
 /**
