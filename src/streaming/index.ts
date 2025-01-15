@@ -18,7 +18,4 @@ export * as stream from './stream';
 export * as subscribeToken from './subscribeToken';
 export * as webhooks from './webhooks';
 
-/**
- * V3 APIs
- */
-export * as assets from './asset';
+export * as assets from './assets';
