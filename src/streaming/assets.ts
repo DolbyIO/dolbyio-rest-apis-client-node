@@ -11,8 +11,9 @@ import { sendDelete, sendGet, sendPost } from './internal/httpHelpers';
  * @link https://docs.dolby.io/streaming-apis/reference/media-assets-post
  * @param apiSecret The API Secret used to authenticate this request.
  * @param clipRequest The request body for creating a new media asset.
+ * @param idempotencyKey Optional, The unique identifier for this request to prevent duplicate submissions.
  */
-export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequest) => {
+export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequest, idempotencyKey?: string,) => {
     const options = {
         hostname: Urls.getRtsHostname(),
         path: `/api/v3/media/assets`,
@@ -20,6 +21,7 @@ export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequ
             Accept: 'application/json',
             'Content-Type': 'application/json',
             Authorization: `Bearer ${apiSecret}`,
+            'Idempotency-Key': idempotencyKey
         },
         body: JSON.stringify(clipRequest),
     }
