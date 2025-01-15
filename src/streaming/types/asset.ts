@@ -1,8 +1,4 @@
 /**
- * Create Asset Clip
- */
-
-/**
  * Storage types supported by Dolby.
  */
 export type MediaAssetStorageType = "awsS3" | "gcs" | "dolbyStorage"; // Valid storage types
