@@ -17,3 +17,8 @@ export * as recordFiles from './recordFiles';
 export * as stream from './stream';
 export * as subscribeToken from './subscribeToken';
 export * as webhooks from './webhooks';
+
+/**
+ * V3 APIs
+ */
+export * as assets from './asset';
