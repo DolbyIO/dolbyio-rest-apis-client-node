@@ -8,7 +8,9 @@ import { sendDelete, sendGet, sendPost } from './internal/httpHelpers';
 
 /**
  * Creates a new media asset.
+ * 
  * @link https://docs.dolby.io/streaming-apis/reference/media-assets-post
+ * 
  * @param apiSecret The API Secret used to authenticate this request.
  * @param clipRequest The request body for creating a new media asset.
  * @param idempotencyKey Optional, The unique identifier for this request to prevent duplicate submissions.
@@ -31,9 +33,13 @@ export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequ
 
 /**
  * Lists media assets.
+ * 
  * @link https://docs.dolby.io/streaming-apis/reference/media-assets-get
+ * 
  * @param apiSecret The API Secret used to authenticate this request.
  * @param params Query parameters for filtering the list of media assets.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives an array of {@link AssetResponseData} objects.
  */
 export const list = async (apiSecret: string, params: ListMediaAssetsQueryParams) => {
     const options = {
@@ -52,9 +58,13 @@ export const list = async (apiSecret: string, params: ListMediaAssetsQueryParams
 
 /**
  * Deletes multiple media assets from storage.
+ * 
  * @link https://docs.dolby.io/streaming-apis/reference/media-assets-delete
+ * 
  * @param apiSecret The API Secret used to authenticate this request.
  * @param assetIds The list of asset IDs to delete.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives an array of asset deletion tasks that failed.
  */
 export const deleteAssets = async (apiSecret: string, assetIds: string[]) => {
     const options = {
@@ -68,14 +78,18 @@ export const deleteAssets = async (apiSecret: string, assetIds: string[]) => {
         params: toDictString(assetIds)
     };
 
-    return await sendDelete(options);
+    return await sendDelete<{id?: string, error?: string}[] | null>(options);
 }
 
 /**
  * Reads a media asset.
+ * 
  * @link https://docs.dolby.io/streaming-apis/reference/media-assets-mediaassetid-get
+ * 
  * @param apiSecret The API Secret used to authenticate this request.
  * @param assetId The ID of the media asset to read.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives an {@link AssetResponseData} object.
  */
 export const read = async (apiSecret: string, assetId: string) => {
     const options = {

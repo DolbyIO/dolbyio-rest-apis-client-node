@@ -2,6 +2,8 @@ export * from './types';
 
 /** APIs for the Dolby Millicast account level settings. */
 export * as account from './account';
+/** APIs to access the media assets. */
+export * as assets from './assets';
 /** APIs for the Dolby Millicast clusters for the account. */
 export * as cluster from './cluster';
 /**
@@ -17,5 +19,3 @@ export * as recordFiles from './recordFiles';
 export * as stream from './stream';
 export * as subscribeToken from './subscribeToken';
 export * as webhooks from './webhooks';
-
-export * as assets from './assets';
