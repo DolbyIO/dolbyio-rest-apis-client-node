@@ -1,4 +1,5 @@
 export * from './account';
+export * from './asset';
 export * from './cluster';
 export * from './director';
 export * from './publishToken';
