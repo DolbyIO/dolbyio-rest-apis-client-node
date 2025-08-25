@@ -6,7 +6,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-_?logo=GitHub&labelColor=black&color=blue)](https://github.com/DolbyIO/dolbyio-rest-apis-client-node)
 [![Documentation](https://img.shields.io/badge/Documentation-_?logo=readthedocs&labelColor=black&color=blue)](https://api-references.dolby.io/dolbyio-rest-apis-client-node/)
 
-Dolby.io REST APIs Client for Node.JS is wrapper for the [Dolby Millicast](https://docs.dolby.io/streaming-apis/reference) and [Dolby.io Media](https://docs.dolby.io/media-processing/reference/media-enhance-overview) REST APIs.
+Dolby.io REST APIs Client for Node.JS is wrapper for the [Dolby Millicast](https://optiview.dolby.com/docs/millicast/api/millicast-api/) and Dolby.io Media REST APIs.
 
 # Install this project
 
@@ -164,5 +164,5 @@ npm run docs
 
 ## Related Projects
 
--   [TypeDoc](https://typedoc.org)
--   [js-logger](https://github.com/jonnyreeves/js-logger)
+- [TypeDoc](https://typedoc.org)
+- [js-logger](https://github.com/jonnyreeves/js-logger)

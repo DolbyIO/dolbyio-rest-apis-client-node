@@ -5,7 +5,7 @@ import { ActivePublishTokenResponse, CreatePublishToken, PublishToken, UpdatePub
 /**
  * Gets the specified publish token.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_readtoken
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-read-token/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param tokenId Identifier of the publish token to read.
@@ -28,7 +28,7 @@ export const read = async (apiSecret: string, tokenId: number): Promise<PublishT
 /**
  * Deletes the publish token.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_deletetoken
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-delete-token/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param tokenId Identifier of the publish token to delete.
@@ -49,9 +49,11 @@ export const deleteToken = async (apiSecret: string, tokenId: number): Promise<b
 };
 
 /**
+ * @deprecated
+ * 
  * Updates the publish token.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_updatetoken
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-update-token/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param tokenId Identifier of the publish token to update.
@@ -77,7 +79,7 @@ export const update = async (apiSecret: string, tokenId: number, publishToken: U
 /**
  * Lists all publish tokens with specific sorting and pagination.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_listtokens
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-list-tokens/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param sortBy How to sort the response.
@@ -117,7 +119,7 @@ export const list = async (
 /**
  * Creates a publish token.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_createtoken
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-create-token/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param publishToken Information about the new publish token.
@@ -142,7 +144,7 @@ export const create = async (apiSecret: string, publishToken: CreatePublishToken
 /**
  * Gets the Publish Token ID of an active stream by its Stream ID.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_getactivetokenbystreamid
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-get-active-token-by-stream-id/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param streamId Stream ID for which to get the publish token IDs.
@@ -170,7 +172,7 @@ export const getActivePublishTokenId = async (apiSecret: string, streamId: strin
 /**
  * Gets all Publish Token IDs for active streams on the account.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_getallactivetokensbyaccount
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-get-all-active-tokens-by-account/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  *
@@ -192,7 +194,7 @@ export const getAllActivePublishTokenId = async (apiSecret: string): Promise<Act
 /**
  * Disables Publish Token(s) by their Token ID. An array of Token IDs can be used for bulk disable.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/publishtokenv1_disabletokens
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-disable-tokens/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param tokenIds List of token IDs to disable.

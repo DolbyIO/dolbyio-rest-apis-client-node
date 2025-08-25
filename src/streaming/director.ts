@@ -5,7 +5,7 @@ import { PublishResponse, SubscribeResponse } from './types/director';
 /**
  * Request for url and authorization to publish a stream.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/director_publish
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/director/director-publish/}
  *
  * @param publishingToken The publishing token.
  * @param streamName The name of the stream.
@@ -34,11 +34,11 @@ export const publish = async (publishingToken: string, streamName: string): Prom
 /**
  * Request for url and authorization to subscribe to a stream.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/director_subscribe
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/director/director-subscribe/}
  *
  * @param streamName The name of the stream.
  * @param streamAccountId The account identifier. Required only for published streams which have `subscribeRequiresAuth=false`.
- * @param subscribeToken The subscribe token.
+ * @param publishingToken The publish token.
  *
  * @returns A {@link SubscribeResponse} object through a {@link Promise}.
  */

@@ -1,21 +1,17 @@
 import * as Urls from '../urls';
-import {
-    CreateAssetClipRequest,
-    ListMediaAssetsQueryParams,
-    AssetResponseData,
-} from './types/asset';
+import { CreateAssetClipRequest, ListMediaAssetsQueryParams, AssetResponseData } from './types/asset';
 import { sendDelete, sendGet, sendPost } from './internal/httpHelpers';
 
 /**
  * Creates a new media asset.
- * 
- * @link https://docs.dolby.io/streaming-apis/reference/media-assets-post
- * 
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-create-media-asset/}
+ *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param clipRequest The request body for creating a new media asset.
  * @param idempotencyKey Optional, The unique identifier for this request to prevent duplicate submissions.
  */
-export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequest, idempotencyKey?: string,) => {
+export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequest, idempotencyKey?: string) => {
     const options = {
         hostname: Urls.getRtsHostname(),
         path: `/api/v3/media/assets`,
@@ -23,19 +19,19 @@ export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequ
             Accept: 'application/json',
             'Content-Type': 'application/json',
             Authorization: `Bearer ${apiSecret}`,
-            'Idempotency-Key': idempotencyKey
+            'Idempotency-Key': idempotencyKey,
         },
         body: JSON.stringify(clipRequest),
-    }
+    };
 
     return await sendPost<AssetResponseData>(options);
-}
+};
 
 /**
  * Lists media assets.
- * 
- * @link https://docs.dolby.io/streaming-apis/reference/media-assets-get
- * 
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-list-media-assets/}
+ *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param params Query parameters for filtering the list of media assets.
  *
@@ -44,23 +40,25 @@ export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequ
 export const list = async (apiSecret: string, params: ListMediaAssetsQueryParams) => {
     const options = {
         hostname: Urls.getRtsHostname(),
-        path: "/api/v3/media/assets",
+        path: '/api/v3/media/assets',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${apiSecret}`
+            Authorization: `Bearer ${apiSecret}`,
         },
         params: toDictString(params),
     };
 
     return await sendGet<AssetResponseData[]>(options);
-}
+};
 
 /**
  * Deletes multiple media assets from storage.
  * 
- * @link https://docs.dolby.io/streaming-apis/reference/media-assets-delete
- * 
+ * @remarks Only media assets with status Complete or Error can be deleted.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-delete-media-assets/}
+ *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param assetIds The list of asset IDs to delete.
  *
@@ -69,23 +67,23 @@ export const list = async (apiSecret: string, params: ListMediaAssetsQueryParams
 export const deleteAssets = async (apiSecret: string, assetIds: string[]) => {
     const options = {
         hostname: Urls.getRtsHostname(),
-        path: "api/v3/media/assets",
+        path: 'api/v3/media/assets',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${apiSecret}`
+            Authorization: `Bearer ${apiSecret}`,
         },
-        params: toDictString(assetIds)
+        params: toDictString(assetIds),
     };
 
-    return await sendDelete<{id?: string, error?: string}[] | null>(options);
-}
+    return await sendDelete<{ id?: string; error?: string }[] | null>(options);
+};
 
 /**
  * Reads a media asset.
- * 
- * @link https://docs.dolby.io/streaming-apis/reference/media-assets-mediaassetid-get
- * 
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-read-media-asset/}
+ *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param assetId The ID of the media asset to read.
  *
@@ -97,12 +95,12 @@ export const read = async (apiSecret: string, assetId: string) => {
         path: `/api/v3/media/assets/${assetId}`,
         headers: {
             Accept: 'application/json',
-            Authorization: `Bearer ${apiSecret}`
-        }
+            Authorization: `Bearer ${apiSecret}`,
+        },
     };
 
     return await sendGet<AssetResponseData>(options);
-}
+};
 
 type Dict<T> = { [key: string]: T };
 

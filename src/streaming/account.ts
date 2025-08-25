@@ -3,10 +3,12 @@ import * as Urls from '../urls';
 import { AccountGeoCascade, GeoRestrictions } from './types/account';
 
 /**
+ * @deprecated
+ * 
  * Gets the account geo cascading settings.
  * If a Publish Token does not define any geo cascade settings, the account wide settings are used.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/account_getgeocascade
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/account-get-geo-cascade/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  *
@@ -26,10 +28,12 @@ export const getGeoCascade = async (apiSecret: string): Promise<AccountGeoCascad
 };
 
 /**
+ * @deprecated
+ * 
  * Update account wide geo cascading settings to enable/disable the feature or update the account default cluster list.
  * `["all"]` could be used in place of cluster list to cascade stream to all existing and any future clusters available to the account.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/account_updategeocascade
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/account-update-geo-cascade/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param settings The new default geo cascading cluster settings.
@@ -51,11 +55,13 @@ export const updateGeoCascade = async (apiSecret: string, settings: AccountGeoCa
 };
 
 /**
+ * @deprecated
+ * 
  * Gets the account geo restriction rules.
  *
  * If a token (either Publish or Subscribe) does not define any geo restrictions, the account wide rules are used.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/geo_geo
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/geo-geo/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  *
@@ -75,9 +81,11 @@ export const readGeoRestrictions = async (apiSecret: string): Promise<GeoRestric
 };
 
 /**
+ * @deprecated
+ * 
  * Updates the account geo restriction rules.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/geo_updategeo
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/geo-update-geo/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param allowedCountries The list of allowed countries. An empty array `[]` removes all rules.

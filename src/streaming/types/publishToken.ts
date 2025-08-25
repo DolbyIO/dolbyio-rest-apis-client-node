@@ -33,12 +33,12 @@ export interface PublishToken {
     /**
      * May specify multiple IPv4 addresses or CIDR notated network blocks.
      * If specified, the token will only be usable from those IP addresses.
-     * @note Not currently supported with RTMP.
+     * @remarks Not currently supported with RTMP.
      */
     allowedIpAddresses: string[];
     /**
      * If specified will bind the token to the first X IP addresses used with token in requests to Director API, thus restricting the token to those IP addresses without being known beforehand.
-     * @note Not currently supported with RTMP.
+     * @remarks Not currently supported with RTMP.
      */
     bindIpsOnUsage?: number;
     /**
@@ -201,13 +201,13 @@ export interface CreatePublishToken {
     /**
      * May specify multiple IPv4 addresses or CIDR notated network blocks.
      * If specified, the token will only be usable from those IP addresses.
-     * @note Not currently supported with RTMP.
+     * @remarks Not currently supported with RTMP.
      */
     allowedIpAddresses?: string[];
     /**
      * If specified will bind the token to the first X IP addresses used with token in requests to Director API, thus restricting the token to those IP addresses without being known beforehand.
      * Mutually exclusive with {@link allowedIpAddresses} option.
-     * @note Not currently supported with RTMP.
+     * @remarks Not currently supported with RTMP.
      */
     bindIpsOnUsage?: number;
     /**
@@ -251,7 +251,7 @@ export interface CreatePublishToken {
     /**
      * Set to `true` to receive webhook notifications for thumbnails for the specified streams.
      * @defaultValue `false`.
-     * @link https://docs.dolby.io/streaming-apis/docs/thumbnail-webhooks
+     * @see {@link https://optiview.dolby.com/docs/millicast/webhooks/thumbnail/}
      */
     enableThumbnails?: boolean;
     /**

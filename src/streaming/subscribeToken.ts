@@ -5,7 +5,7 @@ import { CreateSubscribeToken, SubscribeToken, UpdateSubscribeToken } from './ty
 /**
  * Gets the specified subscribe token.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/subscribetokenv1_readtoken
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/subscribe-token-v-1-read-token/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param tokenId Identifier of the subscribe token to read.
@@ -28,7 +28,7 @@ export const read = async (apiSecret: string, tokenId: number): Promise<Subscrib
 /**
  * Deletes the subscribe token.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/subscribetokenv1_deletetoken
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/subscribe-token-v-1-delete-token/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param tokenId Identifier of the subscribe token to delete.
@@ -49,9 +49,11 @@ export const deleteToken = async (apiSecret: string, tokenId: number): Promise<b
 };
 
 /**
+ * @deprecated
+ * 
  * Updates the subscribe token.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/subscribetokenv1_updatetoken
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/subscribe-token-v-1-update-token/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param tokenId Identifier of the subscribe token to update.
@@ -77,7 +79,7 @@ export const update = async (apiSecret: string, tokenId: number, subscribeToken:
 /**
  * Lists all subscribe tokens with specific sorting and pagination.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/subscribetokenv1_listtokens
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/subscribe-token-v-1-list-tokens/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param sortBy How to sort the response.
@@ -117,7 +119,7 @@ export const list = async (
 /**
  * Creates a subscribe token.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/subscribetokenv1_createtoken
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/subscribe-token-v-1-create-token/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param subscribeToken Information about the new subscribe token.

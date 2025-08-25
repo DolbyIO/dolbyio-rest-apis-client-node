@@ -1,11 +1,13 @@
-import { sendDelete, sendGet, sendPost, sendPut } from './internal/httpHelpers';
+import { sendGet, sendPost } from './internal/httpHelpers';
 import * as Urls from '../urls';
 import { MediaAsset } from './types/recordFiles';
 
 /**
+ * @deprecated
+ * 
  * Gets current total bytes of recorded files in storage.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/recordfilesv2_readrecordmediaasset
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/record-files-get-record-file/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param mediaAssetId Identifier of the media asset to read.
@@ -26,9 +28,9 @@ export const readMediaAsset = async (apiSecret: string, mediaAssetId: string): P
 };
 
 /**
+ * @deprecated
+ * 
  * Deletes multiple media assets from storage.
- *
- * @link https://docs.dolby.io/streaming-apis/reference/recordfilesv2_deleterecordmediaassets
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param assetIds List of the media assets identifiers to delete from storage.
@@ -55,9 +57,11 @@ export const deleteMediaAssets = async (apiSecret: string, assetIds: number[]): 
 };
 
 /**
+ * @deprecated
+ * 
  * Deletes all recorded file from storage.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/recordfiles_deleteallrecordfiles
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/record-files-delete-all-record-files/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  *
@@ -77,9 +81,11 @@ export const deleteAllFiles = async (apiSecret: string): Promise<boolean> => {
 };
 
 /**
+ * @deprecated
+ * 
  * Gets current total bytes of recorded files in storage.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/recordfiles_recordfileusage
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/record-files-record-file-usage/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  *
@@ -100,9 +106,11 @@ export const usage = async (apiSecret: string): Promise<number> => {
 };
 
 /**
+ * @deprecated
+ * 
  * Gets total number of gigabyte hours of storage used within date range.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/recordfiles_recordfileusagebillable
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/record-files-record-file-usage-billable/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param startDate Start date from which to pull the recorded files usage.

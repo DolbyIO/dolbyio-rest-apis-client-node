@@ -5,7 +5,7 @@ import { ClusterResponse } from './types/cluster';
 /**
  * Gets the default cluster and list the available onces.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/cluster_getclustersinfo
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/cluster-get-clusters-info/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  *
@@ -27,7 +27,7 @@ export const read = async (apiSecret: string): Promise<ClusterResponse> => {
 /**
  * Updates the default cluster for the account.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/cluster_updateclusterinfo
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/cluster-update-cluster-info/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param defaultCluster The new default cluster.

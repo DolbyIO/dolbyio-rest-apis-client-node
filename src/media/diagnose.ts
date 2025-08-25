@@ -9,10 +9,8 @@ import { DiagnoseJob } from './types/diagnose';
  *
  * This is an asynchronous operation so you will receive a job identifier to be used to get the job status and result.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-diagnose-post
- *
  * @param accessToken Access token to use for authentication.
- * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-diagnose-post
+ * @param jobContent Content of the job description as a JSON payload.
  *
  * @returns The job identifier through a {@link Promise}.
  */
@@ -28,8 +26,6 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
  * The {@link DiagnoseJob.progress} attribute provides a percentage of job progress.
  *
  * If the {@link DiagnoseJob.status} is Success then the json result will be returned in the response.
- *
- * @link https://docs.dolby.io/media-apis/reference/media-diagnose-get
  *
  * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to retrieve.

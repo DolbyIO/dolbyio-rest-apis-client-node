@@ -7,10 +7,8 @@ import { TranscodeJob } from './types/transcode';
  *
  * Start transcoding to modify the size, bitrates, and formats for your media.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-transcode-post
- *
  * @param accessToken Access token to use for authentication.
- * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-transcode-post
+ * @param jobContent Content of the job description as a JSON payload.
  *
  * @returns The job identifier through a {@link Promise}.
  */
@@ -24,8 +22,6 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
  * For a given {@link jobId}, this method will check if the processing task has completed and return the transcode results.
  *
  * When the {@link TranscodeJob.status} is Success you'll be able to retrieve your result from the output location you provided in the original POST.
- *
- * @link https://docs.dolby.io/media-apis/reference/media-transcode-get
  *
  * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to retrieve.
