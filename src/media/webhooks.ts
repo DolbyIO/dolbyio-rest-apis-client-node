@@ -7,8 +7,6 @@ import { UpdateWebhookOptions, Webhook } from './types/webhooks';
 /**
  * Registers a webhook that is triggered when a job completes.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-webhook-post
- *
  * @param accessToken Access token to use for authentication.
  * @param url The callback url that will be called when job execution completes.
  * @param headers (Optional) Headers to include in the webhook call.
@@ -27,7 +25,7 @@ export const registerWebhook = async (accessToken: JwtToken, url: string, header
     }
 
     const requestOptions: AuthRequestOptions = {
-        hostname: Urls.getRtsHostname(),
+        hostname: Urls.getMapiHostname(),
         path: '/media/webhooks',
         headers: {
             Accept: 'application/json',
@@ -48,8 +46,6 @@ export const registerWebhook = async (accessToken: JwtToken, url: string, header
 /**
  * Updates the previously registered webhook configuration.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-webhook-put
- *
  * @param accessToken Access token to use for authentication.
  * @param options Options to update the webhook.
  */
@@ -65,7 +61,7 @@ export const updateWebhook = async (accessToken: JwtToken, options: UpdateWebhoo
     }
 
     const requestOptions: AuthRequestOptions = {
-        hostname: Urls.getRtsHostname(),
+        hostname: Urls.getMapiHostname(),
         path: '/media/webhooks',
         params: {
             id: options.webhookId,
@@ -84,8 +80,6 @@ export const updateWebhook = async (accessToken: JwtToken, options: UpdateWebhoo
 /**
  * Retrieves the previously registered webhook configuration.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-webhook-get
- *
  * @param accessToken Access token to use for authentication.
  * @param webhookId Identifier of the webhook to retrieve.
  *
@@ -93,7 +87,7 @@ export const updateWebhook = async (accessToken: JwtToken, options: UpdateWebhoo
  */
 export const retrieveWebhook = async (accessToken: JwtToken, webhookId: string): Promise<Webhook> => {
     const requestOptions: AuthRequestOptions = {
-        hostname: Urls.getRtsHostname(),
+        hostname: Urls.getMapiHostname(),
         path: '/media/webhooks',
         params: {
             id: webhookId,
@@ -109,8 +103,6 @@ export const retrieveWebhook = async (accessToken: JwtToken, webhookId: string):
 /**
  * Deletes a previously registered webhook configuration.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-webhook-delete
- *
  * @param accessToken Access token to use for authentication.
  * @param webhookId Identifier of the webhook to delete.
  *
@@ -118,7 +110,7 @@ export const retrieveWebhook = async (accessToken: JwtToken, webhookId: string):
  */
 export const deleteWebhook = async (accessToken: JwtToken, webhookId: string): Promise<string | null> => {
     const requestOptions: AuthRequestOptions = {
-        hostname: Urls.getRtsHostname(),
+        hostname: Urls.getMapiHostname(),
         path: '/media/webhooks',
         params: {
             id: webhookId,

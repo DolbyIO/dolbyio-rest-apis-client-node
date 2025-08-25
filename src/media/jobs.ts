@@ -8,8 +8,6 @@ import { ListJobsOptions, ListAllJobsOptions, JobsResponse, Job } from './types/
  *
  * List of jobs previously submitted, up to the last 31 days.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-jobs-get
- *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the list of jobs.
  *
@@ -46,8 +44,6 @@ export const list = async (accessToken: JwtToken, options: ListJobsOptions): Pro
  * Query Media Jobs.
  *
  * List of all jobs previously submitted, up to the last 31 days.
- *
- * @link https://docs.dolby.io/media-apis/reference/media-jobs-get
  *
  * @param accessToken Access token to use for authentication.
  * @param options Options to request the list of jobs.
@@ -97,8 +93,6 @@ export const listAll = async (accessToken: JwtToken, options: ListAllJobsOptions
 
 /**
  * Requests cancellation of a previously submitted job.
- *
- * @link https://docs.dolby.io/media-apis/reference/media-jobs-cancel-post
  *
  * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to cancel.

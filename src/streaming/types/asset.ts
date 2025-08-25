@@ -1,7 +1,7 @@
 /**
  * Storage types supported by Dolby.
  */
-export type MediaAssetStorageType = "awsS3" | "gcs" | "dolbyStorage"; // Valid storage types
+export type MediaAssetStorageType = 'awsS3' | 'gcs' | 'dolbyStorage'; // Valid storage types
 
 /**
  * Additional options for the storage location.
@@ -119,7 +119,7 @@ export interface AssetResponseData {
     /** Optional, ID of the object. */
     id?: string | null;
     /** Required, type of the object. */
-    type: "recording" | "clip" | "storageValidation" | "timeline" | "feed";
+    type: 'recording' | 'clip' | 'storageValidation' | 'timeline' | 'feed';
     /** Optional, information about the asset. */
     feed?: MediaAssetFeedSelectionModel;
     /** Required, ISO 8601 date string, Start time of clip. */
@@ -131,7 +131,7 @@ export interface AssetResponseData {
     /** Storage information. */
     storage: MediaAssetStorageResponseModel;
     /** The status of the Clip request. */
-    status: "processing" | "complete" | "error" | "deleting" | "deleted";
+    status: 'processing' | 'complete' | 'error' | 'deleting' | 'deleted';
     /** Optional, error details. */
     error?: string | null;
     /** Optional, ISO 8601 date string, Created Date. */
@@ -141,13 +141,13 @@ export interface AssetResponseData {
     /** Optional, ISO 8601 date string, Deleted Date. */
     removed?: string | null;
     /** Optional, asset metadata. */
-    metadata?: RecordMetadata
+    metadata?: RecordMetadata;
 }
 
 /**
  * The allowable sort options for listing media assets.
  */
-export type ListMediaAssetSortBy = "startTime" | "endTime" | "name"; // Add other valid sort options as needed
+export type ListMediaAssetSortBy = 'startTime' | 'endTime' | 'name'; // Add other valid sort options as needed
 
 /**
  * The allowable parameters for listing and filtering media assets.

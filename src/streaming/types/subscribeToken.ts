@@ -183,7 +183,7 @@ export interface CreateSubscribeToken {
     originCluster?: string;
     /**
      * Tracking Information for the Stream Syndication capability.
-     * @link https://docs.dolby.io/streaming-apis/docs/syndication.
+     * @see {@link https://optiview.dolby.com/docs/millicast/distribution/syndication/}
      */
     tracking?: {
         /** Tracking identifier for Stream Syndication. */

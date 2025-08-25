@@ -7,8 +7,6 @@ import { JwtToken } from './types/jwtToken';
  *
  * To make any API call, you must acquire a JWT (JSON Web Token) format API token.
  *
- * @link https://docs.dolby.io/media-apis/reference/get-api-token
- *
  * @param appKey Your Dolby.io App Key.
  * @param appSecret Your Dolby.io App Secret.
  * @param expiresIn API token expiration time in seconds. If no value is specified, the default is 1800, indicating 30 minutes. The maximum value is 86,400, indicating 24 hours.

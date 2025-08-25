@@ -36,8 +36,6 @@ const getUrl = async (accessToken: JwtToken, endpointUrl: string, dlbUrl: string
  *
  * You'll be returned a pre-signed url you can use to PUT and upload your media file. The temporary storage should allow you to read and write to the dlb:// locations for a period of at least 24 hours before it is removed.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-input
- *
  * @param accessToken Access token to use for authentication.
  * @param dlbUrl The `url` should be in the form `dlb://object-key` where the object-key can be any alpha-numeric string. The object-key is unique to your account API Key so there is no risk of collision with other users.
  *
@@ -54,8 +52,6 @@ export const getUploadUrl = async (accessToken: JwtToken, dlbUrl: string): Promi
  *
  * The temporary storage should allow you to read and write to the dlb:// locations for a period of at least 24 hours before it is removed.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-output-post
- *
  * @param accessToken Access token to use for authentication.
  * @param dlbUrl The `url` should be in the form `dlb://object-key` where the object-key can be any alpha-numeric string. The object-key is unique to your account API Key so there is no risk of collision with other users.
  *
@@ -69,8 +65,6 @@ export const getDownloadUrl = async (accessToken: JwtToken, dlbUrl: string): Pro
  * Upload a media file to the Dolby.io temporary storage.
  *
  * The temporary storage should allow you to read and write to the dlb:// locations for a period of at least 24 hours before it is removed.
- *
- * @link https://docs.dolby.io/media-apis/reference/media-input-post
  *
  * @param accessToken Access token to use for authentication.
  * @param dlbUrl The `url` should be in the form `dlb://object-key` where the object-key can be any alpha-numeric string. The object-key is unique to your account API Key so there is no risk of collision with other users.
@@ -87,8 +81,6 @@ export const uploadFile = async (accessToken: JwtToken, dlbUrl: string, filePath
  * You can download media you previously uploaded with /media/input or media that was generated through another Dolby Media API.
  *
  * The temporary storage should allow you to read and write to the dlb:// locations for a period of at least 24 hours before it is removed.
- *
- * @link https://docs.dolby.io/media-apis/reference/media-output-get
  *
  * @param accessToken Access token to use for authentication.
  * @param dlbUrl The `url` should be in the form `dlb://object-key` where the object-key can be any alpha-numeric string. The object-key is unique to your account API Key so there is no risk of collision with other users.

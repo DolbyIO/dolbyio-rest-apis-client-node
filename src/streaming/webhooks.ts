@@ -5,7 +5,7 @@ import { Webhook, UpdateWebhookRequest, ListWebhooksRequest, AddWebhookRequest }
 /**
  * Gets the specified webhook.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/webhooks_get
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/webhooks-get/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param webhookId Identifier of the webhook to read.
@@ -28,7 +28,7 @@ export const read = async (apiSecret: string, webhookId: number): Promise<Webhoo
 /**
  * Updates the webhook.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/webhooks_updatewebhook
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/webhooks-update-webhook/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param webhookId Identifier of the webhook to update.
@@ -54,7 +54,7 @@ export const update = async (apiSecret: string, webhookId: number, webhook: Upda
 /**
  * Removes the webhook from the account.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/webhooks_removewebhook
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/webhooks-remove-webhook/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param webhookId Identifier of the publish token to delete.
@@ -77,7 +77,7 @@ export const remove = async (apiSecret: string, webhookId: number): Promise<Webh
 /**
  * Lists the webhooks of the account.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/webhooks_listwebhooks
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/webhooks-list-webhooks/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param listRequest The options to list the webhooks.
@@ -112,7 +112,7 @@ export const list = async (apiSecret: string, listRequest: ListWebhooksRequest):
 /**
  * Adds a new webhook to the account.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/webhooks_addwebhook
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/webhooks-add-webhook/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param webhook Information about the new webhook.

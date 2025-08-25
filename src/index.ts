@@ -1,12 +1,11 @@
 /**
  * Media APIs.
- * @link https://docs.dolby.io/media-apis/reference
  */
 export * as media from './media';
 
 /**
  * Dolby Millicast APIs.
- * @link https://docs.dolby.io/streaming-apis/reference
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/millicast-api/}
  */
 export * as streaming from './streaming';
 

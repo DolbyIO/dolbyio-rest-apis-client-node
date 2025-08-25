@@ -15,10 +15,8 @@ import { MasteringPreviewJob, MasteringJob } from './types/mastering';
  *
  * To learn more, see the example requests and responses.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-music-mastering-preview-post
- *
  * @param accessToken Access token to use for authentication.
- * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-music-mastering-preview-post
+ * @param jobContent Content of the job description as a JSON payload.
  *
  * @returns The job identifier through a {@link Promise}.
  */
@@ -31,8 +29,6 @@ export const startPreview = async (accessToken: JwtToken, jobContent: string): P
  *
  * For a given {@link jobId}, this method will check if the mastering task has completed.
  * When the status is Success you'll be able to retrieve your results from the outputs locations you provided in the original POST.
- *
- * @link https://docs.dolby.io/media-apis/reference/media-music-mastering-preview-get
  *
  * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to retrieve.
@@ -54,10 +50,8 @@ export const getPreviewResults = async (accessToken: JwtToken, jobId: string): P
  *
  * To learn more, see the example requests and responses.
  *
- * @link https://docs.dolby.io/media-apis/reference/media-music-mastering-post
- *
  * @param accessToken Access token to use for authentication.
- * @param jobContent Content of the job description as a JSON payload. You can find the definition at this URL: https://docs.dolby.io/media-apis/reference/media-music-mastering-post
+ * @param jobContent Content of the job description as a JSON payload.
  *
  * @returns The job identifier through a {@link Promise}.
  */
@@ -70,8 +64,6 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
  *
  * For a given {@link jobId}, this method will check if the mastering task has completed.
  * When the status is Success you'll be able to retrieve your results from the outputs locations you provided in the original POST.
- *
- * @link https://docs.dolby.io/media-apis/reference/media-music-mastering-get
  *
  * @param accessToken Access token to use for authentication.
  * @param jobId Identifier of the job to retrieve.

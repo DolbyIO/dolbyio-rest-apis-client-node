@@ -14,8 +14,8 @@ import {
 /**
  * Lists all transcoders.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/transcoder_listtranscoders
- * @beta
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-list-transcoders/}
+ *
  * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
@@ -52,8 +52,8 @@ export const listTranscoders = async (apiSecret: string, options: ListTranscoder
 /**
  * Gets the specified cloud transcoder.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/transcoder_gettranscoder
- * @beta
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-get-transcoder/}
+ *
  * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
@@ -78,8 +78,8 @@ export const getTranscoder = async (apiSecret: string, transcoderId: string): Pr
 /**
  * Deletes the specified cloud transcoder.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/transcoder_deletetranscoder
- * @beta
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-delete-transcoder/}
+ *
  * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
@@ -104,8 +104,8 @@ export const deleteTranscoder = async (apiSecret: string, transcoderId: number):
 /**
  * Creates a cloud transcoder.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/transcoder_createtranscoder
- * @beta
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-create-transcoder/}
+ *
  * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
@@ -138,8 +138,8 @@ export const createTranscoder = async (apiSecret: string, transcoder: CreateTran
 /**
  * Configures an existing Transcoder.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/transcoder_configuretranscoder
- * @beta
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-update-transcoder/}
+ *
  * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
@@ -167,8 +167,8 @@ export const updateTranscoder = async (apiSecret: string, transcoderId: string, 
 /**
  * Starts the cloud transcoder.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/transcoder_starttranscoder
- * @beta
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-start-transcoder/}
+ *
  * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
@@ -193,8 +193,8 @@ export const startTranscoder = async (apiSecret: string, transcoderId: string): 
 /**
  * Stops the cloud transcoder.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/transcoder_stoptranscoder
- * @beta
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-stop-transcoder/}
+ *
  * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
@@ -220,8 +220,8 @@ export const stopTranscoder = async (apiSecret: string, transcoderId: string): P
  * Lists all transcoder instances.
  * Information on each instance is available for up to 90 days from its end date.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/transcoder_listtranscoderinstances
- * @beta
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-list-transcoder-instances/}
+ *
  * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team
  *
@@ -264,8 +264,8 @@ export const listTranscoderInstances = async (apiSecret: string, options: ListTr
 /**
  * Gets the specified cloud transcoder instance.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/transcoder_gettranscoderinstance
- * @beta
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-get-transcoder-instance/}
+ *
  * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
@@ -290,8 +290,8 @@ export const getTranscoderInstance = async (apiSecret: string, transcoderInstanc
 /**
  * Lists all transcoder profiles.
  *
- * @link https://docs.dolby.io/streaming-apis/reference/transcoder_listtranscoderprofiles
- * @beta
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-list-transcoder-profiles/}
+ *
  * @remarks Cloud transcoder is not currently available for general usage.
  * If you would like to opt in, please contact our Sales team.
  *
