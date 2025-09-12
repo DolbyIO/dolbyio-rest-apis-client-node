@@ -27,7 +27,7 @@ export const startPreview = async (accessToken: JwtToken, jobContent: string): P
 /**
  * Gets Mastering Preview Results
  *
- * For a given {@link jobId}, this method will check if the mastering task has completed.
+ * For a given `jobId`, this method will check if the mastering task has completed.
  * When the status is Success you'll be able to retrieve your results from the outputs locations you provided in the original POST.
  *
  * @param accessToken Access token to use for authentication.
@@ -62,7 +62,7 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
 /**
  * Gets Mastering Results
  *
- * For a given {@link jobId}, this method will check if the mastering task has completed.
+ * For a given `jobId`, this method will check if the mastering task has completed.
  * When the status is Success you'll be able to retrieve your results from the outputs locations you provided in the original POST.
  *
  * @param accessToken Access token to use for authentication.

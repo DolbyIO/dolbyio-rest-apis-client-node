@@ -21,7 +21,7 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
 /**
  * Gets Diagnose Results.
  *
- * For a given {@link jobId}, this method will check if the processing task has completed.
+ * For a given `jobId`, this method will check if the processing task has completed.
  *
  * The {@link DiagnoseJob.progress} attribute provides a percentage of job progress.
  *

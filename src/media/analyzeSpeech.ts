@@ -21,7 +21,7 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
 /**
  * Gets Speech Analytics Status.
  *
- * For a given {@link jobId}, this method will check if the processing task has completed.
+ * For a given `jobId`, this method will check if the processing task has completed.
  *
  * When {@link AnalyzeSpeechJob.status} is `Success`, you'll be able to retrieve your result from the `output` location you provided in the original {@link start} request.
  *
