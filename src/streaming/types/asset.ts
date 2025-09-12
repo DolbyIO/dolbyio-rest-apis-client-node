@@ -25,8 +25,6 @@ export interface MediaAssetStorageModel {
     type?: MediaAssetStorageType | null;
     /** Additional options for the storage location. */
     options?: UpdateStorageOptionsModel | null;
-    /** ISO 8601 date string, only used for DolbyIO storage. Sets the date to delete the asset automatically. */
-    expiration?: string | null;
 }
 
 /**
@@ -51,6 +49,8 @@ export interface CreateAssetClipRequest {
     name?: string | null;
     /** Optional, storage information. */
     storage?: MediaAssetStorageModel | null;
+    /** Optional. Provide expiry time for live recording clip. */
+    expiration?: string | null;
 }
 
 /**

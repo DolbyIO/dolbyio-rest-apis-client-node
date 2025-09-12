@@ -1,13 +1,13 @@
 import { sendPost } from './internal/httpHelpers';
 import * as Urls from '../urls';
-import { disable } from './publishToken';
+import { disableToken } from './publishToken';
 import { StreamStopResponse } from './types/stream';
 
 /**
  * Stops an active stream.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/stream-stop-stream/}
- * @remarks Prior to stopping the stream, you must call {@link disable}.
+ * @remarks Prior to stopping the stream, you must call {@link disableToken}.
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param streamId Identifier of the stream to stop.
@@ -37,7 +37,7 @@ export const stop = async (apiSecret: string, streamId: string): Promise<StreamS
  * Stops all currently active streams associated with your account.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/stream-stop-by-account/}
- * @remarks Prior to stopping a stream, you must call {@link disable}.
+ * @remarks Prior to stopping a stream, you must call {@link disableToken}.
  *
  * @param apiSecret The API Secret used to authenticate this request.
  *

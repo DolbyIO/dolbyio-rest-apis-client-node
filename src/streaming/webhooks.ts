@@ -1,6 +1,6 @@
 import { sendDelete, sendGet, sendPost, sendPut } from './internal/httpHelpers';
 import * as Urls from '../urls';
-import { Webhook, UpdateWebhookRequest, ListWebhooksRequest, AddWebhookRequest } from './types/webhooks';
+import { Webhook, UpdateWebhookRequest, ListWebhooksRequest, AddWebhookRequest, WebhookType } from './types/webhooks';
 
 /**
  * Gets the specified webhook.
@@ -132,4 +132,28 @@ export const add = async (apiSecret: string, webhook: AddWebhookRequest): Promis
     };
 
     return await sendPost<Webhook>(options);
+};
+
+/**
+ * Sends a test event for the specified webhook type.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/webhooks-test-webhook/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param webhookType Type of webhook to test.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a flag indicating if the operation was successful or not.
+ */
+export const test = async (apiSecret: string, webhookType: WebhookType): Promise<boolean> => {
+    const options = {
+        hostname: Urls.getRtsHostname(),
+        path: `/api/webhooks/test/${webhookType}`,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+    };
+
+    return await sendPost<boolean>(options);
 };

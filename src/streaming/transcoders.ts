@@ -36,6 +36,14 @@ export const listTranscoders = async (apiSecret: string, options: ListTranscoder
         params['status'] = options.status;
     }
 
+    if (options.cluster) {
+        params['cluster'] = options.cluster;
+    }
+
+    if (options.transcoderName) {
+        params['transcoderName'] = options.transcoderName;
+    }
+
     const queryOptions = {
         hostname: Urls.getRtsHostname(),
         path: '/api/transcoders',
@@ -102,12 +110,23 @@ export const deleteTranscoder = async (apiSecret: string, transcoderId: number):
 };
 
 /**
- * Creates a cloud transcoder.
+ * ## Creates a cloud transcoder.
+ *
+ * Create a Cloud Transcoder to enable Adaptive Bitrate (ABR) Simulcast streams without requiring multiple broadcast contribution sources.
+ *
+ * A Transcoder represents the configuration of your bitrate ladder from a pre-defined profile or by setting the maximum height and frameRate you'd like to target.
+ * See the 'List Transcoder Profiles' endpoint to find available Transcoder profiles. If you specify both a profile id and height/frameRate settings only the profile will be used.
+ *
+ * You should update any broadcast encoders to use this new origin server as configured by the DNS of the Transcoder which can be found in the response data.
+ *
+ * @remarks There are additional charges for a Transcoder so you should use
+ * the {@link stopTranscoder | Stop Transcoder} and {@link startTranscoder | Start Transcoder} capabilities
+ * to enable cloud transcoding only when you need to broadcast.
+ *
+ * Cloud transcoder is not currently available for general usage.
+ * If you would like to opt in, please contact our Sales team.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-create-transcoder/}
- *
- * @remarks Cloud transcoder is not currently available for general usage.
- * If you would like to opt in, please contact our Sales team.
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param transcoder Information about the new cloud transcoder.
@@ -136,7 +155,15 @@ export const createTranscoder = async (apiSecret: string, transcoder: CreateTran
 };
 
 /**
- * Configures an existing Transcoder.
+ * ## Configures an existing Transcoder.
+ *
+ * Make changes to the configuration of an existing Transcoder.
+ * Changes should take effect without requiring a server restart except for DNS prefix and cluster,
+ * which can only be updated when the transcoder is in a shutdown state.
+ *
+ * Changing the profile will require either a profile id or the height, frameRate, and passThrough.
+ * If you specify both, only the profile will be used.
+ * See the {@link listTranscoders | List Transcoder Profiles} to find available Transcoder profiles.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-update-transcoder/}
  *
@@ -165,7 +192,9 @@ export const updateTranscoder = async (apiSecret: string, transcoderId: string, 
 };
 
 /**
- * Starts the cloud transcoder.
+ * ## Starts the cloud transcoder.
+ *
+ * Enable a Transcoder by ID to accept incoming broadcast sources.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-start-transcoder/}
  *
@@ -191,7 +220,9 @@ export const startTranscoder = async (apiSecret: string, transcoderId: string): 
 };
 
 /**
- * Stops the cloud transcoder.
+ * ## Stops the cloud transcoder.
+ *
+ * Disable a Transcoder by ID so that it will shutdown and no longer accept incoming broadcast sources.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-stop-transcoder/}
  *
@@ -218,6 +249,7 @@ export const stopTranscoder = async (apiSecret: string, transcoderId: string): P
 
 /**
  * Lists all transcoder instances.
+ *
  * Information on each instance is available for up to 90 days from its end date.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/transcoder-list-transcoder-instances/}
@@ -238,6 +270,9 @@ export const listTranscoderInstances = async (apiSecret: string, options: ListTr
         isDescending: (options.isDescending ?? false).toString(),
     };
 
+    if (options.status) {
+        params['status'] = options.status;
+    }
     if (options.transcoderId) {
         params['transcoderId'] = options.transcoderId;
     }
@@ -320,3 +355,6 @@ export const listTranscoderProfiles = async (apiSecret: string, options: ListTra
 
     return await sendGet<TranscoderProfile[]>(queryOptions);
 };
+
+/** APIs related to the transcoder schedulers. */
+export * as scheduler from './transcodersSchedules';

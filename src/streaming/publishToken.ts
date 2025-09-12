@@ -1,6 +1,15 @@
 import { sendDelete, sendGet, sendPost, sendPut, sendPatch } from './internal/httpHelpers';
 import * as Urls from '../urls';
-import { ActivePublishTokenResponse, CreatePublishToken, PublishToken, UpdatePublishToken, DisablePublishTokenResponse } from './types/publishToken';
+import {
+    ActivePublishTokenResponse,
+    CreatePublishToken,
+    PublishToken,
+    UpdatePublishToken,
+    DisablePublishTokenResponse,
+    ListPublishTokensSortOptions,
+    ListPublishTokensByNameSortOptions,
+    ListPublishTokensByClusterSortOptions,
+} from './types/publishToken';
 
 /**
  * Gets the specified publish token.
@@ -12,7 +21,7 @@ import { ActivePublishTokenResponse, CreatePublishToken, PublishToken, UpdatePub
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link PublishToken} object.
  */
-export const read = async (apiSecret: string, tokenId: number): Promise<PublishToken> => {
+export const getToken = async (apiSecret: string, tokenId: number): Promise<PublishToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),
         path: `/api/publish_token/${tokenId}`,
@@ -26,7 +35,9 @@ export const read = async (apiSecret: string, tokenId: number): Promise<PublishT
 };
 
 /**
- * Deletes the publish token.
+ * ## Deletes the publish token
+ *
+ * Deletes token specified by the token's ID. The Token ID can be found using the {@link listTokens | List Tokens API} or in the API response of {@link createToken | Create Token API}.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-delete-token/}
  *
@@ -49,11 +60,11 @@ export const deleteToken = async (apiSecret: string, tokenId: number): Promise<b
 };
 
 /**
- * @deprecated
- * 
- * Updates the publish token.
+ * ## Updates the publish token
  *
- * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-update-token/}
+ * Update token stream information as well as updates token itself.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-2-update-token/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param tokenId Identifier of the publish token to update.
@@ -61,10 +72,10 @@ export const deleteToken = async (apiSecret: string, tokenId: number): Promise<b
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link PublishToken} object.
  */
-export const update = async (apiSecret: string, tokenId: number, publishToken: UpdatePublishToken): Promise<PublishToken> => {
+export const updateToken = async (apiSecret: string, tokenId: number, publishToken: UpdatePublishToken): Promise<PublishToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),
-        path: `/api/publish_token/${tokenId}`,
+        path: `/api/v2/publish_token/${tokenId}`,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
@@ -82,28 +93,19 @@ export const update = async (apiSecret: string, tokenId: number, publishToken: U
  * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-list-tokens/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
- * @param sortBy How to sort the response.
- * @param page Number of the page to retrieve.
- * @param itemsOnPage Number of items per page.
- * @param isDescending Sort by descending order.
+ * @param options Options to sort the response.
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives an array of {@link PublishToken} objects.
  */
-export const list = async (
-    apiSecret: string,
-    sortBy: 'Name' | 'AddedOn',
-    page: number,
-    itemsOnPage: number,
-    isDescending: boolean = false
-): Promise<PublishToken[]> => {
+export const listTokens = async (apiSecret: string, options: ListPublishTokensSortOptions): Promise<PublishToken[]> => {
     const params = {
-        sortBy,
-        page: page.toString(),
-        itemsOnPage: itemsOnPage.toString(),
-        isDescending: isDescending.toString(),
+        sortBy: options.sortBy,
+        page: options.page.toString(),
+        itemsOnPage: options.itemsOnPage.toString(),
+        isDescending: (options.isDescending ?? false).toString(),
     };
 
-    const options = {
+    const queryOptions = {
         hostname: Urls.getRtsHostname(),
         path: '/api/publish_token/list',
         params,
@@ -113,11 +115,89 @@ export const list = async (
         },
     };
 
-    return await sendGet<PublishToken[]>(options);
+    return await sendGet<PublishToken[]>(queryOptions);
 };
 
 /**
- * Creates a publish token.
+ * ## List Publish Tokens By Name
+ *
+ * List all tokens with specific sorting and pagination that matches given token name or stream name.
+ * Tokens with wildcard stream names are excluded from the responses.
+ * If response array is empty, you have reached the end of the list ordering.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-list-tokens-by-name/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param options Options to sort the response.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives an array of {@link PublishToken} objects.
+ */
+export const listTokensByName = async (apiSecret: string, options: ListPublishTokensByNameSortOptions): Promise<PublishToken[]> => {
+    const params = {
+        name: options.name,
+        sortBy: options.sortBy,
+        page: options.page.toString(),
+        itemsOnPage: options.itemsOnPage.toString(),
+        isDescending: (options.isDescending ?? false).toString(),
+    };
+
+    if (options.filterBy) {
+        params['filterBy'] = options.filterBy;
+    }
+
+    const queryOptions = {
+        hostname: Urls.getRtsHostname(),
+        path: '/api/publish_token/list_by_name',
+        params,
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+    };
+
+    return await sendGet<PublishToken[]>(queryOptions);
+};
+
+/**
+ * ## List Publish Tokens By Cluster
+ *
+ * List all tokens with specific sorting and pagination that matches given cluster region.
+ * If response array is empty, you have reached the end of the list ordering.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-list-tokens-by-cluster/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param options Options to sort the response.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives an array of {@link PublishToken} objects.
+ */
+export const listTokensByCluster = async (apiSecret: string, options: ListPublishTokensByClusterSortOptions): Promise<PublishToken[]> => {
+    const params = {
+        cluster: options.cluster,
+        sortBy: options.sortBy,
+        page: options.page.toString(),
+        itemsOnPage: options.itemsOnPage.toString(),
+        isDescending: (options.isDescending ?? false).toString(),
+    };
+
+    const queryOptions = {
+        hostname: Urls.getRtsHostname(),
+        path: '/api/publish_token/list_by_cluster',
+        params,
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+    };
+
+    return await sendGet<PublishToken[]>(queryOptions);
+};
+
+/**
+ * ## Creates a publish token
+ *
+ * Creates new token given a label and associated stream name(s).
+ * Stream names are limited to 128 characters.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-create-token/}
  *
@@ -126,7 +206,7 @@ export const list = async (
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link PublishToken} object.
  */
-export const create = async (apiSecret: string, publishToken: CreatePublishToken): Promise<PublishToken> => {
+export const createToken = async (apiSecret: string, publishToken: CreatePublishToken): Promise<PublishToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),
         path: '/api/publish_token/',
@@ -201,7 +281,7 @@ export const getAllActivePublishTokenId = async (apiSecret: string): Promise<Act
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link DisablePublishTokenResponse} object.
  */
-export const disable = async (apiSecret: string, tokenIds: number[]): Promise<DisablePublishTokenResponse> => {
+export const disableToken = async (apiSecret: string, tokenIds: number[]): Promise<DisablePublishTokenResponse> => {
     const body = {
         tokenIds,
     };
@@ -218,4 +298,30 @@ export const disable = async (apiSecret: string, tokenIds: number[]): Promise<Di
     };
 
     return await sendPatch<DisablePublishTokenResponse>(options);
+};
+
+/**
+ * ## Sync restreams
+ *
+ * Apply any re-stream configuration changes for running streams immediately.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/publish-token-v-1-sync-restream/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param tokenId Identifier of the publish token to sync.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives a flag to indicate if the operation succeeded or not.
+ */
+export const syncRestream = async (apiSecret: string, tokenId: string): Promise<boolean> => {
+    const options = {
+        hostname: Urls.getRtsHostname(),
+        path: `/api/publish_token/${tokenId}/restream/sync`,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+    };
+
+    return await sendPost<boolean>(options);
 };
