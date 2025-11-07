@@ -1,6 +1,6 @@
 import * as Urls from '../urls';
-import { CreateAssetClipRequest, ListMediaAssetsQueryParams, AssetResponseData } from './types/asset';
-import { sendDelete, sendGet, sendPost } from './internal/httpHelpers';
+import { CreateAssetClipRequest, ListMediaAssetsQueryParams, AssetResponseData, UploadCredentials, RegisterMediaAssetRequest, UpdateMediaAssetRequest } from './types/asset';
+import { sendDelete, sendGet, sendPatch, sendPost } from './internal/httpHelpers';
 import { toDictString } from './internal/stringHelpers';
 
 /**
@@ -31,7 +31,7 @@ import { toDictString } from './internal/stringHelpers';
 export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequest, idempotencyKey?: string) => {
     const options = {
         hostname: Urls.getRtsHostname(),
-        path: `/api/v3/media/assets`,
+        path: '/api/v3/media/assets',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
@@ -156,4 +156,82 @@ export const deleteAllAssets = async (apiSecret: string, mediaAssetType: 'record
     };
 
     return await sendDelete<{ id?: string; error?: string }[] | null>(options);
+};
+
+/**
+ * ## Generate Upload Credentials
+ *
+ * Generate AWS access credentials for uploading media to a specified S3 location.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-get-upload-credentials/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ */
+export const generateUploadCredentials = async (apiSecret: string) => {
+    const options = {
+        hostname: Urls.getRtsHostname(),
+        path: '/api/v3/media/assets/upload',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+    };
+
+    return await sendPost<UploadCredentials>(options);
+};
+
+/**
+ * ## Registers Media Asset
+ *
+ * Register media asset upon completion of content upload.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-register-media-asset/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param registrationRequest The request body for creating a new media asset.
+ */
+export const registerMediaAsset = async (apiSecret: string, registrationRequest: RegisterMediaAssetRequest) => {
+    const options = {
+        hostname: Urls.getRtsHostname(),
+        path: '/api/v3/media/assets/register',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+        body: JSON.stringify(registrationRequest),
+    };
+
+    return await sendPost<AssetResponseData>(options);
+};
+
+/**
+ * ## Updates Media Asset
+ * 
+ * Update media asset settings.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-update-media-asset/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param updateRequest The request body for creating a new media asset.
+ */
+export const updateMediaAsset = async (apiSecret: string, updateRequest: UpdateMediaAssetRequest) => {
+    const body = {
+        mediaDistributionId: updateRequest.mediaDistributionId,
+        customPath: updateRequest.customPath,
+    };
+
+    const options = {
+        hostname: Urls.getRtsHostname(),
+        path: `/api/v3/media/assets/${updateRequest.mediaAssetId}`,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+        body: JSON.stringify(body),
+    };
+
+    return await sendPatch<AssetResponseData>(options);
 };

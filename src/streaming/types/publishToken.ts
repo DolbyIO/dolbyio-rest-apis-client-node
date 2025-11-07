@@ -303,6 +303,7 @@ export interface DisablePublishTokenResponse {
     }[];
 }
 
+/** Represents a restream target. */
 export interface RestreamTarget {
     /** The endpoint to restream media */
     url: string;

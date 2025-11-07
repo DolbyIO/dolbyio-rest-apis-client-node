@@ -97,6 +97,18 @@ export interface RecordMetadata {
 }
 
 /**
+ * Represents the download URL for an asset.
+ */
+export interface RecordDownloadUrl {
+    /** Download URL. */
+    downloadUrl?: string;
+    /** URL. */
+    url?: string;
+    /** Expiration of the download URL. */
+    downloadExpiresOn?: string;
+}
+
+/**
  * Response data for the feed selection from where the clip was created.
  */
 export interface MediaAssetFeedSelectionModel {
@@ -142,6 +154,8 @@ export interface AssetResponseData {
     removed?: string | null;
     /** Optional, asset metadata. */
     metadata?: RecordMetadata;
+    /** Optional, asset download URL. */
+    download?: RecordDownloadUrl;
 }
 
 /**
@@ -177,4 +191,67 @@ export interface ListMediaAssetsQueryParams {
     limit?: number;
     /** Optional, defaults to `false`, sort descending boolean. */
     desc?: boolean;
+}
+
+/**
+ * Represents a set of upload credentials for assets.
+ */
+export interface UploadCredentials {
+    /** AWS Access Key ID. */
+    accessKeyId?: string;
+    /** AWS Secret Access Key. */
+    secretAccessKey?: string;
+    /** Session token. */
+    sessionToken?: string;
+    /** Credentials expire within 1 hr by default. Please upload and register media assets before expiry.. */
+    expiration?: string;
+    /** Path to upload media asset contents. Path is in the form of `s3://<bucketName>/<objectPrefix>/`. */
+    path?: string;
+    /** S3 bucket to which content can be uploaded to. */
+    bucketName?: string;
+    /** Prefix of S3 locaton to which content can be uploaded to. */
+    objectPrefix?: string;
+}
+
+/**
+ * The information required to register a media asset.
+ */
+export interface RegisterMediaAssetRequest {
+    /**
+     * Provide the prefix to the location where files have been uploaded. We will inspect our internal storage for this objectPrefix and if we find:
+     * * An exact match - we will obtain and serve a copy of the single file and ignore any prefix matches
+     * * A prefix match - we will obtain and serve a copy of all the content under the specified prefix (i.e. files under s3:////)
+     */
+    objectPrefix: string;
+    /**
+     * Optional. Specify the entry point to the media using its filename relative to the `objectPrefix` e.g. main.m3u8. This ensures that the discovery url returned by our service links to the file.
+     * If an object with key `s3://<bucketName>/<objectPrefix>/<entrypoint>` is not found, then the registration process will fail.
+     */
+    entrypoint?: string;
+    /** Optional. Provide a label for the media asset. */
+    name?: string;
+    /**
+     * Optional. If not specified, media asset never expires.
+     * ISO 8601 format should be used (eg 2020-01-01T00:00:00Z), all times are expected to be UTC.
+     */
+    expiration?: string;
+    /** ID of the media distribution used to authenticate viewing of this media asset. */
+    mediaDistributionId?: string;
+    /** Customise the download url path. */
+    customPath?: string;
+}
+
+/**
+ * The information required to update a media asset.
+ */
+export interface UpdateMediaAssetRequest {
+    /** Identifier of the media asset to update. */
+    mediaAssetId: string;
+    /**
+     * ID of the media distribution used to authenticate viewing of this media asset.
+     * Updates may take up to an hour to take effect.
+     */
+    mediaDistributionId?: string;
+    /** Customise the download url path. */
+    customPath?: string;
 }
