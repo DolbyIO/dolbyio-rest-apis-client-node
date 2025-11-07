@@ -1,26 +1,22 @@
+import { ListSortOptions } from './core';
+
 /** Status of a transcoder. */
 export type TranscoderStatus = 'Provisioning' | 'Active' | 'Error' | 'Shutdown' | 'Deleted' | 'ShuttingDown' | 'Starting' | 'Deleting';
-
-/** Represents the options to sort a response. */
-export interface ListSortOptions<SortByType> {
-    /** How to sort the response. */
-    sortBy: SortByType;
-    /** Number of the page to retrieve. Minimum is 1. */
-    page: number;
-    /** Number of items per page. Must be between 1 and 100. */
-    itemsOnPage: number;
-    /** Sort by descending order. */
-    isDescending?: boolean;
-}
 
 /** Represents the options to sort the response for listing transcoders. */
 export interface ListTranscodersSortOptions extends ListSortOptions<'CreatedDate'> {
     /** List the transcoders with this status. */
     status?: TranscoderStatus;
+    /** Returns only Transcoders for the given cluster(s). */
+    cluster?: string[];
+    /** Returns only Transcoders that match the given string. Will include partial sub-string matches. */
+    transcoderName?: string;
 }
 
 /** Represents the options to sort the response for listing transcoders. */
 export interface ListTranscodersInstancesSortOptions extends ListSortOptions<'CreatedDate'> {
+    /** List the transcoders with this status. */
+    status?: TranscoderStatus;
     /** List the instances for this transcoder. */
     transcoderId?: string;
     /** */
@@ -76,9 +72,29 @@ export interface TranscoderProfile {
     /** Frame rate of input stream. */
     frameRate: number;
     /** */
-    isDefault: boolean;
-    /** */
+    isDefault?: boolean;
+    /** Indicates that the top layer is used as is and bypasses transcoding without additional processing. */
     passThrough: boolean;
+    /**
+     * The layers the Transcoder will produce for distribution.
+     * These values are pre-determined following the Millicast bitrate ladder as step-down layers from the overall Transcoder configuration.
+     */
+    layers: {
+        /** The height for this layer. */
+        height?: number;
+        /** The width for this layer. */
+        width?: number;
+        /** The target frames-per-second for this layer. */
+        fps?: number;
+        /** The codec used for this layer. */
+        codec?: string;
+        /** The target bitrate for this layer. */
+        bitrate?: number;
+        /** The I-Frame interval for this layer. */
+        intraPeriod?: number;
+        /** Allow transrating of layer. */
+        allowTransrating?: boolean;
+    }[];
 }
 
 /** Represents a transcoder instance. */

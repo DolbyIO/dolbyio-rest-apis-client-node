@@ -23,7 +23,7 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
 /**
  * Gets Enhance Results
  *
- * For a given {@link jobId}, this method will check if the processing task has completed and return the enhanced results.
+ * For a given `jobId`, this method will check if the processing task has completed and return the enhanced results.
  *
  * When the {@link EnhanceJob.status} is Success you'll be able to retrieve your result from the output location you provided in the original POST.
  *

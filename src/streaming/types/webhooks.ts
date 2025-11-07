@@ -1,3 +1,5 @@
+import { update } from '../webhooks';
+
 /** Represents a webhook. */
 export interface Webhook {
     /** Identifier of the webhook. */
@@ -14,8 +16,23 @@ export interface Webhook {
     isThumbnailHooks: boolean;
     /** If `true` sends webhook events on transcoder instance updates. */
     isTranscoderHooks: boolean;
-    /** If `true` sends webhook events on clip `start/error/complete/deleted`. */
-    isClipHooks: boolean;
+    /**
+     * If `true` sends webhook events media asset `processing/errored/completed/deleted`.
+     * Only media assets of type `recording` and `clip` types can trigger webhooks.
+     */
+    isMediaHooks: boolean;
+    /** If `true` sends webhook events on important events related to viewers. */
+    isViewerConnectionHooks: boolean;
+    /**
+     * Your webhook may be temporarily disabled if too many attempted webhook events timeout.
+     * You can re-enable it immediately by updating the url or setting {@link UpdateWebhookRequest.reEnable} to `true` via {@link update | Update Webhook}.
+     */
+    disabled?: {
+        /**  */
+        until: string;
+        /** Reason why the webhook was disabled. */
+        reason: string;
+    };
 }
 
 /** Represents a webhook update request. */
@@ -32,8 +49,12 @@ export interface UpdateWebhookRequest {
     isThumbnailHooks?: boolean;
     /** Set to `true` to send webhook events on transcoder instance updates. */
     isTranscoderHooks?: boolean;
-    /** Set to `true` to send webhook events on clip `start/error/complete/deleted`. */
-    isClipHooks?: boolean;
+    /** Set to `true` to send webhook events on media assets updates. */
+    isMediaHooks?: boolean;
+    /** Set to `true` to send webhook events on viewer connection updates. */
+    isViewerConnectionHooks?: boolean;
+    /** Set to `true` to immediately re-enable the webhook if it has been temporarily disabled. */
+    reEnable?: boolean;
 }
 
 /** Represents a webhook listing request. */
@@ -52,8 +73,6 @@ export interface AddWebhookRequest {
     url: string;
     /** Set to `true` to send webhook events on feeds `start/stop`. */
     isFeedHooks: boolean;
-    /** Set to `true` to send webhook events on recording `start/error/complete/deleted`. */
-    isRecordingHooks: boolean;
     /**
      * Set to `true` to send webhook events on transcoder instance updates.
      * @defaultValue `false`.
@@ -65,8 +84,17 @@ export interface AddWebhookRequest {
      */
     isTranscoderHooks?: boolean;
     /**
-     * Set to `true` to send webhook events on clip `start/error/complete/deleted`.
+     * Set to `true` to send webhook events on media asset `processing/errored/completed/deleted`.
+     * Only media assets of type `recording` and `clip` types can trigger webhooks.
      * @defaultValue `false`.
      */
-    isClipHooks?: boolean;
+    isMediaHooks?: boolean;
+    /**
+     * Set to `true` to send webhook events on important events related to viewers.
+     * @defaultValue `false`.
+     */
+    isViewerConnectionHooks?: boolean;
 }
+
+/** Types of webhook events. */
+export type WebhookType = 'Recordings' | 'Thumbnail' | 'Transcoder' | 'Media' | 'Feeds' | 'ViewerConnection';

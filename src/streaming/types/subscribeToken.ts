@@ -1,3 +1,5 @@
+import { ListSortOptions } from './core';
+
 /** Represents a subscribe token stream name. */
 export interface SubscribeTokenStream {
     /** Name of the stream. */
@@ -91,8 +93,8 @@ export interface SubscribeToken {
             isEnabled?: boolean;
             /**
              * List of cluster IDs to geo cascade subscribe stream.
-             * Cannot be empty when {@link isEnabled} is `true`.
-             * This list is ignored when {@link isEnabled} is set to `false`.
+             * Cannot be empty when `isEnabled` is `true`.
+             * This list is ignored when `isEnabled` is set to `false`.
              * @defaultValue Defaults to `["all"]` if unset.
              */
             clusters?: string[];
@@ -109,14 +111,14 @@ export interface SubscribeToken {
 export interface UpdateSubscribeToken {
     /** Name for the token that is used to display in the dashboard. */
     label?: string;
-    /** Refresh the publish token. */
+    /** Generate new unique token, invalidating previous token. */
     refreshToken?: boolean;
     /** Enables or disable the publish token. */
     isActive?: boolean;
     /** List of stream names to add to the list. */
     addTokenStreams?: SubscribeTokenStream[];
     /** List of stream names to remove from the list. */
-    removeTokenStreams?: SubscribeTokenStream[];
+    removeTokenStreams?: string[];
     /** Update the list of allowed origins. */
     updateAllowedOrigins?: string[];
     /** Update the list of allows IP addresses. */
@@ -189,4 +191,15 @@ export interface CreateSubscribeToken {
         /** Tracking identifier for Stream Syndication. */
         trackingId?: string;
     };
+}
+
+/** Represents the options to sort the response for listing subscribe tokens. */
+export interface ListSubscribeTokensSortOptions extends ListSortOptions<'Name'> {}
+
+/** Represents the options to sort the response for listing subscribe tokens by name. */
+export interface ListSubscribeTokensByNameSortOptions extends ListSortOptions<'Name'> {
+    /** Name to filter. */
+    name: string;
+    /** Filter by token or stream name. */
+    filterBy?: 'Token' | 'StreamName';
 }

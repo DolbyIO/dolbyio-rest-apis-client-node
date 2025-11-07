@@ -1,12 +1,13 @@
 {
     "name": "@dolbyio/dolbyio-rest-apis-client",
-    "version": "5.1.1",
-    "description": "Node.JS wrapper for the Dolby.io REST APIs",
+    "version": "6.0.0",
+    "description": "Node.JS wrapper for the Dolby OptiView REST APIs",
     "main": "dist/index.js",
     "scripts": {
         "build": "tsc && babel ./src --out-dir dist --extensions .ts",
         "docs": "typedoc",
-        "prettier": "prettier --write ."
+        "prettier": "prettier --write .",
+        "watch_docs": "npm-watch docs"
     },
     "repository": {
         "type": "git",
@@ -21,24 +22,36 @@
         "rest",
         "rest-api",
         "webrtc",
-        "dolbyio"
+        "dolbyio",
+        "optiview",
+        "millicast"
     ],
     "files": [
         "dist/*",
         "README.md"
     ],
+    "watch": {
+        "docs": {
+            "patterns": [
+                "src"
+            ],
+            "extensions": "ts",
+            "quiet": false
+        }
+    },
     "devDependencies": {
         "@babel/cli": "^7.28.3",
         "@babel/core": "^7.28.3",
         "@babel/preset-env": "^7.28.3",
-        "@babel/preset-typescript": "^7.27.1",
+        "@babel/preset-typescript": "^7.28.5",
         "@types/follow-redirects": "^1.14.4",
-        "@types/node": "^24.3.0",
+        "@types/node": "^24.10.0",
         "babel-plugin-inline-replace-variables": "^1.3.1",
+        "npm-watch": "^0.13.0",
         "prettier": "^3.6.2",
-        "typedoc": "^0.28.11",
-        "typedoc-plugin-mdn-links": "^5.0.9",
-        "typescript": "^5.9.2"
+        "typedoc": "^0.28.14",
+        "typedoc-plugin-mdn-links": "^5.0.10",
+        "typescript": "^5.9.3"
     },
     "dependencies": {
         "follow-redirects": "^1.15.11",

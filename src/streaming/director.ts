@@ -9,12 +9,14 @@ import { PublishResponse, SubscribeResponse } from './types/director';
  *
  * @param publishingToken The publishing token.
  * @param streamName The name of the stream.
+ * @param streamAccountId The account identifier.
  *
  * @returns A {@link PublishResponse} object through a {@link Promise}.
  */
-export const publish = async (publishingToken: string, streamName: string): Promise<PublishResponse> => {
+export const publish = async (publishingToken: string, streamName: string, streamAccountId?: string): Promise<PublishResponse> => {
     const body = {
         streamName: streamName,
+        streamAccountId: streamAccountId,
     };
 
     const options = {

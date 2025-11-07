@@ -1,4 +1,5 @@
-import { getActivePublishTokenId, getAllActivePublishTokenId, disable } from '../publishToken';
+import { getActivePublishTokenId, getAllActivePublishTokenId, disableToken } from '../publishToken';
+import { ListSortOptions } from './core';
 
 /** Represents a publish token stream name. */
 export interface PublishTokenStream {
@@ -13,7 +14,9 @@ export interface PublishToken {
     /** Identifier of the publish token. */
     id: string;
     /** Name for the token that is used to display in the dashboard. */
-    label: string;
+    label?: string;
+    /** Priority value for streams. */
+    priority?: number;
     /** Publish token. */
     token: string;
     /** Date when the publish token was created. */
@@ -65,11 +68,7 @@ export interface PublishToken {
     subscribeRequiresAuth: boolean;
     /** Is the publish token allowed to record the specified streams. */
     record: boolean;
-    /**
-     * Is the publish token allowed to create clips the specified streams.
-     * @beta
-     * @remarks Live clipping is currently in Beta phase.
-     */
+    /** Is the publish token allowed to create clips the specified streams. */
     clip: boolean;
     /** Is multisource enabled or not. */
     multisource: boolean;
@@ -83,17 +82,8 @@ export interface PublishToken {
     srtPassphrase?: string;
     /** Geo cascade settings for cascading stream to other clusters. */
     geoCascade: PublishTokenGeoCascade;
-    /**
-     * List of endpoints to restream the stream.
-     * @beta
-     * @remarks Restream is currently in Beta phase.
-     */
-    restream: {
-        /** The endpoint to restream media */
-        url: string;
-        /** Secret key for restreaming endpoint. */
-        key: string;
-    }[];
+    /** List of endpoints to restream the stream. */
+    restream: RestreamTarget[];
     /**
      * Token effective settings for properties that use account default settings.
      * Value for each property will either be token or account level settings.
@@ -122,6 +112,8 @@ export interface PublishToken {
         /** Geo cascade settings for cascading stream to other clusters. */
         geoCascade: PublishTokenGeoCascade;
     };
+    /** Identifier of the integration mechanism. */
+    integrationId: 'None' | 'Maestro' | 'Passthru' | 'Internal';
 }
 
 /** Represents the changes requested for a publish token. */
@@ -137,17 +129,17 @@ export interface UpdatePublishToken {
     /** List of stream names to remove from the list. */
     removeTokenStreams?: PublishTokenStream[];
     /** Update the list of allowed origins. */
-    updateAllowedOrigins?: string[];
+    allowedOrigins?: string[];
     /** Update the list of allows IP addresses. */
-    updateAllowedIpAddresses?: string[];
+    allowedIpAddresses?: string[];
     /** Update the bind IPs on usage value. */
-    updateBindIpsOnUsage?: number;
+    bindIpsOnUsage?: number;
     /** Update the list of allowed countries. */
-    updateAllowedCountries?: string[];
+    allowedCountries?: string[];
     /** Update the list of denied countries. */
-    updateDeniedCountries?: string[];
+    deniedCountries?: string[];
     /** Update the origin cluster. */
-    updateOriginCluster?: string;
+    originCluster?: string;
     /** Is authentication required to subscribe to the specified streams. */
     subscribeRequiresAuth?: boolean;
     /** Allow or disallow to record the specified streams. */
@@ -161,24 +153,13 @@ export interface UpdatePublishToken {
     /** Display passphrase encryption settings in the dashboard as well as returning the SRT passphrase in response to this API call. */
     displaySrtPassphrase?: boolean;
     /** Update the geo cascading rules for this publish token. */
-    updateGeoCascade?: PublishTokenGeoCascade;
-    /**
-     * Allow or disallow to create clips of the specified streams.
-     * @beta
-     * @remarks Live clipping is currently in Beta phase.
-     */
+    geoCascade?: PublishTokenGeoCascade;
+    /** Allow or disallow to create clips of the specified streams. */
     clip?: boolean;
-    /**
-     * List of endpoints to restream media.
-     * @beta
-     * @remarks Restream is currently in Beta phase.
-     */
-    updateRestream?: {
-        /** The endpoint to restream the stream */
-        url: string;
-        /** Secret key for restreaming endpoint. */
-        key: string;
-    }[];
+    /** List of endpoints to restream media. */
+    restream?: RestreamTarget[];
+    /** Set default priority value for streams. Set to null to clear value. */
+    priority?: number;
 }
 
 /** Represents the information to create a publish token. */
@@ -273,21 +254,12 @@ export interface CreatePublishToken {
      * Set to `true` to allow this publish token to enable live clipping on specified streams.
      * This flag cannot be set to `true` when the {@link record} flag is enabled.
      * @defaultValue `false`.
-     * @beta
-     * @remarks Live clipping is currently in Beta phase.
      */
     clip?: boolean;
     /**
      * List of endpoints to restream the stream.
-     * @beta
-     * @remarks Restream is currently in Beta phase.
      */
-    restream?: {
-        /** The endpoint to restream media */
-        url: string;
-        /** Secret key for restreaming endpoint. */
-        key: string;
-    }[];
+    restream?: RestreamTarget[];
 }
 
 /**
@@ -317,7 +289,7 @@ export interface ActivePublishTokenResponse {
 }
 
 /**
- * Represents the response to a {@link disable} request.
+ * Represents the response to a {@link disableToken} request.
  */
 export interface DisablePublishTokenResponse {
     /** List of tokens successfully disabled. */
@@ -329,4 +301,36 @@ export interface DisablePublishTokenResponse {
         /** Reason why the token has failed to be disabled. */
         errorMessage?: string;
     }[];
+}
+
+/** Represents a restream target. */
+export interface RestreamTarget {
+    /** The endpoint to restream media */
+    url: string;
+    /** Secret key for restreaming endpoint. */
+    key: string;
+    /** Label for restreaming endpoint. */
+    label?: string;
+    /**
+     * Enable or disable restream endpoint.
+     * @default `true`
+     */
+    enabled?: string;
+}
+
+/** Represents the options to sort the response for listing publish tokens. */
+export interface ListPublishTokensSortOptions extends ListSortOptions<'Name'> {}
+
+/** Represents the options to sort the response for listing subscribe tokens by name. */
+export interface ListPublishTokensByNameSortOptions extends ListSortOptions<'Name'> {
+    /** Name to filter. */
+    name: string;
+    /** Filter by token or stream name. */
+    filterBy?: 'Token' | 'StreamName';
+}
+
+/** Represents the options to sort the response for listing subscribe tokens by name. */
+export interface ListPublishTokensByClusterSortOptions extends ListSortOptions<'Name'> {
+    /** Cluster to filter. */
+    cluster: string;
 }

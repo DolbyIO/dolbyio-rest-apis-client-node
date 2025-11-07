@@ -1,9 +1,33 @@
 import * as Urls from '../urls';
-import { CreateAssetClipRequest, ListMediaAssetsQueryParams, AssetResponseData } from './types/asset';
-import { sendDelete, sendGet, sendPost } from './internal/httpHelpers';
+import {
+    CreateAssetClipRequest,
+    ListMediaAssetsQueryParams,
+    AssetResponseData,
+    UploadCredentials,
+    RegisterMediaAssetRequest,
+    UpdateMediaAssetRequest,
+} from './types/asset';
+import { sendDelete, sendGet, sendPatch, sendPost } from './internal/httpHelpers';
+import { toDictString } from './internal/stringHelpers';
 
 /**
- * Creates a new media asset.
+ * ## Creates Media Asset
+ *
+ * Create a live clip from an ongoing live stream. You must provide the stream name and start time, and once processing is complete the media asset of the type clip will be available for retrieval.
+ *
+ * If a stop time is not specified, the time the request was received will be used. The clip duration must be a minimum of ten (10) seconds and cannot exceed eight (8) hours.
+ *
+ * There are a few cases where more than one clip will be generated from a single request.
+ * 1. A stream went offline during the time range will generate separate clips for the period before and after the restart.
+ * 1. A stream that is configured for multi-source when a simulcastId is not given in the request to select a single layer.
+ * 1. A stream that is configured for multi-bitrate contribution or redundant fallback ingest and a sourceId is not given in the request to specify which to use. In that scenario, sources will be ranked based on the following criteria and the highest ranked source is selected for clipping:
+ *      * priority
+ *      * quality
+ *      * start time
+ *
+ * By using an `Idempotency-Key` header in your requests, you can avoid generating more than one identical clip should the same request be received more than once.
+ * To avoid unnecessary charges, it is recommended you use a common identifier for live clip requests based on a common source stream and time range.
+ * For background on the usage of this header, please refer to the {@link https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/ | IETF Draft}.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-create-media-asset/}
  *
@@ -14,7 +38,7 @@ import { sendDelete, sendGet, sendPost } from './internal/httpHelpers';
 export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequest, idempotencyKey?: string) => {
     const options = {
         hostname: Urls.getRtsHostname(),
-        path: `/api/v3/media/assets`,
+        path: '/api/v3/media/assets',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
@@ -28,7 +52,13 @@ export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequ
 };
 
 /**
- * Lists media assets.
+ * ## Lists Media Assets
+ *
+ * List media assets, excluding those that have been deleted. A media asset can be:
+ * 1. A `"recording"` that is from the full duration of the stream
+ * 1. A `"clip"` which is generated from {@link create | Create Media Asset}
+ * 1. A `"timeline"` which is a series of segments that is buffered in a cache and available for clipping. A `"timeline"` is capped at a 12 hour duration or whenever the stream is re-started.
+ * 1. Of type `storageValidation`, which is a record reflecting the outcome of triggering Validate Third Party Storage Setup
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-list-media-assets/}
  *
@@ -53,8 +83,10 @@ export const list = async (apiSecret: string, params: ListMediaAssetsQueryParams
 };
 
 /**
+ * ## Delete Media Assets
+ *
  * Deletes multiple media assets from storage.
- * 
+ *
  * @remarks Only media assets with status Complete or Error can be deleted.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-delete-media-assets/}
@@ -80,7 +112,9 @@ export const deleteAssets = async (apiSecret: string, assetIds: string[]) => {
 };
 
 /**
- * Reads a media asset.
+ * ## Read Media Asset
+ *
+ * Gets media asset specified by id. Includes temporary download link if the media asset is complete.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-read-media-asset/}
  *
@@ -102,12 +136,109 @@ export const read = async (apiSecret: string, assetId: string) => {
     return await sendGet<AssetResponseData>(options);
 };
 
-type Dict<T> = { [key: string]: T };
+/**
+ * ## Delete All Media Assets
+ *
+ * Deletes all media assets of a specified type from storage.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-delete-media-assets-2/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param mediaAssetType Asset type to delete.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives an array of asset deletion tasks that failed.
+ */
+export const deleteAllAssets = async (apiSecret: string, mediaAssetType: 'recording' | 'clip' | 'storageValidation' | 'timeline') => {
+    const options = {
+        hostname: Urls.getRtsHostname(),
+        path: 'api/v3/media/assets/all',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+        params: {
+            type: mediaAssetType,
+        },
+    };
 
-function toDictString(obj: Record<string, any>): Dict<string> {
-    const result: Dict<string> = {};
-    for (const [key, value] of Object.entries(obj)) {
-        result[key] = String(value); // Ensure all values are converted to strings
-    }
-    return result;
-}
+    return await sendDelete<{ id?: string; error?: string }[] | null>(options);
+};
+
+/**
+ * ## Generate Upload Credentials
+ *
+ * Generate AWS access credentials for uploading media to a specified S3 location.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-get-upload-credentials/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ */
+export const generateUploadCredentials = async (apiSecret: string) => {
+    const options = {
+        hostname: Urls.getRtsHostname(),
+        path: '/api/v3/media/assets/upload',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+    };
+
+    return await sendPost<UploadCredentials>(options);
+};
+
+/**
+ * ## Registers Media Asset
+ *
+ * Register media asset upon completion of content upload.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-register-media-asset/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param registrationRequest The request body for creating a new media asset.
+ */
+export const registerMediaAsset = async (apiSecret: string, registrationRequest: RegisterMediaAssetRequest) => {
+    const options = {
+        hostname: Urls.getRtsHostname(),
+        path: '/api/v3/media/assets/register',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+        body: JSON.stringify(registrationRequest),
+    };
+
+    return await sendPost<AssetResponseData>(options);
+};
+
+/**
+ * ## Updates Media Asset
+ *
+ * Update media asset settings.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-update-media-asset/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param updateRequest The request body for creating a new media asset.
+ */
+export const updateMediaAsset = async (apiSecret: string, updateRequest: UpdateMediaAssetRequest) => {
+    const body = {
+        mediaDistributionId: updateRequest.mediaDistributionId,
+        customPath: updateRequest.customPath,
+    };
+
+    const options = {
+        hostname: Urls.getRtsHostname(),
+        path: `/api/v3/media/assets/${updateRequest.mediaAssetId}`,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+        body: JSON.stringify(body),
+    };
+
+    return await sendPatch<AssetResponseData>(options);
+};

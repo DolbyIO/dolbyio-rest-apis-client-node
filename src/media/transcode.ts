@@ -19,7 +19,7 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
 /**
  * Gets Transcode Results.
  *
- * For a given {@link jobId}, this method will check if the processing task has completed and return the transcode results.
+ * For a given `jobId`, this method will check if the processing task has completed and return the transcode results.
  *
  * When the {@link TranscodeJob.status} is Success you'll be able to retrieve your result from the output location you provided in the original POST.
  *

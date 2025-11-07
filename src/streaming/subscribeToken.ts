@@ -1,6 +1,12 @@
 import { sendDelete, sendGet, sendPost, sendPut } from './internal/httpHelpers';
 import * as Urls from '../urls';
-import { CreateSubscribeToken, SubscribeToken, UpdateSubscribeToken } from './types/subscribeToken';
+import {
+    CreateSubscribeToken,
+    SubscribeToken,
+    UpdateSubscribeToken,
+    ListSubscribeTokensSortOptions,
+    ListSubscribeTokensByNameSortOptions,
+} from './types/subscribeToken';
 
 /**
  * Gets the specified subscribe token.
@@ -12,7 +18,7 @@ import { CreateSubscribeToken, SubscribeToken, UpdateSubscribeToken } from './ty
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link SubscribeToken} object.
  */
-export const read = async (apiSecret: string, tokenId: number): Promise<SubscribeToken> => {
+export const getToken = async (apiSecret: string, tokenId: number): Promise<SubscribeToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),
         path: `/api/subscribe_token/${tokenId}`,
@@ -26,7 +32,9 @@ export const read = async (apiSecret: string, tokenId: number): Promise<Subscrib
 };
 
 /**
- * Deletes the subscribe token.
+ * ## Deletes the subscribe token
+ *
+ * Deletes token specified by the token's ID. The Token ID can be found using the {@link listTokens | List Tokens API} or in the API response of {@link createToken | Create Token API}.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/subscribe-token-v-1-delete-token/}
  *
@@ -49,11 +57,11 @@ export const deleteToken = async (apiSecret: string, tokenId: number): Promise<b
 };
 
 /**
- * @deprecated
- * 
- * Updates the subscribe token.
+ * ## Updates the subscribe token
  *
- * @see {@link https://optiview.dolby.com/docs/millicast/api/subscribe-token-v-1-update-token/}
+ * Update token stream information as well as updates token itself.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/subscribe-token-v-2-update-token/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
  * @param tokenId Identifier of the subscribe token to update.
@@ -61,10 +69,10 @@ export const deleteToken = async (apiSecret: string, tokenId: number): Promise<b
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link SubscribeToken} object.
  */
-export const update = async (apiSecret: string, tokenId: number, subscribeToken: UpdateSubscribeToken): Promise<SubscribeToken> => {
+export const updateToken = async (apiSecret: string, tokenId: number, subscribeToken: UpdateSubscribeToken): Promise<SubscribeToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),
-        path: `/api/subscribe_token/${tokenId}`,
+        path: `/api/v2/subscribe_token/${tokenId}`,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
@@ -82,28 +90,19 @@ export const update = async (apiSecret: string, tokenId: number, subscribeToken:
  * @see {@link https://optiview.dolby.com/docs/millicast/api/subscribe-token-v-1-list-tokens/}
  *
  * @param apiSecret The API Secret used to authenticate this request.
- * @param sortBy How to sort the response.
- * @param page Number of the page to retrieve.
- * @param itemsOnPage Number of items per page.
- * @param isDescending Sort by descending order.
+ * @param options Options to sort the response.
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives an array of {@link SubscribeToken} objects.
  */
-export const list = async (
-    apiSecret: string,
-    sortBy: 'Name' | 'AddedOn',
-    page: number,
-    itemsOnPage: number,
-    isDescending: boolean = false
-): Promise<SubscribeToken[]> => {
+export const listTokens = async (apiSecret: string, options: ListSubscribeTokensSortOptions): Promise<SubscribeToken[]> => {
     const params = {
-        sortBy,
-        page: page.toString(),
-        itemsOnPage: itemsOnPage.toString(),
-        isDescending: isDescending.toString(),
+        sortBy: options.sortBy,
+        page: options.page.toString(),
+        itemsOnPage: options.itemsOnPage.toString(),
+        isDescending: (options.isDescending ?? false).toString(),
     };
 
-    const options = {
+    const queryOptions = {
         hostname: Urls.getRtsHostname(),
         path: '/api/subscribe_token/list',
         params,
@@ -113,7 +112,47 @@ export const list = async (
         },
     };
 
-    return await sendGet<SubscribeToken[]>(options);
+    return await sendGet<SubscribeToken[]>(queryOptions);
+};
+
+/**
+ * ## List Subscribe Tokens By Name
+ *
+ * List all tokens with specific sorting and pagination that matches given token name or stream name.
+ * Tokens with wildcard stream names are excluded from the responses.
+ * If response array is empty, you have reached the end of the list ordering.
+ *
+ * @see {@link https://optiview.dolby.com/docs/millicast/api/subscribe-token-v-1-list-tokens-by-name/}
+ *
+ * @param apiSecret The API Secret used to authenticate this request.
+ * @param options Options to sort the response.
+ *
+ * @returns A {@link !Promise Promise} whose fulfillment handler receives an array of {@link SubscribeToken} objects.
+ */
+export const listTokensByName = async (apiSecret: string, options: ListSubscribeTokensByNameSortOptions): Promise<SubscribeToken[]> => {
+    const params = {
+        name: options.name,
+        sortBy: options.sortBy,
+        page: options.page.toString(),
+        itemsOnPage: options.itemsOnPage.toString(),
+        isDescending: (options.isDescending ?? false).toString(),
+    };
+
+    if (options.filterBy) {
+        params['filterBy'] = options.filterBy;
+    }
+
+    const queryOptions = {
+        hostname: Urls.getRtsHostname(),
+        path: '/api/subscribe_token/list_by_name',
+        params,
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${apiSecret}`,
+        },
+    };
+
+    return await sendGet<SubscribeToken[]>(queryOptions);
 };
 
 /**
@@ -126,7 +165,7 @@ export const list = async (
  *
  * @returns A {@link !Promise Promise} whose fulfillment handler receives a {@link SubscribeToken} object.
  */
-export const create = async (apiSecret: string, subscribeToken: CreateSubscribeToken): Promise<SubscribeToken> => {
+export const createToken = async (apiSecret: string, subscribeToken: CreateSubscribeToken): Promise<SubscribeToken> => {
     const options = {
         hostname: Urls.getRtsHostname(),
         path: '/api/subscribe_token/',

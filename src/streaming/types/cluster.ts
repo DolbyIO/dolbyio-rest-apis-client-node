@@ -1,7 +1,7 @@
 import { read, update } from '../cluster';
 
 /**
- * Represents a Dolby Millicast cluster.
+ * Represents a Dolby OptiView cluster.
  */
 export interface Cluster {
     /** Unique identifier of the cluster. */

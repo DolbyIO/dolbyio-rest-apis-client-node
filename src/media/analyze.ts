@@ -27,7 +27,7 @@ export const start = async (accessToken: JwtToken, jobContent: string): Promise<
 /**
  * Gets Analyze Status.
  *
- * For a given job_id, this method will check the job status.
+ * For a given `jobId`, this method will check the job status.
  *
  * When {@link AnalyzeJob.status} is `Success`, you'll be able to retrieve your result from the `output` location you provided in the original {@link start} request.
  *
