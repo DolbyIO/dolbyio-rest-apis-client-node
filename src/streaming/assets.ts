@@ -1,5 +1,12 @@
 import * as Urls from '../urls';
-import { CreateAssetClipRequest, ListMediaAssetsQueryParams, AssetResponseData, UploadCredentials, RegisterMediaAssetRequest, UpdateMediaAssetRequest } from './types/asset';
+import {
+    CreateAssetClipRequest,
+    ListMediaAssetsQueryParams,
+    AssetResponseData,
+    UploadCredentials,
+    RegisterMediaAssetRequest,
+    UpdateMediaAssetRequest,
+} from './types/asset';
 import { sendDelete, sendGet, sendPatch, sendPost } from './internal/httpHelpers';
 import { toDictString } from './internal/stringHelpers';
 
@@ -208,7 +215,7 @@ export const registerMediaAsset = async (apiSecret: string, registrationRequest:
 
 /**
  * ## Updates Media Asset
- * 
+ *
  * Update media asset settings.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/media-assets-update-media-asset/}

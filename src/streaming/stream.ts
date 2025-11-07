@@ -60,9 +60,9 @@ export const stopAll = async (apiSecret: string): Promise<StreamStopResponse> =>
 
 /**
  * ## Reprioritize an active stream
- * 
+ *
  * Update stream priority specified in token and restart stream to re-assign priority.
- * 
+ *
  * Use {@link listTokensByName | List Tokens By Name} and filter by StreamName to identify the tokenId associated with the target stream.
  *
  * @see {@link https://optiview.dolby.com/docs/millicast/api/stream-reprioritize-stream/}
