@@ -1,7 +1,8 @@
 {
     "navigationLinks": {
         "Dolby OptiView": "https://optiview.dolby.com",
-        "GitHub": "https://github.com/DolbyIO/dolbyio-rest-apis-client-node"
+        "GitHub": "https://github.com/DolbyIO/dolbyio-rest-apis-client-node",
+        "NPM": "https://www.npmjs.com/package/@dolbyio/dolbyio-rest-apis-client"
     },
     "includeVersion": true,
     "entryPoints": ["src/index.ts"],
