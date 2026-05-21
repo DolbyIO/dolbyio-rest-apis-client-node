@@ -33,6 +33,12 @@ export interface Webhook {
         /** Reason why the webhook was disabled. */
         reason: string;
     };
+    /**
+     * A regular expression used to filter the events sent to this webhook based on StreamName or TranscoderName.
+     * For event types `feeds`, `media`, `recording`, `thumbnail` and `viewerConnection` the filter applies to the `StreamName` field.
+     * For event type `transcoder` the filter applies to the `TranscoderName` field.
+     */
+    filter?: string;
 }
 
 /** Represents a webhook update request. */
@@ -55,6 +61,13 @@ export interface UpdateWebhookRequest {
     isViewerConnectionHooks?: boolean;
     /** Set to `true` to immediately re-enable the webhook if it has been temporarily disabled. */
     reEnable?: boolean;
+    /**
+     * A regular expression used to filter the events sent to this webhook based on StreamName or TranscoderName.
+     * For event types `feeds`, `media`, `recording`, `thumbnail` and `viewerConnection` the filter applies to the `StreamName` field.
+     * For event type `transcoder` the filter applies to the `TranscoderName` field.
+     * Set to `null` to clear value.
+     */
+    filter?: string;
 }
 
 /** Represents a webhook listing request. */
@@ -94,6 +107,12 @@ export interface AddWebhookRequest {
      * @defaultValue `false`.
      */
     isViewerConnectionHooks?: boolean;
+    /**
+     * A regular expression used to filter the events sent to this webhook based on StreamName or TranscoderName.
+     * For event types `feeds`, `media`, `recording`, `thumbnail` and `viewerConnection` the filter applies to the `StreamName` field.
+     * For event type `transcoder` the filter applies to the `TranscoderName` field.
+     */
+    filter?: string;
 }
 
 /** Types of webhook events. */

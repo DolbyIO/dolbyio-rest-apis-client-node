@@ -1,6 +1,6 @@
 {
     "name": "@dolbyio/dolbyio-rest-apis-client",
-    "version": "6.2.1",
+    "version": "6.2.2",
     "description": "Node.JS wrapper for the Dolby OptiView REST APIs",
     "main": "dist/index.js",
     "scripts": {
