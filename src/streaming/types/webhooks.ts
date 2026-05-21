@@ -10,8 +10,6 @@ export interface Webhook {
     secret: string;
     /** If `true` sends webhook events on feeds `start/stop`. */
     isFeedHooks: boolean;
-    /** If `true` sends webhook events on recording `start/error/complete/deleted`. */
-    isRecordingHooks: boolean;
     /** If `true` sends webhook events on thumbnail generation. */
     isThumbnailHooks: boolean;
     /** If `true` sends webhook events on transcoder instance updates. */
@@ -49,8 +47,6 @@ export interface UpdateWebhookRequest {
     refreshSecret?: boolean;
     /** Set to `true` to send webhook events on feeds `start/stop`. */
     isFeedHooks?: boolean;
-    /** Set to `true` to send webhook events on recording `start/error/complete/deleted`. */
-    isRecordingHooks?: boolean;
     /** Set to `true` to send webhook events on thumbnail generation. */
     isThumbnailHooks?: boolean;
     /** Set to `true` to send webhook events on transcoder instance updates. */
@@ -115,5 +111,15 @@ export interface AddWebhookRequest {
     filter?: string;
 }
 
+/** Represents a webhook test request. */
+export interface TestWebhookRequest {
+    /** Type of webhook event to test. */
+    webhookType: WebhookType,
+    /** StreamName to include in test webhook payload. If not provided a default value will be used. */
+    streamName?: string;
+    /** TranscoderName to include in test webhook payload. If not provided a default value will be used.. */
+    transcoderName?: string;
+}
+
 /** Types of webhook events. */
-export type WebhookType = 'Recordings' | 'Thumbnail' | 'Transcoder' | 'Media' | 'Feeds' | 'ViewerConnection';
+export type WebhookType = 'Thumbnail' | 'Transcoder' | 'Media' | 'Feeds' | 'ViewerConnection';
