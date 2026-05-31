@@ -57,6 +57,121 @@ export interface StreamSummary {
     viewerCount: number;
 }
 
+/** Represents a Feed object. */
+export interface Feed {
+    /** Identifier of the stream. */
+    streamId: string;
+    /** Identifier of the feed. */
+    feedId: string;
+    /** Identifier of the cluster. */
+    clusterId: string;
+    /** Identifier of the source. */
+    sourceId: string;
+    /** Simulcast ID. */
+    simulcastId: string;
+    /** Server ID. */
+    serverId: string;
+    /** Is the feed active. */
+    active: boolean;
+    /** Stream publishing start time. */
+    startTime: string;
+    /** Stream publishing end time. */
+    endTime?: string;
+    /** Is recording allowed for this stream. */
+    isRecordingAllowed: boolean;
+    /** Packet loss percentage over last five minutes. */
+    packetLoss: number;
+    /** Is the feed redundant. */
+    isRedundant?: boolean;
+    /** Feed priority. */
+    priority?: number;
+    /** Framerate. */
+    frameRate: number;
+    /** Feed type. */
+    type: string;
+    /** Identifier of the token. */
+    tokenId: number;
+
+    /** Client. */
+    client: {
+        /** Country. */
+        country: string;
+        /** City. */
+        city: string;
+        /** Continent. */
+        continent: string;
+        /** coordinates. */
+        coordinates: number[];
+        /** Sub. */
+        sub: string[];
+        /** IP Address. */
+        ip: string;
+    };
+
+    /** Restream information. */
+    restreams: Restream[];
+
+    /** Feed statistics. */
+    feedStats: FeedStats[];
+
+    /** Details for all tracks. */
+    trackDetails: TrackDetails[];
+}
+
+/** Represents the details of a track object. */
+export interface TrackDetails {
+    /** Idenitfier of the track. */
+    trackId: string;
+    /** Encoding details. */
+    encodingDetails: EncodingDetails[];
+}
+
+/** Represents the encoding details of a track. */
+export interface EncodingDetails {
+    /** Encoding ID. */
+    encodingId: string;
+    /** I-frame rate. */
+    iFrameRate: number;
+    /** B-frame rate. */
+    bFrameRate: number;
+    /** P-frame rate. */
+    pFrameRate: number;
+    /** Encoding statistics. */
+    encodingStats: EncodingStats[];
+}
+
+/** Represents the encoding statistic of a track. */
+export interface EncodingStats {
+    /** Timestamp of the entry. */
+    timestamp: string;
+    /** Timestamp of the entry. */
+    resolution: {
+        /** Height of the frame. */
+        height: number;
+        /** Width of the frame. */
+        width: number;
+    };
+    /** Bitrate. */
+    bitRate: {
+        /** Audio bitrate. */
+        audioBitrate: number;
+        /** Video bitrate. */
+        videoBitrate: number;
+    };
+    /** Video codec. */
+    videoCodec: number;
+    /** Audio codec. */
+    audioCodec: number;
+    /** Frames. */
+    frames?: number;
+    /** RTT. */
+    rtt?: number;
+    /** Buffer Time. */
+    bufferTime?: number;
+    /** B-frames. */
+    bFrames?: number;
+}
+
 /** Represents a stream details. */
 export interface StreamDetails extends StreamSummary {
     /** Has redundant stream. */
@@ -64,110 +179,7 @@ export interface StreamDetails extends StreamSummary {
     /** Restreaming enabled. */
     restreaming: boolean;
     /** Feeds. */
-    feeds: {
-        /** Identifier of the stream. */
-        streamId: string;
-        /** Identifier of the feed. */
-        feedId: string;
-        /** Identifier of the cluster. */
-        clusterId: string;
-        /** Identifier of the source. */
-        sourceId: string;
-        /** Simulcast ID. */
-        simulcastId: string;
-        /** Server ID. */
-        serverId: string;
-        /** Is the feed active. */
-        active: boolean;
-        /** Stream publishing start time. */
-        startTime: string;
-        /** Stream publishing end time. */
-        endTime?: string;
-        /** Is recording allowed for this stream. */
-        isRecordingAllowed: boolean;
-        /** Packet loss percentage over last five minutes. */
-        packetLoss: number;
-        /** Is the feed redundant. */
-        isRedundant?: boolean;
-        /** Feed priority. */
-        priority?: number;
-        /** Framerate. */
-        frameRate: number;
-        /** Feed type. */
-        type: string;
-        /** Identifier of the token. */
-        tokenId: number;
-
-        /** Client. */
-        client: {
-            /** Country. */
-            country: string;
-            /** City. */
-            city: string;
-            /** Continent. */
-            continent: string;
-            /** coordinates. */
-            coordinates: number[];
-            /** Sub. */
-            sub: string[];
-            /** IP Address. */
-            ip: string;
-        };
-
-        /** Restream information. */
-        restreams: Restream[];
-
-        /** Feed statistics. */
-        feedStats: FeedStats[];
-
-        /** Details for all tracks. */
-        trackDetails: {
-            /** Idenitfier of the track. */
-            trackId: string;
-            /** Encoding details. */
-            encodingDetails: {
-                /** Encoding ID. */
-                encodingId: string;
-                /** I-frame rate. */
-                iFrameRate: number;
-                /** B-frame rate. */
-                bFrameRate: number;
-                /** P-frame rate. */
-                pFrameRate: number;
-                /** Encoding statistics. */
-                encodingStats: {
-                    /** Timestamp of the entry. */
-                    timestamp: string;
-                    /** Timestamp of the entry. */
-                    resolution: {
-                        /** Height of the frame. */
-                        height: number;
-                        /** Width of the frame. */
-                        width: number;
-                    };
-                    /** Bitrate. */
-                    bitRate: {
-                        /** Audio bitrate. */
-                        audioBitrate: number;
-                        /** Video bitrate. */
-                        videoBitrate: number;
-                    };
-                    /** Video codec. */
-                    videoCodec: number;
-                    /** Audio codec. */
-                    audioCodec: number;
-                    /** Frames. */
-                    frames?: number;
-                    /** RTT. */
-                    rtt?: number;
-                    /** Buffer Time. */
-                    bufferTime?: number;
-                    /** B-frames. */
-                    bFrames?: number;
-                }[];
-            }[];
-        }[];
-    }[];
+    feeds: Feed[];
 }
 
 /** Represents the restream information. */

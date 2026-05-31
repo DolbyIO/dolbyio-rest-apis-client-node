@@ -114,7 +114,7 @@ export interface AddWebhookRequest {
 /** Represents a webhook test request. */
 export interface TestWebhookRequest {
     /** Type of webhook event to test. */
-    webhookType: WebhookType,
+    webhookType: WebhookType;
     /** StreamName to include in test webhook payload. If not provided a default value will be used. */
     streamName?: string;
     /** TranscoderName to include in test webhook payload. If not provided a default value will be used.. */
