@@ -43,10 +43,13 @@ export const create = async (apiSecret: string, clipRequest: CreateAssetClipRequ
             Accept: 'application/json',
             'Content-Type': 'application/json',
             Authorization: `Bearer ${apiSecret}`,
-            'Idempotency-Key': idempotencyKey,
         },
         body: JSON.stringify(clipRequest),
     };
+    if (idempotencyKey) {
+        // @ts-ignore
+        options.headers['Idempotency-Key'] = idempotencyKey;
+    }
 
     return await sendPost<AssetResponseData>(options);
 };

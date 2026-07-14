@@ -51,6 +51,21 @@ export interface CreateAssetClipRequest {
     storage?: MediaAssetStorageModel | null;
     /** Optional. Provide expiry time for live recording clip. */
     expiration?: string | null;
+    /** Optional. Id of the OptiView Live channel to create live clip. */
+    channelId?: string | null;
+    /** Optional. Format of the media asset. */
+    targetFormat?: 'mp4' | 'hls' | null;
+    /** Optional. ID of the media distribution used to authenticate viewing of this media asset. */
+    mediaDistributionId?: string | null;
+    /**
+     * Optional.
+     * Customize the download url path.
+     * Typically the download url has format `https://<domain>/<orgId>/<mediaAssetId>/<fileName>`.
+     * The customPath replaces the mediaAssetId so that the url looks like `https://<domain>/<orgId>/<customPath>/<fileName>`. The `customPath` must be unique.
+     *
+     * Possible values: non-empty and <= 512 characters.
+     */
+    customPath?: string | null;
 }
 
 /**
@@ -120,8 +135,10 @@ export interface MediaAssetFeedSelectionModel {
     sourceId?: string | null;
     /** Optional, The simulcastId of the stream the clip belongs to. */
     simulcastId?: string | null;
-    /** Optional, int32, the priority of the clip request. */
+    /** Optional, the priority of the clip request. */
     priority?: number | null;
+    /** Optional, the identifier of the OptiView Live channel. */
+    channelId?: number | null;
 }
 
 /**
@@ -256,6 +273,10 @@ export interface UpdateMediaAssetRequest {
      * Updates may take up to an hour to take effect.
      */
     mediaDistributionId?: string;
-    /** Customise the download url path. */
+    /**
+     * Customize a portion of the download url path.
+     * As an example assets are returned in a url such as `https://cdn.optiview.dolby.com/vod/<orgId>/<mediaAssetId>/<fileName>`.
+     * `customPath` will replace `mediaAssetId` in order for a more predictable path.
+     */
     customPath?: string;
 }
